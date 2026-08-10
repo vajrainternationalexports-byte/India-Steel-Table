@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IS Steel Table</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <div class="app-container">
+    
+    <!-- Android Status Bar -->
+    <div class="status-bar">
+      <span>7:25</span>
+      <div class="status-icons">
+        <span>5G</span>
+        <span>55%</span>
+      </div>
+    </div>
+
+    <!-- Top App Bar -->
+    <div class="app-bar">
+      <div class="app-title-box">
+        <span id="appTitle" class="app-title">IS Steel Table</span>
+        <span id="appVersion" class="app-version">v.1.4.3</span>
+      </div>
+
+      <div class="app-actions">
+        <!-- Share Icon -->
+        <button id="shareBtn" class="icon-btn" style="display: none;" title="Share">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="18" cy="5" r="3"></circle>
+            <circle cx="6" cy="12" r="3"></circle>
+            <circle cx="18" cy="19" r="3"></circle>
+            <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+            <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+          </svg>
+        </button>
+
+        <!-- Bookmark Ribbon Icon -->
+        <button id="bookmarkBtn" class="icon-btn" title="Bookmark">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
+            <polygon points="12 7 13.5 10 17 10.5 14.5 13 15 16.5 12 14.8 9 16.5 9.5 13 7 10.5 10.5 10 12 7" fill="currentColor"></polygon>
+          </svg>
+        </button>
+
+        <!-- Calculator Icon -->
+        <button id="calcBtn" class="icon-btn" style="display: none;" title="Calculator">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="4" y="2" width="16" height="20" rx="2"></rect>
+            <line x1="8" y1="6" x2="16" y2="6"></line>
+            <line x1="16" y1="14" x2="16" y2="18"></line>
+            <path d="M8 10h.01M12 10h.01M16 10h.01M8 14h.01M12 14h.01M8 18h.01M12 18h.01"></path>
+          </svg>
+        </button>
+
+        <!-- Overflow Menu 3-dots -->
+        <button id="menuBtn" class="icon-btn" title="Menu">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <circle cx="12" cy="5" r="2"></circle>
+            <circle cx="12" cy="12" r="2"></circle>
+            <circle cx="12" cy="19" r="2"></circle>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Screen Content Body -->
+    <div id="screenContent" class="screen-content"></div>
+
+    <!-- Bottom Navigation Bar (Back, Home, Recents) -->
+    <div class="android-nav-bar">
+      <span id="navRecentsBtn" class="nav-bar-icon">|||</span>
+      <span id="navHomeBtn" class="nav-bar-icon">○</span>
+      <span id="navBackBtn" class="nav-bar-icon">&lt;</span>
+    </div>
+
+  </div>
+
+  <script src="dataset.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

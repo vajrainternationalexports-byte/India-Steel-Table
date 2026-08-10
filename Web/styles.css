@@ -1,0 +1,389 @@
+/* IS Steel Table — Exact 1:1 Visual Replica of Android App */
+:root {
+  --bg-dark: #212429;
+  --appbar-bg: #1c1d21;
+  --btn-grey: #4a4d53;
+  --btn-grey-active: #5c6068;
+  --btn-border: #383a40;
+  --text-white: #ffffff;
+  --text-muted: #b0b4bc;
+  --accent-cyan: #5cd0e6;
+  --accent-orange: #fca311;
+  --font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Segoe UI", Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: #0d0e11;
+  color: var(--text-white);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+/* Device Shell */
+.app-container {
+  width: 100%;
+  max-width: 420px;
+  height: 890px;
+  background-color: var(--bg-dark);
+  background-image: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.22),
+    rgba(0, 0, 0, 0.22) 2px,
+    transparent 2px,
+    transparent 4px
+  );
+  border-radius: 36px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), 0 0 0 8px #2b2e35;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Status Bar */
+.status-bar {
+  height: 38px;
+  background: var(--appbar-bg);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #fff;
+  user-select: none;
+  z-index: 10;
+}
+
+.status-icons {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.75rem;
+}
+
+/* Top App Bar */
+.app-bar {
+  height: 56px;
+  background: var(--appbar-bg);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  border-bottom: 1px solid rgba(0,0,0,0.4);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+  z-index: 10;
+}
+
+.app-title-box {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.app-title {
+  font-size: 1.25rem;
+  font-weight: 500;
+  letter-spacing: 0.2px;
+}
+
+.app-version {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-weight: 400;
+}
+
+.app-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.icon-btn {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1.3rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+}
+
+.icon-btn:hover {
+  opacity: 0.8;
+}
+
+/* Screens Container */
+.screen-content {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+/* SCREEN 1: CATEGORY LIST */
+.category-list {
+  padding: 8px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.category-btn {
+  background: linear-gradient(180deg, #4f535a 0%, #3e4249 100%);
+  border: 1px solid #36393f;
+  border-top-color: #5f636b;
+  color: #ffffff;
+  padding: 13px 18px;
+  border-radius: 4px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  text-align: left;
+  cursor: pointer;
+  box-shadow: 0 2px 3px rgba(0,0,0,0.25);
+  transition: background 0.1s;
+}
+
+.category-btn:hover, .category-btn:active {
+  background: linear-gradient(180deg, #5a5f66 0%, #464a52 100%);
+}
+
+/* TOP SIZE DROPDOWN SELECTOR BAR */
+.size-selector-bar {
+  margin: 10px 12px 6px 12px;
+  background: linear-gradient(180deg, #53575e 0%, #42454b 100%);
+  border: 1px solid #33363b;
+  border-top-color: #636770;
+  border-radius: 4px;
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+  position: relative;
+}
+
+.dropdown-arrow-left {
+  font-size: 0.75rem;
+  color: #fff;
+  margin-right: 12px;
+}
+
+.size-selector-text {
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  flex: 1;
+  text-align: center;
+}
+
+/* SCREEN 2: SPECIFICATION DETAIL (SPLIT VIEW) */
+.detail-split-view {
+  flex: 1;
+  display: flex;
+  padding: 8px 12px 4px 12px;
+  gap: 10px;
+  overflow-y: auto;
+}
+
+.detail-diagram-pane {
+  width: 48%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+#detailCanvas {
+  width: 100%;
+  height: 420px;
+}
+
+.detail-props-pane {
+  width: 52%;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 0.86rem;
+  line-height: 1.35;
+  padding-top: 4px;
+  overflow-y: auto;
+}
+
+.prop-line {
+  white-space: nowrap;
+  font-family: var(--font-family);
+  font-weight: 400;
+  color: #ffffff;
+  letter-spacing: 0.1px;
+}
+
+/* BOTTOM LEGEND & STANDARD CODE */
+.detail-legend-box {
+  padding: 6px 14px 10px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+
+.legend-text {
+  font-size: 0.7rem;
+  color: #cbd0d8;
+  line-height: 1.25;
+  letter-spacing: 0.1px;
+}
+
+.standard-text {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 0.3px;
+}
+
+/* SCREEN 3: 2-COLUMN SIZE GRID PICKER */
+.size-grid-container {
+  padding: 4px 12px 16px 12px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  overflow-y: auto;
+}
+
+.size-grid-btn {
+  background: linear-gradient(180deg, #4f535a 0%, #3e4249 100%);
+  border: 1px solid #36393f;
+  border-top-color: #5f636b;
+  color: #ffffff;
+  padding: 12px 6px;
+  border-radius: 4px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  text-align: center;
+  cursor: pointer;
+  box-shadow: 0 2px 3px rgba(0,0,0,0.25);
+}
+
+.size-grid-btn:hover, .size-grid-btn:active {
+  background: linear-gradient(180deg, #5f646c 0%, #4a4f57 100%);
+}
+
+/* SCREEN 4: CALCULATOR PAGE */
+.calc-screen {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 16px 16px 12px 16px;
+}
+
+.calc-display-section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.calc-result-text {
+  font-size: 1.15rem;
+  font-weight: 500;
+}
+
+.calc-input-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 6px;
+}
+
+.calc-input-label {
+  font-size: 1.05rem;
+  font-weight: 400;
+}
+
+.calc-input-field {
+  flex: 1;
+  max-width: 170px;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid #5a5e66;
+  color: #fff;
+  font-size: 1.05rem;
+  padding: 4px 6px;
+  outline: none;
+  text-align: left;
+}
+
+.calc-input-field.focused {
+  border-bottom-color: #2196f3;
+}
+
+/* CALCULATOR KEYPAD */
+.calc-keypad-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+  margin-top: 20px;
+}
+
+.calc-key {
+  aspect-ratio: 1;
+  background: linear-gradient(180deg, #e3e6ec 0%, #c4c8d0 100%);
+  border: 1px solid #9ea2aa;
+  border-bottom-color: #7b7e85;
+  color: #1a1a1a;
+  border-radius: 8px;
+  font-size: 1.25rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 3px 2px rgba(0,0,0,0.3);
+  user-select: none;
+}
+
+.calc-key:active {
+  transform: translateY(2px);
+  box-shadow: 0 1px 1px rgba(0,0,0,0.3);
+}
+
+.calc-key.key-red {
+  color: #d32f2f;
+}
+
+/* Bottom Android Navigation Bar */
+.android-nav-bar {
+  height: 48px;
+  background: #111215;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  color: #757982;
+  font-size: 1.2rem;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  user-select: none;
+}
+
+.nav-bar-icon {
+  cursor: pointer;
+  padding: 8px 24px;
+}
+
+.nav-bar-icon:hover {
+  color: #fff;
+}
