@@ -9,7 +9,7 @@ public struct ISSteelTablesProApp: App {
 
     public var body: some Scene {
         WindowGroup {
-            SteelTableAppContainerView()
+            DualAppContainerView()
                 .environmentObject(environment)
                 .preferredColorScheme(.dark)
         }
