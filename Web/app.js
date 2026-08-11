@@ -59,7 +59,7 @@ function showCategoryListScreen() {
   content.appendChild(list);
 }
 
-function mapCategoryToFamily(cat) {
+function formatFamilyTitle(fam) {
   const map = {
     "EQUAL ANGLES": "Equal Angles",
     "UNEQUAL ANGLES": "Unequal Angles",
@@ -75,12 +75,17 @@ function mapCategoryToFamily(cat) {
     "FLATS": "Flats",
     "HR PLATES": "HR Plates"
   };
-  return map[cat] || "Equal Angles";
+  return map[(fam || "").toUpperCase()] || fam;
+}
+
+function mapCategoryToFamily(cat) {
+  return cat;
 }
 
 function selectCategory(fam) {
   currentFamily = fam;
-  const sectionsInFam = allSections.filter(s => s.family === fam);
+  const famUpper = fam.toUpperCase();
+  const sectionsInFam = allSections.filter(s => (s.family || "").toUpperCase() === famUpper);
   currentSection = sectionsInFam[0] || allSections[0];
   showDetailScreen();
 }
@@ -88,7 +93,7 @@ function selectCategory(fam) {
 // SCREEN 2: DETAIL VIEW
 function showDetailScreen() {
   currentScreen = "detail";
-  document.getElementById("appTitle").textContent = currentFamily;
+  document.getElementById("appTitle").textContent = formatFamilyTitle(currentFamily);
   document.getElementById("appVersion").style.display = "none";
   document.getElementById("shareBtn").style.display = "flex";
   document.getElementById("calcBtn").style.display = "flex";
@@ -185,7 +190,7 @@ function showSizePickerScreen() {
   const grid = document.createElement("div");
   grid.className = "size-grid-container";
 
-  const sameFam = allSections.filter(s => s.family === currentFamily);
+  const sameFam = allSections.filter(s => (s.family || "").toUpperCase() === (currentFamily || "").toUpperCase());
   sameFam.forEach(s => {
     const btn = document.createElement("button");
     btn.className = "size-grid-btn";
@@ -327,14 +332,16 @@ function handleKeypadPress(k) {
 
 // Generate Properties List Matching Android Screenshots
 function generatePropertiesHtml(s) {
+  if (!s) return "";
   const lines = [];
   const d = s.dimensions || {};
   const st = s.structural || {};
+  const famUpper = (s.family || "").toUpperCase();
 
-  if (s.family.includes("Angles")) {
+  if (famUpper.includes("ANGLE")) {
     lines.push(`M = ${s.massPerMetre} Kg/m`);
     lines.push(`Ar = ${s.area} cm²`);
-    lines.push(`A,B = ${d.legA_mm} ${d.legB_mm || d.legA_mm} mm`);
+    lines.push(`A,B = ${d.legA_mm || d.primaryDepth || 0} ${d.legB_mm || d.legA_mm || d.primaryWidth || 0} mm`);
     lines.push(`t = ${d.thickness_t_mm || 0} mm`);
     lines.push(`R₁ = ${d.rootRadius_r1_mm || 4} mm`);
     lines.push(`R₂ = ${d.toeRadius_r2_description || "Square"}`);
@@ -351,9 +358,9 @@ function generatePropertiesHtml(s) {
     if (st.rvMin_cm) lines.push(`r_v min = ${st.rvMin_cm} cm`);
     if (st.zxx_cm3) lines.push(`Z_x = ${st.zxx_cm3} cm³`);
     if (st.zyy_cm3) lines.push(`Z_y = ${st.zyy_cm3} cm³`);
-  } else if (s.family === "Pipes") {
-    lines.push(`OD = ${d.outerDiameter_od_mm} mm`);
-    lines.push(`t = ${d.wallThickness_t_mm} mm`);
+  } else if (famUpper.includes("PIPE")) {
+    lines.push(`OD = ${d.outerDiameter_od_mm || d.primaryDepth || 0} mm`);
+    lines.push(`t = ${d.wallThickness_t_mm || d.thickness_t_mm || 0} mm`);
     lines.push(`Wt = ${s.massPerMetre} Kg/m`);
     lines.push(`Ar = ${s.area} cm²`);
     if (st.internalVolume_v_cm3_m) lines.push(`V = ${st.internalVolume_v_cm3_m} cm³/m`);
@@ -362,28 +369,28 @@ function generatePropertiesHtml(s) {
     if (st.ixx_cm4) lines.push(`Ixx = ${st.ixx_cm4} cm⁴`);
     if (st.zxx_cm3) lines.push(`Z = ${st.zxx_cm3} cm³`);
     if (st.rxx_cm) lines.push(`Rx = ${st.rxx_cm} cm`);
-  } else if (s.family === "Rectangular Tubes" || s.family === "Square Tubes") {
-    if (s.family === "Square Tubes") {
-      lines.push(`D = ${d.side_s_mm || d.depth_h_mm} mm`);
+  } else if (famUpper.includes("TUBE")) {
+    if (famUpper.includes("SQUARE")) {
+      lines.push(`D = ${d.side_s_mm || d.depth_h_mm || d.primaryDepth || 0} mm`);
     }
-    lines.push(`t = ${d.wallThickness_t_mm || d.thickness_t_mm} mm`);
+    lines.push(`t = ${d.wallThickness_t_mm || d.thickness_t_mm || 0} mm`);
     lines.push(`Wt = ${s.massPerMetre} Kg/m`);
     lines.push(`Ar = ${s.area} cm²`);
-    if (st.ixx_cm4 && s.family === "Rectangular Tubes") lines.push(`Ixx = ${st.ixx_cm4} cm⁴`);
-    if (st.iyy_cm4) lines.push(`${s.family === "Square Tubes" ? "Iy" : "Iyy"} = ${st.iyy_cm4} cm⁴`);
+    if (st.ixx_cm4 && famUpper.includes("RECTANGULAR")) lines.push(`Ixx = ${st.ixx_cm4} cm⁴`);
+    if (st.iyy_cm4) lines.push(`${famUpper.includes("SQUARE") ? "Iy" : "Iyy"} = ${st.iyy_cm4} cm⁴`);
     if (st.rxx_cm) lines.push(`Rx = ${st.rxx_cm} cm`);
-    if (st.ryy_cm && s.family === "Rectangular Tubes") lines.push(`Ry = ${st.ryy_cm} cm`);
+    if (st.ryy_cm && famUpper.includes("RECTANGULAR")) lines.push(`Ry = ${st.ryy_cm} cm`);
     if (st.zxx_cm3) lines.push(`Zx = ${st.zxx_cm3} cm³`);
-    if (st.zyy_cm3 && s.family === "Rectangular Tubes") lines.push(`Zy = ${st.zyy_cm3} cm³`);
+    if (st.zyy_cm3 && famUpper.includes("RECTANGULAR")) lines.push(`Zy = ${st.zyy_cm3} cm³`);
     if (st.plasticSx_cm3) lines.push(`Sx = ${st.plasticSx_cm3} cm³`);
-    if (st.plasticSy_cm3 && s.family === "Rectangular Tubes") lines.push(`Sy = ${st.plasticSy_cm3} cm³`);
-  } else if (s.family.includes("Beams")) {
+    if (st.plasticSy_cm3 && famUpper.includes("RECTANGULAR")) lines.push(`Sy = ${st.plasticSy_cm3} cm³`);
+  } else if (famUpper.includes("BEAM")) {
     lines.push(`M = ${s.massPerMetre} Kg/m`);
     lines.push(`Ar = ${s.area} cm²`);
-    lines.push(`D = ${d.depth_h_mm} mm`);
-    lines.push(`B = ${d.width_b_mm} mm`);
-    lines.push(`t = ${d.webThickness_tw_mm} mm`);
-    lines.push(`T = ${d.flangeThickness_tf_mm} mm`);
+    lines.push(`D = ${d.depth_h_mm || d.primaryDepth || 0} mm`);
+    lines.push(`B = ${d.width_b_mm || d.primaryWidth || 0} mm`);
+    lines.push(`t = ${d.webThickness_tw_mm || 0} mm`);
+    lines.push(`T = ${d.flangeThickness_tf_mm || 0} mm`);
     lines.push(`Slope α = ${d.flangeSlope_deg || 98} deg`);
     lines.push(`R₁ = ${d.rootRadius_r1_mm || 9} mm`);
     lines.push(`R₂ = ${d.toeRadius_r2_mm || 4.5} mm`);
@@ -393,13 +400,13 @@ function generatePropertiesHtml(s) {
     if (st.ryy_cm) lines.push(`r_y = ${st.ryy_cm} cm`);
     if (st.zxx_cm3) lines.push(`Z_x = ${st.zxx_cm3} cm³`);
     if (st.zyy_cm3) lines.push(`Z_y = ${st.zyy_cm3} cm³`);
-  } else if (s.family.includes("Channels")) {
+  } else if (famUpper.includes("CHANNEL")) {
     lines.push(`M = ${s.massPerMetre} Kg/m`);
     lines.push(`Ar = ${s.area} cm²`);
-    lines.push(`D = ${d.depth_h_mm} mm`);
-    lines.push(`B = ${d.width_b_mm} mm`);
-    lines.push(`t = ${d.webThickness_tw_mm} mm`);
-    lines.push(`T = ${d.flangeThickness_tf_mm} mm`);
+    lines.push(`D = ${d.depth_h_mm || d.primaryDepth || 0} mm`);
+    lines.push(`B = ${d.width_b_mm || d.primaryWidth || 0} mm`);
+    lines.push(`t = ${d.webThickness_tw_mm || 0} mm`);
+    lines.push(`T = ${d.flangeThickness_tf_mm || 0} mm`);
     if (d.rootRadius_r1_mm) lines.push(`R₁ = ${d.rootRadius_r1_mm} mm`);
     if (d.toeRadius_r2_mm) lines.push(`R₂ = ${d.toeRadius_r2_mm} mm`);
     if (st.cy_cm) lines.push(`C_y = ${st.cy_cm} cm`);
@@ -409,17 +416,20 @@ function generatePropertiesHtml(s) {
     if (st.ryy_cm) lines.push(`r_y = ${st.ryy_cm} cm`);
     if (st.zxx_cm3) lines.push(`Z_x = ${st.zxx_cm3} cm³`);
     if (st.zyy_cm3) lines.push(`Z_y = ${st.zyy_cm3} cm³`);
-  } else if (s.family === "Flats") {
+  } else if (famUpper.includes("FLAT")) {
     lines.push(`M = ${s.massPerMetre} Kg/m`);
-    lines.push(`t = ${d.thickness_t_mm} mm`);
-    lines.push(`w = ${d.width_b_mm} mm`);
-  } else if (s.family === "HR Plates") {
+    lines.push(`t = ${d.thickness_t_mm || 0} mm`);
+    lines.push(`w = ${d.width_b_mm || 0} mm`);
+  } else if (famUpper.includes("PLATE")) {
     lines.push(`M = ${s.massPerMetre} Kg/m²`);
-    lines.push(`t = ${d.thickness_t_mm} mm`);
-  } else if (s.family === "Square Bars" || s.family === "Round Bars") {
+    lines.push(`t = ${d.thickness_t_mm || 0} mm`);
+  } else if (famUpper.includes("BAR")) {
     lines.push(`M = ${s.massPerMetre} Kg/m`);
     lines.push(`Ar = ${s.area} cm²`);
-    lines.push(`t = ${d.side_s_mm || d.diameter_d_mm} mm`);
+    lines.push(`t = ${d.side_s_mm || d.diameter_d_mm || d.primaryDepth || 0} mm`);
+  } else {
+    lines.push(`M = ${s.massPerMetre} Kg/m`);
+    lines.push(`Ar = ${s.area} cm²`);
   }
 
   return lines.map(l => `<div class="prop-line">${l}</div>`).join("");
@@ -427,28 +437,31 @@ function generatePropertiesHtml(s) {
 
 // Generate Legend & Standard Subtitle Matching Screenshots
 function generateLegendHtml(s) {
-  if (s.family === "Pipes") {
+  if (!s) return "";
+  const famUpper = (s.family || "").toUpperCase();
+  if (famUpper.includes("PIPE")) {
     return `
       <div class="legend-text">Ar=Area of cross-section  V=Internal volume<br>Si=Internal Surface area  Se=External Surface area<br>Ixx=MI about X-X axis  Rx=Radius of Gyration</div>
       <div class="standard-text">IS:1161(1998)</div>
     `;
-  } else if (s.family === "Rectangular Tubes" || s.family === "Square Tubes") {
+  } else if (famUpper.includes("TUBE")) {
     return `
       <div class="legend-text">Moment of Inertia = I  Radius of Gyration = R<br>Elastic Modulus = Z  Plastic Modulus = S</div>
       <div class="standard-text">IS:4923</div>
     `;
-  } else if (s.family.includes("Beams") || s.family.includes("Channels") || s.family.includes("Angles")) {
+  } else if (famUpper.includes("BEAM") || famUpper.includes("CHANNEL") || famUpper.includes("ANGLE")) {
     return `<div class="standard-text">IS:808</div>`;
-  } else if (s.family === "Square Bars" || s.family === "Round Bars" || s.family === "Flats") {
+  } else if (famUpper.includes("BAR") || famUpper.includes("FLAT")) {
     return `<div class="standard-text">IS:1732 / IS:1730</div>`;
-  } else if (s.family === "HR Plates") {
+  } else if (famUpper.includes("PLATE")) {
     return `<div class="standard-text">IS:1730</div>`;
   }
-  return "";
+  return `<div class="standard-text">${s.standard || "IS Code"}</div>`;
 }
 
 // Technical White CAD Drawing on Canvas
 function drawDiagram(section, canvas) {
+  if (!section || !canvas) return;
   const ctx = canvas.getContext("2d");
   const dpr = window.devicePixelRatio || 1;
   const w = canvas.parentElement.clientWidth || 180;
@@ -460,26 +473,29 @@ function drawDiagram(section, canvas) {
 
   ctx.clearRect(0, 0, w, h);
 
-  if (section.family.includes("Angles")) {
+  const famUpper = (section.family || "").toUpperCase();
+  if (famUpper.includes("ANGLE")) {
     drawDualAngleBlueprint(ctx, section, w, h);
-  } else if (section.family === "Flats") {
+  } else if (famUpper.includes("FLAT")) {
     drawFlatBlueprint(ctx, section, w, h);
-  } else if (section.family === "HR Plates") {
+  } else if (famUpper.includes("PLATE")) {
     drawPlateBlueprint(ctx, section, w, h);
-  } else if (section.family.includes("Beams")) {
+  } else if (famUpper.includes("BEAM")) {
     drawBeamBlueprint(ctx, section, w, h);
-  } else if (section.family.includes("Channels")) {
+  } else if (famUpper.includes("CHANNEL")) {
     drawChannelBlueprint(ctx, section, w, h);
-  } else if (section.family === "Pipes") {
+  } else if (famUpper.includes("PIPE")) {
     drawPipeBlueprint(ctx, section, w, h);
-  } else if (section.family === "Rectangular Tubes") {
+  } else if (famUpper.includes("RECTANGULAR TUBE") || famUpper.includes("RECT TUBE")) {
     drawRectTubeBlueprint(ctx, section, w, h);
-  } else if (section.family === "Square Tubes") {
+  } else if (famUpper.includes("SQUARE TUBE")) {
     drawSquareTubeBlueprint(ctx, section, w, h);
-  } else if (section.family === "Square Bars") {
+  } else if (famUpper.includes("SQUARE BAR")) {
     drawSquareBarBlueprint(ctx, section, w, h);
-  } else if (section.family === "Round Bars") {
+  } else if (famUpper.includes("ROUND BAR")) {
     drawRoundBarBlueprint(ctx, section, w, h);
+  } else {
+    drawDualAngleBlueprint(ctx, section, w, h);
   }
 }
 
