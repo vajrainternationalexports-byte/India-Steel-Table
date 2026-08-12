@@ -359,6 +359,29 @@ function openShapeCalculator(shapeKey) {
     formInputsContainer.innerHTML = '';
 
     let html = '';
+    const commonTail = `
+        <div class="wb-input-group">
+            <label>Specific Gravity</label>
+            <input type="number" id="inp_sg" value="${weightCalcState.sg}" step="0.01" oninput="calculateCurrentMass()">
+        </div>
+        <div class="wb-input-group highlighted-calc-field">
+            <label>Calculated Weight (kg)</label>
+            <input type="text" id="inp_calc_weight" value="0.000 kg" readonly style="color: #00E5FF; font-weight: 700; background: #151a24; border: 1px solid #00bcd4;">
+        </div>
+        <div class="wb-input-group">
+            <label>Quantity</label>
+            <input type="number" id="inp_qty" value="1" oninput="calculateCurrentMass()">
+        </div>
+        <div class="wb-input-group">
+            <label>Price Rs./kg</label>
+            <input type="number" id="inp_price" value="${weightCalcState.unitPrice}" step="0.01" oninput="calculateCurrentMass()">
+        </div>
+        <div class="wb-input-group highlighted-calc-field">
+            <label>Calculated Price (Rs.)</label>
+            <input type="text" id="inp_calc_price" value="Rs. 0.00" readonly style="color: #FFD700; font-weight: 700; background: #151a24; border: 1px solid #ffd700;">
+        </div>
+    `;
+
     switch(shapeKey) {
         case 'square':
             html = `
@@ -370,18 +393,7 @@ function openShapeCalculator(shapeKey) {
                     <label>Length (mm)</label>
                     <input type="number" id="inp_l" value="1000" oninput="calculateCurrentMass()">
                 </div>
-                <div class="wb-input-group">
-                    <label>Specific Gravity</label>
-                    <input type="number" id="inp_sg" value="${weightCalcState.sg}" step="0.01" oninput="calculateCurrentMass()">
-                </div>
-                <div class="wb-input-group">
-                    <label>Quantity</label>
-                    <input type="number" id="inp_qty" value="1" oninput="calculateCurrentMass()">
-                </div>
-                <div class="wb-input-group">
-                    <label>Price Rs./kg</label>
-                    <input type="number" id="inp_price" value="${weightCalcState.unitPrice}" step="0.01" oninput="calculateCurrentMass()">
-                </div>
+                ${commonTail}
             `;
             break;
 
@@ -400,18 +412,7 @@ function openShapeCalculator(shapeKey) {
                     <label>Thickness T (mm)</label>
                     <input type="number" id="inp_t" value="10" oninput="calculateCurrentMass()">
                 </div>
-                <div class="wb-input-group">
-                    <label>Specific Gravity</label>
-                    <input type="number" id="inp_sg" value="${weightCalcState.sg}" step="0.01" oninput="calculateCurrentMass()">
-                </div>
-                <div class="wb-input-group">
-                    <label>Quantity</label>
-                    <input type="number" id="inp_qty" value="1" oninput="calculateCurrentMass()">
-                </div>
-                <div class="wb-input-group">
-                    <label>Price Rs./kg</label>
-                    <input type="number" id="inp_price" value="${weightCalcState.unitPrice}" step="0.01" oninput="calculateCurrentMass()">
-                </div>
+                ${commonTail}
             `;
             break;
 
@@ -429,18 +430,7 @@ function openShapeCalculator(shapeKey) {
                     <label>Length (mm)</label>
                     <input type="number" id="inp_l" value="6000" oninput="calculateCurrentMass()">
                 </div>
-                <div class="wb-input-group">
-                    <label>Specific Gravity</label>
-                    <input type="number" id="inp_sg" value="${weightCalcState.sg}" step="0.01" oninput="calculateCurrentMass()">
-                </div>
-                <div class="wb-input-group">
-                    <label>Quantity</label>
-                    <input type="number" id="inp_qty" value="1" oninput="calculateCurrentMass()">
-                </div>
-                <div class="wb-input-group">
-                    <label>Price Rs./kg</label>
-                    <input type="number" id="inp_price" value="${weightCalcState.unitPrice}" step="0.01" oninput="calculateCurrentMass()">
-                </div>
+                ${commonTail}
             `;
             break;
 
@@ -454,18 +444,7 @@ function openShapeCalculator(shapeKey) {
                     <label>Length (mm)</label>
                     <input type="number" id="inp_l" value="1000" oninput="calculateCurrentMass()">
                 </div>
-                <div class="wb-input-group">
-                    <label>Specific Gravity</label>
-                    <input type="number" id="inp_sg" value="${weightCalcState.sg}" step="0.01" oninput="calculateCurrentMass()">
-                </div>
-                <div class="wb-input-group">
-                    <label>Quantity</label>
-                    <input type="number" id="inp_qty" value="1" oninput="calculateCurrentMass()">
-                </div>
-                <div class="wb-input-group">
-                    <label>Price Rs./kg</label>
-                    <input type="number" id="inp_price" value="${weightCalcState.unitPrice}" step="0.01" oninput="calculateCurrentMass()">
-                </div>
+                ${commonTail}
             `;
             break;
 
@@ -491,14 +470,7 @@ function openShapeCalculator(shapeKey) {
                     <label>Length (mm)</label>
                     <input type="number" id="inp_l" value="1000" oninput="calculateCurrentMass()">
                 </div>
-                <div class="wb-input-group">
-                    <label>Specific Gravity</label>
-                    <input type="number" id="inp_sg" value="${weightCalcState.sg}" step="0.01" oninput="calculateCurrentMass()">
-                </div>
-                <div class="wb-input-group">
-                    <label>Quantity</label>
-                    <input type="number" id="inp_qty" value="1" oninput="calculateCurrentMass()">
-                </div>
+                ${commonTail}
             `;
             break;
 
@@ -524,14 +496,7 @@ function openShapeCalculator(shapeKey) {
                     <label>Length (mm)</label>
                     <input type="number" id="inp_l" value="1000" oninput="calculateCurrentMass()">
                 </div>
-                <div class="wb-input-group">
-                    <label>Specific Gravity</label>
-                    <input type="number" id="inp_sg" value="${weightCalcState.sg}" step="0.01" oninput="calculateCurrentMass()">
-                </div>
-                <div class="wb-input-group">
-                    <label>Quantity</label>
-                    <input type="number" id="inp_qty" value="1" oninput="calculateCurrentMass()">
-                </div>
+                ${commonTail}
             `;
             break;
 
@@ -553,20 +518,15 @@ function openShapeCalculator(shapeKey) {
                     <label>Length (mm)</label>
                     <input type="number" id="inp_l" value="1000" oninput="calculateCurrentMass()">
                 </div>
-                <div class="wb-input-group">
-                    <label>Specific Gravity</label>
-                    <input type="number" id="inp_sg" value="${weightCalcState.sg}" step="0.01" oninput="calculateCurrentMass()">
-                </div>
-                <div class="wb-input-group">
-                    <label>Quantity</label>
-                    <input type="number" id="inp_qty" value="1" oninput="calculateCurrentMass()">
-                </div>
+                ${commonTail}
             `;
             break;
     }
 
     formInputsContainer.innerHTML = html;
     drawShapeCanvas(shapeKey);
+    calculateCurrentMass();
+}
 }
 
 function onShapeDropdownChange(shapeKey) {
@@ -746,6 +706,15 @@ function calculateMassEngine() {
     const unit_mass_kg = (volume_cm3 * sg) / 1000;
     const total_mass_kg = unit_mass_kg * qty;
     const total_cost = total_mass_kg * price;
+
+    const calcW = document.getElementById('inp_calc_weight');
+    if (calcW) {
+        calcW.value = `${total_mass_kg.toFixed(3)} kg`;
+    }
+    const calcP = document.getElementById('inp_calc_price');
+    if (calcP) {
+        calcP.value = `Rs. ${total_cost.toFixed(2)}`;
+    }
 
     return {
         component: document.getElementById('wb-app-title')?.innerText || 'Section',
