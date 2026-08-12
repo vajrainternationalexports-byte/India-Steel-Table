@@ -807,6 +807,161 @@ function applyCategorizedSection(typeKey, family, categoryName, index) {
     }, 50);
 }
 
+const STANDARD_PRESETS_DB = {
+    pipe: [
+        { label: "-- Select Standard Pipe Size (IS 1239 / IS 1161) --", od: null, t: null },
+        { label: "15 mm (1/2\") Light - OD 21.3 mm, t 2.00 mm", od: 21.3, t: 2.00 },
+        { label: "15 mm (1/2\") Medium - OD 21.3 mm, t 2.65 mm", od: 21.3, t: 2.65 },
+        { label: "15 mm (1/2\") Heavy - OD 21.3 mm, t 3.25 mm", od: 21.3, t: 3.25 },
+        { label: "20 mm (3/4\") Light - OD 26.9 mm, t 2.30 mm", od: 26.9, t: 2.30 },
+        { label: "20 mm (3/4\") Medium - OD 26.9 mm, t 2.65 mm", od: 26.9, t: 2.65 },
+        { label: "20 mm (3/4\") Heavy - OD 26.9 mm, t 3.25 mm", od: 26.9, t: 3.25 },
+        { label: "25 mm (1\") Light - OD 33.7 mm, t 2.60 mm", od: 33.7, t: 2.60 },
+        { label: "25 mm (1\") Medium - OD 33.7 mm, t 3.25 mm", od: 33.7, t: 3.25 },
+        { label: "25 mm (1\") Heavy - OD 33.7 mm, t 4.05 mm", od: 33.7, t: 4.05 },
+        { label: "32 mm (1-1/4\") Light - OD 42.4 mm, t 2.60 mm", od: 42.4, t: 2.60 },
+        { label: "32 mm (1-1/4\") Medium - OD 42.4 mm, t 3.25 mm", od: 42.4, t: 3.25 },
+        { label: "32 mm (1-1/4\") Heavy - OD 42.4 mm, t 4.05 mm", od: 42.4, t: 4.05 },
+        { label: "40 mm (1-1/2\") Light - OD 48.3 mm, t 2.90 mm", od: 48.3, t: 2.90 },
+        { label: "40 mm (1-1/2\") Medium - OD 48.3 mm, t 3.60 mm", od: 48.3, t: 3.60 },
+        { label: "40 mm (1-1/2\") Heavy - OD 48.3 mm, t 4.50 mm", od: 48.3, t: 4.50 },
+        { label: "50 mm (2\") Light - OD 60.3 mm, t 2.90 mm", od: 60.3, t: 2.90 },
+        { label: "50 mm (2\") Medium - OD 60.3 mm, t 3.60 mm", od: 60.3, t: 3.60 },
+        { label: "50 mm (2\") Heavy - OD 60.3 mm, t 4.50 mm", od: 60.3, t: 4.50 },
+        { label: "65 mm (2-1/2\") Light - OD 76.1 mm, t 3.25 mm", od: 76.1, t: 3.25 },
+        { label: "65 mm (2-1/2\") Medium - OD 76.1 mm, t 3.65 mm", od: 76.1, t: 3.65 },
+        { label: "65 mm (2-1/2\") Heavy - OD 76.1 mm, t 4.50 mm", od: 76.1, t: 4.50 },
+        { label: "80 mm (3\") Light - OD 88.9 mm, t 3.25 mm", od: 88.9, t: 3.25 },
+        { label: "80 mm (3\") Medium - OD 88.9 mm, t 4.05 mm", od: 88.9, t: 4.05 },
+        { label: "80 mm (3\") Heavy - OD 88.9 mm, t 4.85 mm", od: 88.9, t: 4.85 },
+        { label: "100 mm (4\") Light - OD 114.3 mm, t 3.65 mm", od: 114.3, t: 3.65 },
+        { label: "100 mm (4\") Medium - OD 114.3 mm, t 4.50 mm", od: 114.3, t: 4.50 },
+        { label: "100 mm (4\") Heavy - OD 114.3 mm, t 5.40 mm", od: 114.3, t: 5.40 },
+        { label: "125 mm (5\") Medium - OD 139.7 mm, t 4.85 mm", od: 139.7, t: 4.85 },
+        { label: "125 mm (5\") Heavy - OD 139.7 mm, t 5.40 mm", od: 139.7, t: 5.40 },
+        { label: "150 mm (6\") Medium - OD 168.3 mm, t 4.85 mm", od: 168.3, t: 4.85 },
+        { label: "150 mm (6\") Heavy - OD 168.3 mm, t 5.40 mm", od: 168.3, t: 5.40 }
+    ],
+    box: [
+        { label: "-- Select Standard Box/Tube Preset (IS 4923) --", h: null, w: null, t: null },
+        { label: "SHS 25x25x2.0 mm", h: 25, w: 25, t: 2.0 },
+        { label: "SHS 25x25x3.0 mm", h: 25, w: 25, t: 3.0 },
+        { label: "SHS 38x38x2.6 mm", h: 38, w: 38, t: 2.6 },
+        { label: "SHS 38x38x3.2 mm", h: 38, w: 38, t: 3.2 },
+        { label: "SHS 50x50x2.9 mm (Light)", h: 50, w: 50, t: 2.9 },
+        { label: "SHS 50x50x3.6 mm (Medium)", h: 50, w: 50, t: 3.6 },
+        { label: "SHS 50x50x4.5 mm (Heavy)", h: 50, w: 50, t: 4.5 },
+        { label: "SHS 72x72x3.2 mm", h: 72, w: 72, t: 3.2 },
+        { label: "SHS 72x72x4.8 mm", h: 72, w: 72, t: 4.8 },
+        { label: "SHS 100x100x4.0 mm", h: 100, w: 100, t: 4.0 },
+        { label: "SHS 100x100x6.0 mm", h: 100, w: 100, t: 6.0 },
+        { label: "RHS 50x25x2.6 mm", h: 50, w: 25, t: 2.6 },
+        { label: "RHS 60x40x3.2 mm", h: 60, w: 40, t: 3.2 },
+        { label: "RHS 80x40x3.2 mm", h: 80, w: 40, t: 3.2 },
+        { label: "RHS 96x48x3.2 mm", h: 96, w: 48, t: 3.2 },
+        { label: "RHS 96x48x4.8 mm", h: 96, w: 48, t: 4.8 },
+        { label: "RHS 120x60x3.6 mm", h: 120, w: 60, t: 3.6 },
+        { label: "RHS 145x82x4.5 mm", h: 145, w: 82, t: 4.5 }
+    ],
+    rod: [
+        { label: "-- Select Standard Round Bar Diameter (IS 1732) --", d: null },
+        { label: "6 mm Dia", d: 6 },
+        { label: "8 mm Dia", d: 8 },
+        { label: "10 mm Dia", d: 10 },
+        { label: "12 mm Dia", d: 12 },
+        { label: "16 mm Dia", d: 16 },
+        { label: "20 mm Dia", d: 20 },
+        { label: "25 mm Dia", d: 25 },
+        { label: "28 mm Dia", d: 28 },
+        { label: "32 mm Dia", d: 32 },
+        { label: "40 mm Dia", d: 40 },
+        { label: "50 mm Dia", d: 50 },
+        { label: "60 mm Dia", d: 60 },
+        { label: "75 mm Dia", d: 75 },
+        { label: "100 mm Dia", d: 100 }
+    ],
+    square: [
+        { label: "-- Select Standard Square Bar Side (IS 1732) --", s: null },
+        { label: "6x6 mm", s: 6 },
+        { label: "8x8 mm", s: 8 },
+        { label: "10x10 mm", s: 10 },
+        { label: "12x12 mm", s: 12 },
+        { label: "16x16 mm", s: 16 },
+        { label: "20x20 mm", s: 20 },
+        { label: "25x25 mm", s: 25 },
+        { label: "32x32 mm", s: 32 },
+        { label: "40x40 mm", s: 40 },
+        { label: "50x50 mm", s: 50 }
+    ],
+    plate: [
+        { label: "-- Select Standard Sheet/Plate Thickness (IS 2062 / SWG) --", t: null },
+        { label: "1.6 mm (16 SWG)", t: 1.626 },
+        { label: "2.0 mm (14 SWG)", t: 2.032 },
+        { label: "2.5 mm (12 SWG)", t: 2.642 },
+        { label: "3.0 mm Plate", t: 3.0 },
+        { label: "4.0 mm Plate", t: 4.0 },
+        { label: "5.0 mm Plate", t: 5.0 },
+        { label: "6.0 mm Plate", t: 6.0 },
+        { label: "8.0 mm Plate", t: 8.0 },
+        { label: "10.0 mm Plate", t: 10.0 },
+        { label: "12.0 mm Plate", t: 12.0 },
+        { label: "16.0 mm Plate", t: 16.0 },
+        { label: "20.0 mm Plate", t: 20.0 },
+        { label: "25.0 mm Plate", t: 25.0 }
+    ]
+};
+
+function renderPresetDropdownHtml(shapeKey) {
+    const list = STANDARD_PRESETS_DB[shapeKey];
+    if (!list || list.length === 0) return '';
+
+    const options = list.map((item, idx) => `<option value="${idx}">${item.label}</option>`).join('');
+    return `
+        <div class="wb-input-group" style="background: #11141d; padding: 10px; border-radius: 8px; border: 1px solid #00E5FF; margin-bottom: 15px;">
+            <label style="color: #00E5FF; font-weight: 700; font-size: 0.9rem;">Standard Preset Size (Auto-Fill)</label>
+            <select id="preset_size_dropdown" onchange="onPresetSelected('${shapeKey}', this.value)" style="width: 100%; padding: 10px; background: #1a1e29; color: #ffffff; border: 1px solid #282f3f; border-radius: 6px; font-weight: 600;">
+                ${options}
+            </select>
+        </div>
+    `;
+}
+
+function onPresetSelected(shapeKey, index) {
+    const idx = parseInt(index);
+    if (isNaN(idx) || idx < 0) return;
+    const list = STANDARD_PRESETS_DB[shapeKey];
+    if (!list || !list[idx]) return;
+
+    const item = list[idx];
+    if (item.od !== undefined && item.od !== null && document.getElementById('inp_od')) {
+        document.getElementById('inp_od').value = item.od;
+    }
+    if (item.d !== undefined && item.d !== null && document.getElementById('inp_d')) {
+        document.getElementById('inp_d').value = item.d;
+    }
+    if (item.s !== undefined && item.s !== null && document.getElementById('inp_s')) {
+        document.getElementById('inp_s').value = item.s;
+    }
+    if (item.h !== undefined && item.h !== null && document.getElementById('inp_h')) {
+        document.getElementById('inp_h').value = item.h;
+    }
+    if (item.w !== undefined && item.w !== null && document.getElementById('inp_w')) {
+        document.getElementById('inp_w').value = item.w;
+    }
+    if (item.t !== undefined && item.t !== null && document.getElementById('inp_t')) {
+        document.getElementById('inp_t').value = item.t;
+    }
+    if (item.a !== undefined && item.a !== null && document.getElementById('inp_a')) {
+        document.getElementById('inp_a').value = item.a;
+    }
+    if (item.b !== undefined && item.b !== null && document.getElementById('inp_b')) {
+        document.getElementById('inp_b').value = item.b;
+    }
+
+    calculateCurrentMass();
+    drawShapeCanvas(shapeKey);
+}
+
 function openShapeCalculator(shapeKey) {
     weightCalcState.activeShape = shapeKey;
     weightCalcState.activeScreen = 'form';
@@ -822,7 +977,7 @@ function openShapeCalculator(shapeKey) {
     const formInputsContainer = document.getElementById('wb-form-inputs');
     formInputsContainer.innerHTML = '';
 
-    let html = '';
+    let html = renderPresetDropdownHtml(shapeKey);
     const commonTail = `
         <div class="wb-input-group">
             <label>Specific Gravity</label>
@@ -848,7 +1003,7 @@ function openShapeCalculator(shapeKey) {
 
     switch(shapeKey) {
         case 'box':
-            html = `
+            html += `
                 <div class="wb-input-group">
                     <label>Height H (mm)</label>
                     <input type="number" id="inp_h" value="100" oninput="calculateCurrentMass()">
@@ -870,7 +1025,7 @@ function openShapeCalculator(shapeKey) {
             break;
 
         case 'square':
-            html = `
+            html += `
                 <div class="wb-input-group">
                     <label>Side (mm)</label>
                     <input type="number" id="inp_s" value="100" oninput="calculateCurrentMass()">
@@ -885,7 +1040,7 @@ function openShapeCalculator(shapeKey) {
 
         case 'plate':
         case 'flat':
-            html = `
+            html += `
                 <div class="wb-input-group">
                     <label>Length (mm)</label>
                     <input type="number" id="inp_l" value="1000" oninput="calculateCurrentMass()">
@@ -903,7 +1058,7 @@ function openShapeCalculator(shapeKey) {
             break;
 
         case 'pipe':
-            html = `
+            html += `
                 <div class="wb-input-group">
                     <label>Outer Diameter (OD) (mm)</label>
                     <input type="number" id="inp_od" value="114.3" oninput="calculateCurrentMass()">
@@ -921,7 +1076,7 @@ function openShapeCalculator(shapeKey) {
             break;
 
         case 'rod':
-            html = `
+            html += `
                 <div class="wb-input-group">
                     <label>Diameter D (mm)</label>
                     <input type="number" id="inp_d" value="25" oninput="calculateCurrentMass()">
@@ -935,7 +1090,7 @@ function openShapeCalculator(shapeKey) {
             break;
 
         case 'beam':
-            html = `
+            html += `
                 <div class="wb-input-group">
                     <label>Section Height H (mm)</label>
                     <input type="number" id="inp_h" value="200" oninput="calculateCurrentMass()">
@@ -961,7 +1116,7 @@ function openShapeCalculator(shapeKey) {
             break;
 
         case 'channel':
-            html = `
+            html += `
                 <div class="wb-input-group">
                     <label>Section Height H (mm)</label>
                     <input type="number" id="inp_h" value="150" oninput="calculateCurrentMass()">
@@ -987,7 +1142,7 @@ function openShapeCalculator(shapeKey) {
             break;
 
         default:
-            html = `
+            html += `
                 <div class="wb-input-group">
                     <label>Side A (mm)</label>
                     <input type="number" id="inp_a" value="50" oninput="calculateCurrentMass()">
