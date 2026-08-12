@@ -266,6 +266,8 @@ function switchProjectTab(projectKey) {
         tabB.classList.add('active');
         tabA.classList.remove('active');
     }
+}
+
 function openStandardsOrMoreCrossSections() {
     openStandardSelector('beam');
 }
@@ -397,6 +399,28 @@ function openShapeCalculator(shapeKey) {
     `;
 
     switch(shapeKey) {
+        case 'box':
+            html = `
+                <div class="wb-input-group">
+                    <label>Height H (mm)</label>
+                    <input type="number" id="inp_h" value="100" oninput="calculateCurrentMass()">
+                </div>
+                <div class="wb-input-group">
+                    <label>Width B (mm)</label>
+                    <input type="number" id="inp_w" value="50" oninput="calculateCurrentMass()">
+                </div>
+                <div class="wb-input-group">
+                    <label>Wall Thickness t (mm)</label>
+                    <input type="number" id="inp_t" value="3.2" oninput="calculateCurrentMass()">
+                </div>
+                <div class="wb-input-group">
+                    <label>Length (mm)</label>
+                    <input type="number" id="inp_l" value="6000" oninput="calculateCurrentMass()">
+                </div>
+                ${commonTail}
+            `;
+            break;
+
         case 'square':
             html = `
                 <div class="wb-input-group">
@@ -540,7 +564,6 @@ function openShapeCalculator(shapeKey) {
     formInputsContainer.innerHTML = html;
     drawShapeCanvas(shapeKey);
     calculateCurrentMass();
-}
 }
 
 function onShapeDropdownChange(shapeKey) {
@@ -688,6 +711,13 @@ function calculateMassEngine() {
             const pipe_t = parseFloat(document.getElementById('inp_t')?.value || 4.5);
             const id = od - 2 * pipe_t;
             area_mm2 = (Math.PI / 4) * (od * od - id * id);
+            break;
+
+        case 'box':
+            const box_h = parseFloat(document.getElementById('inp_h')?.value || 100);
+            const box_w = parseFloat(document.getElementById('inp_w')?.value || 50);
+            const box_t = parseFloat(document.getElementById('inp_t')?.value || 3.2);
+            area_mm2 = (box_h * box_w) - Math.max(0, (box_h - 2 * box_t) * (box_w - 2 * box_t));
             break;
 
         case 'rod':
