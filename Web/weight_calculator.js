@@ -68,7 +68,37 @@ const CATEGORIZED_PROFILES = {
     channel: {
         'IS 808': [
             {
-                category: "IS Junior Channels",
+                category: "IS Medium Channels (ISMC)",
+                items: [
+                    { name: "ISMC 75", h: 75, b: 40, tw: 4.4, tf: 7.3, mass: 7.14 },
+                    { name: "ISMC 100", h: 100, b: 50, tw: 4.7, tf: 7.5, mass: 9.56 },
+                    { name: "ISMC 125", h: 125, b: 65, tw: 5.3, tf: 8.1, mass: 13.1 },
+                    { name: "ISMC 150", h: 150, b: 75, tw: 5.7, tf: 7.8, mass: 16.8 },
+                    { name: "ISMC 175", h: 175, b: 75, tw: 6.0, tf: 10.2, mass: 19.6 },
+                    { name: "ISMC 200", h: 200, b: 75, tw: 6.2, tf: 11.4, mass: 22.3 },
+                    { name: "ISMC 225", h: 225, b: 80, tw: 6.4, tf: 12.4, mass: 26.1 },
+                    { name: "ISMC 250", h: 250, b: 80, tw: 7.2, tf: 14.1, mass: 30.7 },
+                    { name: "ISMC 300", h: 300, b: 90, tw: 7.8, tf: 13.6, mass: 36.3 },
+                    { name: "ISMC 350", h: 350, b: 100, tw: 8.1, tf: 14.1, mass: 42.7 },
+                    { name: "ISMC 400", h: 400, b: 100, tw: 8.6, tf: 15.3, mass: 50.1 }
+                ]
+            },
+            {
+                category: "IS Light Channels (ISLC)",
+                items: [
+                    { name: "ISLC 75", h: 75, b: 40, tw: 3.7, tf: 6.0, mass: 5.7 },
+                    { name: "ISLC 100", h: 100, b: 50, tw: 4.0, tf: 6.4, mass: 7.9 },
+                    { name: "ISLC 125", h: 125, b: 65, tw: 4.4, tf: 6.6, mass: 10.7 },
+                    { name: "ISLC 150", h: 150, b: 75, tw: 4.8, tf: 7.8, mass: 14.4 },
+                    { name: "ISLC 175", h: 175, b: 75, tw: 5.1, tf: 8.0, mass: 16.7 },
+                    { name: "ISLC 200", h: 200, b: 90, tw: 5.3, tf: 8.6, mass: 20.6 },
+                    { name: "ISLC 225", h: 225, b: 90, tw: 5.8, tf: 9.6, mass: 24.0 },
+                    { name: "ISLC 250", h: 250, b: 100, tw: 6.1, tf: 10.7, mass: 28.0 },
+                    { name: "ISLC 300", h: 300, b: 100, tw: 6.7, tf: 11.6, mass: 34.4 }
+                ]
+            },
+            {
+                category: "IS Junior Channels (ISJC)",
                 items: [
                     { name: "ISJC 100", h: 100, b: 45, tw: 3.0, tf: 4.7, mass: 5.8 },
                     { name: "ISJC 125", h: 125, b: 50, tw: 3.0, tf: 5.0, mass: 7.9 },
@@ -76,39 +106,69 @@ const CATEGORIZED_PROFILES = {
                     { name: "ISJC 175", h: 175, b: 60, tw: 3.6, tf: 5.7, mass: 11.4 },
                     { name: "ISJC 200", h: 200, b: 70, tw: 4.1, tf: 6.2, mass: 13.9 }
                 ]
-            },
-            {
-                category: "IS Light Channels",
-                items: [
-                    { name: "ISLC 75", h: 75, b: 40, tw: 3.7, tf: 6.0, mass: 5.7 },
-                    { name: "ISLC 100", h: 100, b: 50, tw: 4.0, tf: 6.4, mass: 7.9 },
-                    { name: "ISLC 125", h: 125, b: 65, tw: 4.4, tf: 6.6, mass: 10.7 },
-                    { name: "ISLC 150", h: 150, b: 75, tw: 4.8, tf: 7.8, mass: 14.4 },
-                    { name: "ISLC 200", h: 200, b: 90, tw: 5.3, tf: 8.6, mass: 20.6 }
-                ]
-            },
-            {
-                category: "IS Medium Channels",
-                items: [
-                    { name: "ISMC 75", h: 75, b: 40, tw: 4.4, tf: 7.3, mass: 7.1 },
-                    { name: "ISMC 100", h: 100, b: 50, tw: 4.7, tf: 7.5, mass: 9.6 },
-                    { name: "ISMC 125", h: 125, b: 65, tw: 5.3, tf: 8.1, mass: 13.1 },
-                    { name: "ISMC 150", h: 150, b: 75, tw: 5.7, tf: 7.8, mass: 16.8 },
-                    { name: "ISMC 200", h: 200, b: 75, tw: 6.2, tf: 11.4, mass: 22.3 },
-                    { name: "ISMC 250", h: 250, b: 80, tw: 7.2, tf: 14.1, mass: 30.7 },
-                    { name: "ISMC 300", h: 300, b: 90, tw: 7.8, tf: 13.6, mass: 36.3 }
-                ]
             }
         ],
         'ANSI/AISC': [
             {
-                category: "ANSI MC/C Channels",
+                category: "American Standard Channels (C & MC)",
                 items: [
                     { name: "C 3x4.1", h: 76.2, b: 35.8, tw: 4.3, tf: 6.9, mass: 6.1 },
                     { name: "C 4x5.4", h: 101.6, b: 40.2, tw: 4.7, tf: 7.5, mass: 8.0 },
+                    { name: "C 5x6.7", h: 127.0, b: 44.5, tw: 4.8, tf: 8.1, mass: 10.0 },
+                    { name: "C 6x8.2", h: 152.4, b: 48.8, tw: 5.1, tf: 8.7, mass: 12.2 },
                     { name: "MC 6x12", h: 152.4, b: 63.4, tw: 8.0, tf: 9.8, mass: 17.9 },
                     { name: "C 8x11.5", h: 203.2, b: 57.4, tw: 5.6, tf: 9.9, mass: 17.1 },
-                    { name: "C 12x25", h: 304.8, b: 77.4, tw: 9.8, tf: 12.7, mass: 37.2 }
+                    { name: "C 10x15.3", h: 254.0, b: 66.0, tw: 6.1, tf: 11.1, mass: 22.8 },
+                    { name: "C 12x20.7", h: 304.8, b: 74.7, tw: 7.2, tf: 12.7, mass: 30.8 },
+                    { name: "C 15x33.9", h: 381.0, b: 86.4, tw: 10.2, tf: 16.5, mass: 50.4 }
+                ]
+            }
+        ],
+        'BS 4 : Part 1': [
+            {
+                category: "Parallel Flange Channels (PFC)",
+                items: [
+                    { name: "PFC 125x65", h: 125, b: 65, tw: 5.5, tf: 9.5, mass: 13.4 },
+                    { name: "PFC 150x75", h: 150, b: 75, tw: 5.5, tf: 10.0, mass: 17.9 },
+                    { name: "PFC 180x75", h: 180, b: 75, tw: 6.0, tf: 10.5, mass: 20.3 },
+                    { name: "PFC 200x75", h: 200, b: 75, tw: 6.0, tf: 11.0, mass: 23.4 },
+                    { name: "PFC 230x75", h: 230, b: 75, tw: 6.5, tf: 11.5, mass: 25.7 },
+                    { name: "PFC 260x75", h: 260, b: 75, tw: 7.0, tf: 12.0, mass: 27.6 },
+                    { name: "PFC 300x90", h: 300, b: 90, tw: 9.0, tf: 15.5, mass: 41.4 },
+                    { name: "PFC 380x100", h: 380, b: 100, tw: 9.5, tf: 17.5, mass: 54.0 },
+                    { name: "PFC 400x100", h: 400, b: 100, tw: 10.0, tf: 18.0, mass: 58.4 }
+                ]
+            }
+        ],
+        'AS 3679': [
+            {
+                category: "Australian Channels (PFC)",
+                items: [
+                    { name: "75PFC", h: 75, b: 40, tw: 4.5, tf: 6.0, mass: 5.9 },
+                    { name: "100PFC", h: 100, b: 50, tw: 5.0, tf: 6.7, mass: 8.6 },
+                    { name: "125PFC", h: 125, b: 65, tw: 5.5, tf: 7.5, mass: 11.9 },
+                    { name: "150PFC", h: 150, b: 75, tw: 6.0, tf: 9.5, mass: 17.7 },
+                    { name: "180PFC", h: 180, b: 75, tw: 6.0, tf: 10.5, mass: 20.9 },
+                    { name: "200PFC", h: 200, b: 75, tw: 6.0, tf: 11.0, mass: 22.9 },
+                    { name: "230PFC", h: 230, b: 75, tw: 6.5, tf: 12.0, mass: 25.1 },
+                    { name: "250PFC", h: 250, b: 90, tw: 8.0, tf: 13.0, mass: 35.5 },
+                    { name: "300PFC", h: 300, b: 90, tw: 8.0, tf: 14.0, mass: 40.1 }
+                ]
+            }
+        ],
+        'ISO 657': [
+            {
+                category: "ISO Standard Channels (UPN)",
+                items: [
+                    { name: "UPN 80", h: 80, b: 45, tw: 6.0, tf: 8.0, mass: 8.64 },
+                    { name: "UPN 100", h: 100, b: 50, tw: 6.0, tf: 8.5, mass: 10.6 },
+                    { name: "UPN 120", h: 120, b: 55, tw: 7.0, tf: 9.0, mass: 13.4 },
+                    { name: "UPN 140", h: 140, b: 60, tw: 7.0, tf: 10.0, mass: 16.0 },
+                    { name: "UPN 160", h: 160, b: 65, tw: 7.5, tf: 10.5, mass: 18.8 },
+                    { name: "UPN 180", h: 180, b: 70, tw: 8.0, tf: 11.0, mass: 22.0 },
+                    { name: "UPN 200", h: 200, b: 75, tw: 8.5, tf: 11.5, mass: 25.3 },
+                    { name: "UPN 240", h: 240, b: 85, tw: 9.5, tf: 13.0, mass: 33.2 },
+                    { name: "UPN 300", h: 300, b: 100, tw: 10.0, tf: 16.0, mass: 46.2 }
                 ]
             }
         ]
@@ -116,32 +176,191 @@ const CATEGORIZED_PROFILES = {
     beam: {
         'IS 808': [
             {
-                category: "IS Medium Beams",
+                category: "IS Medium Beams (ISMB)",
                 items: [
                     { name: "ISMB 100", h: 100, b: 50, tw: 4.7, tf: 7.0, mass: 8.9 },
+                    { name: "ISMB 125", h: 125, b: 75, tw: 4.4, tf: 7.6, mass: 13.0 },
                     { name: "ISMB 150", h: 150, b: 75, tw: 5.0, tf: 8.0, mass: 15.0 },
+                    { name: "ISMB 175", h: 175, b: 85, tw: 5.8, tf: 9.0, mass: 19.3 },
                     { name: "ISMB 200", h: 200, b: 100, tw: 5.7, tf: 10.8, mass: 25.4 },
+                    { name: "ISMB 225", h: 225, b: 110, tw: 6.5, tf: 11.8, mass: 31.2 },
                     { name: "ISMB 250", h: 250, b: 125, tw: 6.9, tf: 12.5, mass: 37.3 },
                     { name: "ISMB 300", h: 300, b: 140, tw: 7.5, tf: 13.1, mass: 44.2 },
-                    { name: "ISMB 400", h: 400, b: 140, tw: 8.9, tf: 16.0, mass: 61.6 }
+                    { name: "ISMB 350", h: 350, b: 140, tw: 8.1, tf: 14.2, mass: 52.4 },
+                    { name: "ISMB 400", h: 400, b: 140, tw: 8.9, tf: 16.0, mass: 61.6 },
+                    { name: "ISMB 450", h: 450, b: 150, tw: 9.4, tf: 17.4, mass: 72.4 },
+                    { name: "ISMB 500", h: 500, b: 180, tw: 10.2, tf: 17.2, mass: 86.9 },
+                    { name: "ISMB 550", h: 550, b: 190, tw: 11.2, tf: 19.3, mass: 103.7 },
+                    { name: "ISMB 600", h: 600, b: 210, tw: 12.0, tf: 20.8, mass: 122.6 }
                 ]
             },
             {
-                category: "IS Wide Flange Beams",
+                category: "IS Light Beams (ISLB)",
+                items: [
+                    { name: "ISLB 75", h: 75, b: 50, tw: 3.7, tf: 5.0, mass: 6.1 },
+                    { name: "ISLB 100", h: 100, b: 50, tw: 4.0, tf: 6.4, mass: 8.0 },
+                    { name: "ISLB 125", h: 125, b: 75, tw: 4.4, tf: 6.5, mass: 11.9 },
+                    { name: "ISLB 150", h: 150, b: 80, tw: 4.8, tf: 6.8, mass: 14.2 },
+                    { name: "ISLB 175", h: 175, b: 90, tw: 5.1, tf: 7.3, mass: 16.7 },
+                    { name: "ISLB 200", h: 200, b: 100, tw: 5.4, tf: 7.3, mass: 19.8 },
+                    { name: "ISLB 225", h: 225, b: 100, tw: 5.6, tf: 8.6, mass: 22.2 },
+                    { name: "ISLB 250", h: 250, b: 125, tw: 6.1, tf: 8.2, mass: 27.9 },
+                    { name: "ISLB 300", h: 300, b: 150, tw: 6.7, tf: 9.4, mass: 36.9 },
+                    { name: "ISLB 350", h: 350, b: 165, tw: 7.4, tf: 11.4, mass: 49.5 },
+                    { name: "ISLB 400", h: 400, b: 165, tw: 8.0, tf: 12.5, mass: 56.9 },
+                    { name: "ISLB 450", h: 450, b: 170, tw: 8.6, tf: 13.4, mass: 65.3 },
+                    { name: "ISLB 500", h: 500, b: 180, tw: 9.2, tf: 14.1, mass: 75.0 },
+                    { name: "ISLB 600", h: 600, b: 210, tw: 10.5, tf: 15.5, mass: 99.5 }
+                ]
+            },
+            {
+                category: "IS Wide Flange Beams (ISWB)",
                 items: [
                     { name: "ISWB 150", h: 150, b: 100, tw: 5.4, tf: 7.0, mass: 17.0 },
+                    { name: "ISWB 175", h: 175, b: 125, tw: 5.8, tf: 7.4, mass: 22.1 },
                     { name: "ISWB 200", h: 200, b: 140, tw: 6.1, tf: 9.0, mass: 28.8 },
+                    { name: "ISWB 225", h: 225, b: 150, tw: 6.4, tf: 9.9, mass: 33.9 },
                     { name: "ISWB 250", h: 250, b: 200, tw: 6.7, tf: 9.0, mass: 40.9 },
-                    { name: "ISWB 300", h: 300, b: 200, tw: 7.4, tf: 10.0, mass: 48.1 }
+                    { name: "ISWB 300", h: 300, b: 200, tw: 7.4, tf: 10.0, mass: 48.1 },
+                    { name: "ISWB 350", h: 350, b: 250, tw: 8.0, tf: 11.4, mass: 56.9 },
+                    { name: "ISWB 400", h: 400, b: 250, tw: 8.6, tf: 12.7, mass: 66.7 },
+                    { name: "ISWB 450", h: 450, b: 250, tw: 9.2, tf: 13.7, mass: 79.3 },
+                    { name: "ISWB 500", h: 500, b: 250, tw: 9.9, tf: 14.7, mass: 95.2 },
+                    { name: "ISWB 600", h: 600, b: 250, tw: 11.2, tf: 18.0, mass: 133.7 }
                 ]
             },
             {
-                category: "IS Column Sections H Beams",
+                category: "IS Heavy Beams / Columns (ISHB)",
                 items: [
                     { name: "ISHB 150", h: 150, b: 150, tw: 5.4, tf: 8.4, mass: 27.1 },
                     { name: "ISHB 200", h: 200, b: 200, tw: 6.1, tf: 9.0, mass: 37.3 },
+                    { name: "ISHB 225", h: 225, b: 225, tw: 6.5, tf: 9.1, mass: 43.1 },
                     { name: "ISHB 250", h: 250, b: 250, tw: 6.7, tf: 9.0, mass: 51.0 },
-                    { name: "ISHB 300", h: 300, b: 300, tw: 7.6, tf: 10.6, mass: 63.0 }
+                    { name: "ISHB 300", h: 300, b: 300, tw: 7.6, tf: 10.6, mass: 63.0 },
+                    { name: "ISHB 350", h: 350, b: 250, tw: 8.3, tf: 11.6, mass: 67.4 },
+                    { name: "ISHB 400", h: 400, b: 250, tw: 9.1, tf: 12.7, mass: 77.4 },
+                    { name: "ISHB 450", h: 450, b: 250, tw: 9.8, tf: 13.7, mass: 87.2 }
+                ]
+            }
+        ],
+        'ANSI/AISC': [
+            {
+                category: "AISC Wide Flange Beams (W Shapes)",
+                items: [
+                    { name: "W 4x13", h: 106, b: 103, tw: 7.1, tf: 8.8, mass: 19.3 },
+                    { name: "W 6x9", h: 150, b: 100, tw: 4.3, tf: 5.5, mass: 13.4 },
+                    { name: "W 6x15", h: 152, b: 152, tw: 5.8, tf: 6.6, mass: 22.5 },
+                    { name: "W 8x10", h: 200, b: 100, tw: 4.3, tf: 5.2, mass: 14.9 },
+                    { name: "W 8x18", h: 207, b: 133, tw: 5.8, tf: 8.4, mass: 26.8 },
+                    { name: "W 8x24", h: 203, b: 165, tw: 6.2, tf: 10.2, mass: 35.7 },
+                    { name: "W 10x12", h: 251, b: 101, tw: 4.8, tf: 5.3, mass: 17.9 },
+                    { name: "W 10x19", h: 260, b: 102, tw: 6.4, tf: 10.0, mass: 28.3 },
+                    { name: "W 10x30", h: 266, b: 148, tw: 7.6, tf: 13.0, mass: 44.6 },
+                    { name: "W 12x16", h: 305, b: 101, tw: 5.6, tf: 6.7, mass: 23.8 },
+                    { name: "W 12x26", h: 310, b: 165, tw: 5.8, tf: 9.7, mass: 38.7 },
+                    { name: "W 12x40", h: 303, b: 203, tw: 7.5, tf: 13.1, mass: 59.5 },
+                    { name: "W 14x22", h: 349, b: 127, tw: 5.8, tf: 8.5, mass: 32.7 },
+                    { name: "W 14x34", h: 356, b: 171, tw: 7.2, tf: 11.6, mass: 50.6 },
+                    { name: "W 16x26", h: 399, b: 140, tw: 6.4, tf: 8.8, mass: 38.7 },
+                    { name: "W 18x35", h: 450, b: 152, tw: 7.6, tf: 10.8, mass: 52.1 },
+                    { name: "W 21x44", h: 526, b: 165, tw: 8.9, tf: 11.4, mass: 65.5 },
+                    { name: "W 24x55", h: 599, b: 178, tw: 10.0, tf: 12.8, mass: 81.8 }
+                ]
+            },
+            {
+                category: "American Standard Beams (S Shapes)",
+                items: [
+                    { name: "S 3x5.7", h: 76.2, b: 59.2, tw: 4.3, tf: 6.6, mass: 8.5 },
+                    { name: "S 4x7.7", h: 101.6, b: 67.6, tw: 4.9, tf: 7.4, mass: 11.5 },
+                    { name: "S 6x12.5", h: 152.4, b: 84.6, tw: 5.9, tf: 9.1, mass: 18.6 },
+                    { name: "S 8x18.4", h: 203.2, b: 101.6, tw: 6.9, tf: 10.8, mass: 27.4 },
+                    { name: "S 10x25.4", h: 254.0, b: 118.4, tw: 7.9, tf: 12.5, mass: 37.8 },
+                    { name: "S 12x31.8", h: 304.8, b: 127.0, tw: 8.9, tf: 14.2, mass: 47.3 }
+                ]
+            }
+        ],
+        'BS 4 : Part 1': [
+            {
+                category: "Universal Beams (UB)",
+                items: [
+                    { name: "127x76x13UB", h: 127, b: 76, tw: 4.0, tf: 7.6, mass: 13.0 },
+                    { name: "152x89x16UB", h: 152, b: 89, tw: 4.5, tf: 7.7, mass: 16.0 },
+                    { name: "178x102x19UB", h: 178, b: 102, tw: 4.8, tf: 7.9, mass: 19.0 },
+                    { name: "203x102x23UB", h: 203, b: 102, tw: 5.4, tf: 9.3, mass: 23.1 },
+                    { name: "203x133x25UB", h: 203, b: 133, tw: 5.7, tf: 7.8, mass: 25.1 },
+                    { name: "254x102x22UB", h: 254, b: 102, tw: 5.7, tf: 6.8, mass: 22.0 },
+                    { name: "254x146x31UB", h: 251, b: 146, tw: 6.0, tf: 8.6, mass: 31.1 },
+                    { name: "305x102x25UB", h: 305, b: 102, tw: 5.8, tf: 6.8, mass: 24.8 },
+                    { name: "305x165x40UB", h: 303, b: 165, tw: 6.0, tf: 10.2, mass: 40.3 },
+                    { name: "356x127x33UB", h: 349, b: 127, tw: 6.0, tf: 8.5, mass: 33.1 },
+                    { name: "406x140x39UB", h: 398, b: 142, tw: 6.4, tf: 8.6, mass: 39.0 },
+                    { name: "457x152x52UB", h: 450, b: 153, tw: 7.6, tf: 10.9, mass: 52.3 },
+                    { name: "533x210x82UB", h: 528, b: 209, tw: 9.6, tf: 13.2, mass: 82.2 },
+                    { name: "610x229x101UB", h: 603, b: 228, tw: 10.5, tf: 14.8, mass: 101.2 }
+                ]
+            },
+            {
+                category: "Universal Columns (UC)",
+                items: [
+                    { name: "152x152x23UC", h: 152, b: 152, tw: 5.8, tf: 6.8, mass: 23.0 },
+                    { name: "203x203x46UC", h: 203, b: 203, tw: 7.2, tf: 11.0, mass: 46.1 },
+                    { name: "254x254x73UC", h: 254, b: 254, tw: 8.6, tf: 14.2, mass: 73.1 },
+                    { name: "305x305x97UC", h: 308, b: 305, tw: 9.9, tf: 15.4, mass: 96.9 }
+                ]
+            }
+        ],
+        'AS 3679': [
+            {
+                category: "Australian Universal Beams (UB)",
+                items: [
+                    { name: "150UB14", h: 150, b: 75, tw: 5.0, tf: 7.0, mass: 14.0 },
+                    { name: "150UB18", h: 155, b: 100, tw: 6.0, tf: 8.0, mass: 18.0 },
+                    { name: "180UB16", h: 173, b: 90, tw: 4.5, tf: 7.0, mass: 16.1 },
+                    { name: "200UB18", h: 198, b: 99, tw: 4.5, tf: 7.0, mass: 18.2 },
+                    { name: "200UB25", h: 203, b: 133, tw: 5.8, tf: 7.8, mass: 25.4 },
+                    { name: "250UB25", h: 248, b: 124, tw: 5.0, tf: 8.0, mass: 25.7 },
+                    { name: "250UB31", h: 252, b: 146, tw: 6.1, tf: 8.6, mass: 31.4 },
+                    { name: "310UB32", h: 305, b: 99, tw: 5.5, tf: 6.7, mass: 32.0 },
+                    { name: "310UB40", h: 304, b: 165, tw: 6.1, tf: 10.2, mass: 40.4 },
+                    { name: "360UB45", h: 352, b: 171, tw: 6.9, tf: 9.7, mass: 44.7 },
+                    { name: "410UB54", h: 403, b: 178, tw: 7.6, tf: 10.9, mass: 53.7 },
+                    { name: "460UB67", h: 454, b: 190, tw: 8.5, tf: 12.7, mass: 67.1 },
+                    { name: "530UB82", h: 528, b: 209, tw: 9.6, tf: 13.2, mass: 82.0 },
+                    { name: "610UB101", h: 603, b: 228, tw: 10.6, tf: 14.8, mass: 101.0 }
+                ]
+            },
+            {
+                category: "Australian Universal Columns (UC)",
+                items: [
+                    { name: "100UC15", h: 97, b: 99, tw: 5.0, tf: 7.0, mass: 14.8 },
+                    { name: "150UC23", h: 152, b: 152, tw: 6.0, tf: 6.8, mass: 23.4 },
+                    { name: "150UC30", h: 158, b: 153, tw: 6.5, tf: 9.4, mass: 30.0 },
+                    { name: "200UC46", h: 203, b: 203, tw: 7.3, tf: 11.0, mass: 46.2 },
+                    { name: "250UC73", h: 254, b: 254, tw: 8.6, tf: 14.2, mass: 72.9 },
+                    { name: "310UC97", h: 308, b: 305, tw: 9.9, tf: 15.4, mass: 96.8 }
+                ]
+            }
+        ],
+        'ISO 657': [
+            {
+                category: "ISO Parallel Flange Beams (IPE)",
+                items: [
+                    { name: "IPE 80", h: 80, b: 46, tw: 3.8, tf: 5.2, mass: 6.0 },
+                    { name: "IPE 100", h: 100, b: 55, tw: 4.1, tf: 5.7, mass: 8.1 },
+                    { name: "IPE 120", h: 120, b: 64, tw: 4.4, tf: 6.3, mass: 10.4 },
+                    { name: "IPE 140", h: 140, b: 73, tw: 4.7, tf: 6.9, mass: 12.9 },
+                    { name: "IPE 160", h: 160, b: 82, tw: 5.0, tf: 7.4, mass: 15.8 },
+                    { name: "IPE 180", h: 180, b: 91, tw: 5.3, tf: 8.0, mass: 18.8 },
+                    { name: "IPE 200", h: 200, b: 100, tw: 5.6, tf: 8.5, mass: 22.4 },
+                    { name: "IPE 220", h: 220, b: 110, tw: 5.9, tf: 9.2, mass: 26.2 },
+                    { name: "IPE 240", h: 240, b: 120, tw: 6.2, tf: 9.8, mass: 30.7 },
+                    { name: "IPE 270", h: 270, b: 135, tw: 6.6, tf: 10.2, mass: 36.1 },
+                    { name: "IPE 300", h: 300, b: 150, tw: 7.1, tf: 10.7, mass: 42.2 },
+                    { name: "IPE 330", h: 330, b: 160, tw: 7.5, tf: 11.5, mass: 49.1 },
+                    { name: "IPE 360", h: 360, b: 170, tw: 8.0, tf: 12.7, mass: 57.1 },
+                    { name: "IPE 400", h: 400, b: 180, tw: 8.6, tf: 13.5, mass: 66.3 },
+                    { name: "IPE 450", h: 450, b: 190, tw: 9.4, tf: 14.6, mass: 77.6 },
+                    { name: "IPE 500", h: 500, b: 200, tw: 10.2, tf: 16.0, mass: 90.7 }
                 ]
             }
         ]
@@ -149,16 +368,190 @@ const CATEGORIZED_PROFILES = {
     angle: {
         'IS 808': [
             {
-                category: "IS Equal Angles",
+                category: "IS Equal Angles (ISA)",
                 items: [
+                    { name: "20x20x3", a: 20, b: 20, t: 3, mass: 0.9 },
                     { name: "25x25x3", a: 25, b: 25, t: 3, mass: 1.1 },
                     { name: "25x25x4", a: 25, b: 25, t: 4, mass: 1.4 },
                     { name: "30x30x3", a: 30, b: 30, t: 3, mass: 1.4 },
+                    { name: "30x30x4", a: 30, b: 30, t: 4, mass: 1.8 },
+                    { name: "35x35x3", a: 35, b: 35, t: 3, mass: 1.6 },
+                    { name: "35x35x4", a: 35, b: 35, t: 4, mass: 2.1 },
+                    { name: "40x40x3", a: 40, b: 40, t: 3, mass: 1.8 },
+                    { name: "40x40x4", a: 40, b: 40, t: 4, mass: 2.4 },
                     { name: "40x40x5", a: 40, b: 40, t: 5, mass: 3.0 },
+                    { name: "45x45x3", a: 45, b: 45, t: 3, mass: 2.1 },
+                    { name: "45x45x5", a: 45, b: 45, t: 5, mass: 3.4 },
+                    { name: "50x50x3", a: 50, b: 50, t: 3, mass: 2.3 },
+                    { name: "50x50x4", a: 50, b: 50, t: 4, mass: 3.0 },
+                    { name: "50x50x5", a: 50, b: 50, t: 5, mass: 3.8 },
                     { name: "50x50x6", a: 50, b: 50, t: 6, mass: 4.5 },
+                    { name: "60x60x5", a: 60, b: 60, t: 5, mass: 4.5 },
+                    { name: "60x60x6", a: 60, b: 60, t: 6, mass: 5.4 },
+                    { name: "65x65x5", a: 65, b: 65, t: 5, mass: 4.9 },
                     { name: "65x65x6", a: 65, b: 65, t: 6, mass: 5.8 },
+                    { name: "65x65x8", a: 65, b: 65, t: 8, mass: 7.7 },
+                    { name: "75x75x6", a: 75, b: 75, t: 6, mass: 6.8 },
                     { name: "75x75x8", a: 75, b: 75, t: 8, mass: 8.9 },
-                    { name: "100x100x10", a: 100, b: 100, t: 10, mass: 14.9 }
+                    { name: "75x75x10", a: 75, b: 75, t: 10, mass: 11.0 },
+                    { name: "80x80x6", a: 80, b: 80, t: 6, mass: 7.3 },
+                    { name: "80x80x8", a: 80, b: 80, t: 8, mass: 9.6 },
+                    { name: "80x80x10", a: 80, b: 80, t: 10, mass: 11.9 },
+                    { name: "90x90x6", a: 90, b: 90, t: 6, mass: 8.2 },
+                    { name: "90x90x8", a: 90, b: 90, t: 8, mass: 10.8 },
+                    { name: "90x90x10", a: 90, b: 90, t: 10, mass: 13.4 },
+                    { name: "100x100x6", a: 100, b: 100, t: 6, mass: 9.2 },
+                    { name: "100x100x8", a: 100, b: 100, t: 8, mass: 12.1 },
+                    { name: "100x100x10", a: 100, b: 100, t: 10, mass: 14.9 },
+                    { name: "100x100x12", a: 100, b: 100, t: 12, mass: 17.7 },
+                    { name: "130x130x10", a: 130, b: 130, t: 10, mass: 19.7 },
+                    { name: "150x150x12", a: 150, b: 150, t: 12, mass: 27.2 },
+                    { name: "200x200x15", a: 200, b: 200, t: 15, mass: 45.3 }
+                ]
+            },
+            {
+                category: "IS Unequal Angles (ISA)",
+                items: [
+                    { name: "30x20x3", a: 30, b: 20, t: 3, mass: 1.1 },
+                    { name: "40x25x4", a: 40, b: 25, t: 4, mass: 1.9 },
+                    { name: "45x30x4", a: 45, b: 30, t: 4, mass: 2.2 },
+                    { name: "50x30x4", a: 50, b: 30, t: 4, mass: 2.4 },
+                    { name: "50x30x5", a: 50, b: 30, t: 5, mass: 3.0 },
+                    { name: "60x40x5", a: 60, b: 40, t: 5, mass: 3.7 },
+                    { name: "65x45x5", a: 65, b: 45, t: 5, mass: 4.1 },
+                    { name: "75x50x6", a: 75, b: 50, t: 6, mass: 5.6 },
+                    { name: "75x50x8", a: 75, b: 50, t: 8, mass: 7.3 },
+                    { name: "80x50x6", a: 80, b: 50, t: 6, mass: 5.8 },
+                    { name: "90x60x6", a: 90, b: 60, t: 6, mass: 6.8 },
+                    { name: "90x60x8", a: 90, b: 60, t: 8, mass: 8.9 },
+                    { name: "100x65x6", a: 100, b: 65, t: 6, mass: 7.5 },
+                    { name: "100x65x8", a: 100, b: 65, t: 8, mass: 9.9 },
+                    { name: "100x75x8", a: 100, b: 75, t: 8, mass: 10.5 },
+                    { name: "125x75x8", a: 125, b: 75, t: 8, mass: 12.1 },
+                    { name: "150x90x10", a: 150, b: 90, t: 10, mass: 18.2 },
+                    { name: "200x100x12", a: 200, b: 100, t: 12, mass: 27.3 }
+                ]
+            }
+        ],
+        'ANSI/AISC': [
+            {
+                category: "AISC Equal Angles (L Shapes)",
+                items: [
+                    { name: "L 2x2x1/8", a: 50.8, b: 50.8, t: 3.2, mass: 2.45 },
+                    { name: "L 2x2x3/16", a: 50.8, b: 50.8, t: 4.8, mass: 3.63 },
+                    { name: "L 2x2x1/4", a: 50.8, b: 50.8, t: 6.4, mass: 4.75 },
+                    { name: "L 2.5x2.5x1/4", a: 63.5, b: 63.5, t: 6.4, mass: 6.1 },
+                    { name: "L 3x3x3/16", a: 76.2, b: 76.2, t: 4.8, mass: 5.5 },
+                    { name: "L 3x3x1/4", a: 76.2, b: 76.2, t: 6.4, mass: 7.3 },
+                    { name: "L 3x3x3/8", a: 76.2, b: 76.2, t: 9.5, mass: 10.7 },
+                    { name: "L 4x4x1/4", a: 101.6, b: 101.6, t: 6.4, mass: 9.8 },
+                    { name: "L 4x4x3/8", a: 101.6, b: 101.6, t: 9.5, mass: 14.6 },
+                    { name: "L 4x4x1/2", a: 101.6, b: 101.6, t: 12.7, mass: 19.0 },
+                    { name: "L 5x5x3/8", a: 127.0, b: 127.0, t: 9.5, mass: 18.3 },
+                    { name: "L 6x6x3/8", a: 152.4, b: 152.4, t: 9.5, mass: 22.2 },
+                    { name: "L 6x6x1/2", a: 152.4, b: 152.4, t: 12.7, mass: 29.2 },
+                    { name: "L 8x8x1/2", a: 203.2, b: 203.2, t: 12.7, mass: 39.3 }
+                ]
+            },
+            {
+                category: "AISC Unequal Angles (L Shapes)",
+                items: [
+                    { name: "L 3x2x3/16", a: 76.2, b: 50.8, t: 4.8, mass: 4.6 },
+                    { name: "L 4x3x1/4", a: 101.6, b: 76.2, t: 6.4, mass: 8.6 },
+                    { name: "L 5x3.5x5/16", a: 127.0, b: 88.9, t: 7.9, mass: 13.0 },
+                    { name: "L 6x4x3/8", a: 152.4, b: 101.6, t: 9.5, mass: 18.3 },
+                    { name: "L 8x6x1/2", a: 203.2, b: 152.4, t: 12.7, mass: 34.2 }
+                ]
+            }
+        ],
+        'BS 4 : Part 1': [
+            {
+                category: "British Equal Angles",
+                items: [
+                    { name: "L 40x40x4", a: 40, b: 40, t: 4, mass: 2.42 },
+                    { name: "L 50x50x5", a: 50, b: 50, t: 5, mass: 3.77 },
+                    { name: "L 60x60x6", a: 60, b: 60, t: 6, mass: 5.42 },
+                    { name: "L 75x75x6", a: 75, b: 75, t: 6, mass: 6.85 },
+                    { name: "L 75x75x8", a: 75, b: 75, t: 8, mass: 8.99 },
+                    { name: "L 90x90x8", a: 90, b: 90, t: 8, mass: 10.9 },
+                    { name: "L 100x100x10", a: 100, b: 100, t: 10, mass: 15.0 },
+                    { name: "L 120x120x10", a: 120, b: 120, t: 10, mass: 18.2 },
+                    { name: "L 150x150x12", a: 150, b: 150, t: 12, mass: 27.3 },
+                    { name: "L 200x200x16", a: 200, b: 200, t: 16, mass: 48.5 }
+                ]
+            },
+            {
+                category: "British Unequal Angles",
+                items: [
+                    { name: "L 65x50x6", a: 65, b: 50, t: 6, mass: 5.16 },
+                    { name: "L 75x50x6", a: 75, b: 50, t: 6, mass: 5.65 },
+                    { name: "L 100x65x8", a: 100, b: 65, t: 8, mass: 9.94 },
+                    { name: "L 125x75x8", a: 125, b: 75, t: 8, mass: 12.2 },
+                    { name: "L 150x90x10", a: 150, b: 90, t: 10, mass: 18.2 },
+                    { name: "L 200x100x12", a: 200, b: 100, t: 12, mass: 27.3 }
+                ]
+            }
+        ],
+        'AS 3679': [
+            {
+                category: "Australian Equal Angles (EA)",
+                items: [
+                    { name: "25x25x3EA", a: 25, b: 25, t: 3, mass: 1.12 },
+                    { name: "30x30x3EA", a: 30, b: 30, t: 3, mass: 1.35 },
+                    { name: "40x40x3EA", a: 40, b: 40, t: 3, mass: 1.83 },
+                    { name: "50x50x3EA", a: 50, b: 50, t: 3, mass: 2.31 },
+                    { name: "65x65x5EA", a: 65, b: 65, t: 5, mass: 4.87 },
+                    { name: "75x75x6EA", a: 75, b: 75, t: 6, mass: 6.81 },
+                    { name: "90x90x6EA", a: 90, b: 90, t: 6, mass: 8.22 },
+                    { name: "100x100x6EA", a: 100, b: 100, t: 6, mass: 9.16 },
+                    { name: "125x125x8EA", a: 125, b: 125, t: 8, mass: 14.9 },
+                    { name: "150x150x10EA", a: 150, b: 150, t: 10, mass: 22.8 },
+                    { name: "200x200x13EA", a: 200, b: 200, t: 13, mass: 39.8 }
+                ]
+            },
+            {
+                category: "Australian Unequal Angles (UA)",
+                items: [
+                    { name: "65x50x5UA", a: 65, b: 50, t: 5, mass: 4.28 },
+                    { name: "75x50x6UA", a: 75, b: 50, t: 6, mass: 5.56 },
+                    { name: "100x75x6UA", a: 100, b: 75, t: 6, mass: 7.98 },
+                    { name: "125x75x6UA", a: 125, b: 75, t: 6, mass: 9.16 },
+                    { name: "150x100x10UA", a: 150, b: 100, t: 10, mass: 18.9 }
+                ]
+            }
+        ],
+        'ISO 657': [
+            {
+                category: "ISO Equal Angles (ISO 657/1)",
+                items: [
+                    { name: "20x20x3", a: 20, b: 20, t: 3, mass: 0.88 },
+                    { name: "25x25x3", a: 25, b: 25, t: 3, mass: 1.12 },
+                    { name: "30x30x3", a: 30, b: 30, t: 3, mass: 1.36 },
+                    { name: "40x40x4", a: 40, b: 40, t: 4, mass: 2.42 },
+                    { name: "50x50x5", a: 50, b: 50, t: 5, mass: 3.77 },
+                    { name: "60x60x6", a: 60, b: 60, t: 6, mass: 5.42 },
+                    { name: "70x70x7", a: 70, b: 70, t: 7, mass: 7.38 },
+                    { name: "80x80x8", a: 80, b: 80, t: 8, mass: 9.66 },
+                    { name: "90x90x9", a: 90, b: 90, t: 9, mass: 12.2 },
+                    { name: "100x100x10", a: 100, b: 100, t: 10, mass: 15.1 },
+                    { name: "120x120x11", a: 120, b: 120, t: 11, mass: 19.9 },
+                    { name: "150x150x12", a: 150, b: 150, t: 12, mass: 27.3 },
+                    { name: "200x200x16", a: 200, b: 200, t: 16, mass: 48.5 }
+                ]
+            },
+            {
+                category: "ISO Unequal Angles (ISO 657/2)",
+                items: [
+                    { name: "30x20x3", a: 30, b: 20, t: 3, mass: 1.12 },
+                    { name: "40x25x4", a: 40, b: 25, t: 4, mass: 1.93 },
+                    { name: "50x30x5", a: 50, b: 30, t: 5, mass: 2.96 },
+                    { name: "60x40x6", a: 60, b: 40, t: 6, mass: 4.46 },
+                    { name: "75x50x7", a: 75, b: 50, t: 7, mass: 6.47 },
+                    { name: "90x60x8", a: 90, b: 60, t: 8, mass: 8.96 },
+                    { name: "100x65x9", a: 100, b: 65, t: 9, mass: 11.1 },
+                    { name: "125x75x10", a: 125, b: 75, t: 10, mass: 15.0 },
+                    { name: "150x90x11", a: 150, b: 90, t: 11, mass: 20.0 },
+                    { name: "200x100x14", a: 200, b: 100, t: 14, mass: 31.4 }
                 ]
             }
         ]
@@ -166,33 +559,88 @@ const CATEGORIZED_PROFILES = {
     tee: {
         'IS 808': [
             {
-                category: "IS Normal Tee Bars",
+                category: "IS Normal Tee Bars (ISNT)",
                 items: [
                     { name: "ISNT 20", h: 20, b: 20, tw: 3.0, tf: 3.0, mass: 0.9 },
+                    { name: "ISNT 25", h: 25, b: 25, tw: 3.5, tf: 3.5, mass: 1.3 },
                     { name: "ISNT 30", h: 30, b: 30, tw: 4.0, tf: 4.0, mass: 1.8 },
                     { name: "ISNT 40", h: 40, b: 40, tw: 5.0, tf: 5.0, mass: 2.9 },
                     { name: "ISNT 50", h: 50, b: 50, tw: 6.0, tf: 6.0, mass: 4.5 },
                     { name: "ISNT 60", h: 60, b: 60, tw: 6.0, tf: 6.0, mass: 5.4 },
                     { name: "ISNT 75", h: 75, b: 75, tw: 8.0, tf: 8.0, mass: 8.9 },
+                    { name: "ISNT 80", h: 80, b: 80, tw: 8.0, tf: 8.0, mass: 9.6 },
                     { name: "ISNT 100", h: 100, b: 100, tw: 10.0, tf: 10.0, mass: 15.0 },
                     { name: "ISNT 150", h: 150, b: 150, tw: 12.0, tf: 12.0, mass: 27.2 }
                 ]
             },
             {
-                category: "IS Deep Legged Tee Bars",
+                category: "IS Heavy Tee Bars (ISHT)",
                 items: [
-                    { name: "ISDT 100", h: 100, b: 50, tw: 5.0, tf: 7.0, mass: 7.5 },
-                    { name: "ISDT 150", h: 150, b: 75, tw: 6.0, tf: 8.0, mass: 12.8 }
+                    { name: "ISHT 75", h: 75, b: 75, tw: 5.4, tf: 8.4, mass: 13.5 },
+                    { name: "ISHT 100", h: 100, b: 100, tw: 6.1, tf: 9.0, mass: 18.6 },
+                    { name: "ISHT 125", h: 125, b: 125, tw: 6.5, tf: 9.1, mass: 21.5 },
+                    { name: "ISHT 150", h: 150, b: 150, tw: 6.7, tf: 9.0, mass: 25.5 }
                 ]
             },
             {
-                category: "IS Slit Medium Weight Tee Bars",
+                category: "IS Slit Medium Weight Tee Bars (ISST)",
                 items: [
-                    { name: "ISMT 50", h: 50, b: 100, tw: 4.7, tf: 7.0, mass: 4.5 },
-                    { name: "ISMT 62.5", h: 62.5, b: 125, tw: 5.3, tf: 8.1, mass: 6.6 },
-                    { name: "ISMT 75", h: 75, b: 150, tw: 5.7, tf: 7.8, mass: 8.4 },
-                    { name: "ISMT 87.5", h: 87.5, b: 175, tw: 6.0, tf: 8.6, mass: 11.2 },
-                    { name: "ISMT 100", h: 100, b: 200, tw: 6.2, tf: 11.4, mass: 14.2 }
+                    { name: "ISST 100", h: 50, b: 100, tw: 4.7, tf: 7.0, mass: 4.5 },
+                    { name: "ISST 150", h: 75, b: 150, tw: 5.0, tf: 8.0, mass: 7.5 },
+                    { name: "ISST 200", h: 100, b: 200, tw: 5.7, tf: 10.8, mass: 12.7 },
+                    { name: "ISST 250", h: 125, b: 250, tw: 6.9, tf: 12.5, mass: 18.6 },
+                    { name: "ISST 300", h: 150, b: 300, tw: 7.5, tf: 13.1, mass: 22.1 }
+                ]
+            }
+        ],
+        'ANSI/AISC': [
+            {
+                category: "AISC Structural Tees (WT Shapes)",
+                items: [
+                    { name: "WT 3x6", h: 76.2, b: 101.6, tw: 5.6, tf: 6.7, mass: 8.9 },
+                    { name: "WT 4x9", h: 101.6, b: 133.4, tw: 5.8, tf: 8.4, mass: 13.4 },
+                    { name: "WT 5x15", h: 127.0, b: 148.0, tw: 7.6, tf: 13.0, mass: 22.3 },
+                    { name: "WT 6x20", h: 152.4, b: 203.2, tw: 7.5, tf: 13.1, mass: 29.8 },
+                    { name: "WT 7x30", h: 177.8, b: 171.5, tw: 9.8, tf: 15.6, mass: 44.6 },
+                    { name: "WT 9x40", h: 228.6, b: 190.5, tw: 10.0, tf: 16.3, mass: 59.5 }
+                ]
+            }
+        ],
+        'BS 4 : Part 1': [
+            {
+                category: "BS Structural Tees",
+                items: [
+                    { name: "T 50x100", h: 50, b: 100, tw: 5.0, tf: 8.0, mass: 7.5 },
+                    { name: "T 75x150", h: 75, b: 150, tw: 6.0, tf: 9.0, mass: 12.0 },
+                    { name: "T 100x200", h: 100, b: 200, tw: 7.0, tf: 10.0, mass: 18.0 },
+                    { name: "T 125x250", h: 125, b: 250, tw: 8.0, tf: 11.0, mass: 24.5 }
+                ]
+            }
+        ],
+        'AS 3679': [
+            {
+                category: "Australian Structural Tees",
+                items: [
+                    { name: "50x50T", h: 50, b: 50, tw: 5.0, tf: 5.0, mass: 3.7 },
+                    { name: "75x75T", h: 75, b: 75, tw: 6.0, tf: 6.0, mass: 6.8 },
+                    { name: "100x100T", h: 100, b: 100, tw: 8.0, tf: 8.0, mass: 12.1 },
+                    { name: "125x125T", h: 125, b: 125, tw: 9.0, tf: 9.0, mass: 17.2 },
+                    { name: "150x150T", h: 150, b: 150, tw: 10.0, tf: 10.0, mass: 22.8 }
+                ]
+            }
+        ],
+        'ISO 657': [
+            {
+                category: "ISO Standard Tees (T)",
+                items: [
+                    { name: "ISO T20", h: 20, b: 20, tw: 3.0, tf: 3.0, mass: 0.88 },
+                    { name: "ISO T25", h: 25, b: 25, tw: 3.5, tf: 3.5, mass: 1.25 },
+                    { name: "ISO T30", h: 30, b: 30, tw: 4.0, tf: 4.0, mass: 1.77 },
+                    { name: "ISO T40", h: 40, b: 40, tw: 5.0, tf: 5.0, mass: 2.96 },
+                    { name: "ISO T50", h: 50, b: 50, tw: 6.0, tf: 6.0, mass: 4.44 },
+                    { name: "ISO T60", h: 60, b: 60, tw: 7.0, tf: 7.0, mass: 6.23 },
+                    { name: "ISO T80", h: 80, b: 80, tw: 9.0, tf: 9.0, mass: 10.7 },
+                    { name: "ISO T100", h: 100, b: 100, tw: 11.0, tf: 11.0, mass: 16.4 }
                 ]
             }
         ]
