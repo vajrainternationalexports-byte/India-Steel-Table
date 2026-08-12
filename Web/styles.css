@@ -376,27 +376,46 @@ html, body {
   gap: 12px;
 }
 
-.wb-shape-card-white {
-  background: #ffffff;
-  border-radius: 6px;
-  padding: 8px;
-  aspect-ratio: 1 / 1;
+.wb-shape-card-dark {
+  background: #161922;
+  border: 1px solid #282f3f;
+  border-radius: 10px;
+  padding: 10px 6px 8px 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  transition: transform 0.15s, border-color 0.15s, box-shadow 0.15s;
+  text-align: center;
+}
+
+.wb-shape-card-dark:hover, .wb-shape-card-dark:active {
+  transform: translateY(-2px);
+  border-color: #00bcd4;
+  box-shadow: 0 4px 16px rgba(0, 188, 212, 0.25);
+}
+
+.wb-svg-wrap {
+  width: 44px;
+  height: 44px;
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.5);
-  transition: transform 0.15s, box-shadow 0.15s;
-}
-
-.wb-shape-card-white:active {
-  transform: scale(0.95);
-  box-shadow: 0 0 10px #00bcd4;
 }
 
 .wb-3d-svg {
   width: 100%;
   height: 100%;
+}
+
+.wb-shape-title {
+  font-size: 0.73rem;
+  font-weight: 600;
+  color: #e2e8f0;
+  line-height: 1.1;
 }
 
 .wb-home-stacked-actions {
@@ -406,22 +425,35 @@ html, body {
 }
 
 .wb-main-action-row {
-  background: #ffffff;
-  color: #000000;
-  border: none;
-  border-radius: 4px;
+  background: #161922;
+  color: #ffffff;
+  border: 1px solid #282f3f;
+  border-left: 4px solid #00bcd4;
+  border-radius: 8px;
   padding: 14px 16px;
-  font-size: 0.95rem;
+  font-size: 0.92rem;
   font-weight: 600;
   cursor: pointer;
-  text-align: center;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-  transition: background-color 0.15s, transform 0.15s;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+  transition: background-color 0.15s, transform 0.15s, border-color 0.15s;
 }
 
-.wb-main-action-row:active {
-  background: #e0f7fa;
-  transform: scale(0.98);
+.wb-main-action-row:hover, .wb-main-action-row:active {
+  background: #202533;
+  border-color: #00bcd4;
+  transform: translateX(2px);
+}
+
+.wb-action-icon {
+  font-size: 1.2rem;
+}
+
+.wb-action-label {
+  flex: 1;
+  text-align: left;
 }
 
 /* STANDARDS & SECTIONS PICKER SCREEN (IMG_9440, IMG_9445) */
