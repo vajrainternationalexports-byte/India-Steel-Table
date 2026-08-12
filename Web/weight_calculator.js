@@ -1,7 +1,8 @@
 /**
  * Engineering Weight Calculator - Project B Full Replica Implementation
- * Comprehensive Standards (IS 808, ANSI, BS 4, AS 3679, ISO 657), Technical Canvas Renderer,
- * Specific Gravity Selector, Unit Converter, Scientific Expression Calculator & Takeoff Store.
+ * Comprehensive Standards (IS 808, ANSI, BS 4, AS 3679, ISO 657), 2-Column Calculation Layout,
+ * Categorized Section Pickers, Technical Canvas Renderer, Specific Gravity Selector,
+ * Scientific Expression Calculator & Takeoff Store.
  */
 
 const DENSITY_DATABASE = [
@@ -10,7 +11,6 @@ const DENSITY_DATABASE = [
     { name: "Bronze", sg: 8.73 },
     { name: "Cast Iron", sg: 7.20 },
     { name: "Copper", sg: 8.96 },
-    { name: "Steel (General / Mild)", sg: 7.85 },
     { name: "Steel C15", sg: 7.85 },
     { name: "Steel C35", sg: 7.84 },
     { name: "Steel C60", sg: 7.83 },
@@ -63,82 +63,149 @@ const INCH_FRACTIONS = [
     { fraction: "1\"", decimal: 1.0000, mm: 25.400 }
 ];
 
-// STANDARD PROFILES DATABASE (IS 808, ANSI, BS 4, AS 3679, ISO 657)
-const STANDARD_PROFILES = {
-    beam: {
-        IS: [
-            { name: "ISJB 150", h: 150, b: 50, tw: 3.0, tf: 4.6, mass: 7.1 },
-            { name: "ISLB 175", h: 175, b: 85, tw: 4.8, tf: 6.8, mass: 16.7 },
-            { name: "ISLB 200", h: 200, b: 100, tw: 5.0, tf: 7.3, mass: 19.8 },
-            { name: "ISLB 225", h: 225, b: 100, tw: 5.8, tf: 8.6, mass: 23.9 },
-            { name: "ISMB 100", h: 100, b: 50, tw: 4.7, tf: 7.0, mass: 8.9 },
-            { name: "ISMB 150", h: 150, b: 75, tw: 5.0, tf: 8.0, mass: 15.0 },
-            { name: "ISMB 200", h: 200, b: 100, tw: 5.7, tf: 10.8, mass: 25.4 },
-            { name: "ISMB 250", h: 250, b: 125, tw: 6.9, tf: 12.5, mass: 37.3 },
-            { name: "ISMB 300", h: 300, b: 140, tw: 7.5, tf: 13.1, mass: 44.2 },
-            { name: "ISHB 200", h: 200, b: 200, tw: 6.1, tf: 9.0, mass: 37.3 }
-        ],
-        ANSI: [
-            { name: "W 6x9", h: 150, b: 100, tw: 4.3, tf: 5.5, mass: 13.4 },
-            { name: "W 8x10", h: 200, b: 100, tw: 4.3, tf: 5.2, mass: 14.9 },
-            { name: "W 10x12", h: 250, b: 100, tw: 4.8, tf: 5.3, mass: 17.9 },
-            { name: "S 3x5.7", h: 76.2, b: 59.2, tw: 4.3, tf: 6.6, mass: 8.5 }
-        ],
-        BS: [
-            { name: "UB 127x76x13", h: 127, b: 76, tw: 4.0, tf: 7.6, mass: 13.0 },
-            { name: "UB 152x89x16", h: 152.4, b: 88.7, tw: 4.5, tf: 7.7, mass: 16.0 },
-            { name: "UB 203x133x25", h: 203.2, b: 133.2, tw: 5.7, tf: 7.8, mass: 25.1 }
-        ]
-    },
+// STANDARDS & CATEGORIZED PROFILES DATABASE (IMG_9440, IMG_9445, IMG_9448, IMG_9453, IMG_9459)
+const CATEGORIZED_PROFILES = {
     channel: {
-        IS: [
-            { name: "ISJC 100", h: 100, b: 45, tw: 3.0, tf: 4.7, mass: 5.8 },
-            { name: "ISLC 100", h: 100, b: 50, tw: 4.0, tf: 6.4, mass: 7.9 },
-            { name: "ISMC 75", h: 75, b: 40, tw: 4.4, tf: 7.3, mass: 7.1 },
-            { name: "ISMC 100", h: 100, b: 50, tw: 4.7, tf: 7.5, mass: 9.6 },
-            { name: "ISMC 125", h: 125, b: 65, tw: 5.3, tf: 8.1, mass: 13.1 },
-            { name: "ISMC 150", h: 150, b: 75, tw: 5.7, tf: 7.8, mass: 16.8 },
-            { name: "ISMC 200", h: 200, b: 75, tw: 6.2, tf: 11.4, mass: 22.3 },
-            { name: "ISMC 250", h: 250, b: 80, tw: 7.2, tf: 14.1, mass: 30.7 }
+        'IS 808': [
+            {
+                category: "IS Junior Channels",
+                items: [
+                    { name: "ISJC 100", h: 100, b: 45, tw: 3.0, tf: 4.7, mass: 5.8 },
+                    { name: "ISJC 125", h: 125, b: 50, tw: 3.0, tf: 5.0, mass: 7.9 },
+                    { name: "ISJC 150", h: 150, b: 55, tw: 3.6, tf: 5.4, mass: 9.9 },
+                    { name: "ISJC 175", h: 175, b: 60, tw: 3.6, tf: 5.7, mass: 11.4 },
+                    { name: "ISJC 200", h: 200, b: 70, tw: 4.1, tf: 6.2, mass: 13.9 }
+                ]
+            },
+            {
+                category: "IS Light Channels",
+                items: [
+                    { name: "ISLC 75", h: 75, b: 40, tw: 3.7, tf: 6.0, mass: 5.7 },
+                    { name: "ISLC 100", h: 100, b: 50, tw: 4.0, tf: 6.4, mass: 7.9 },
+                    { name: "ISLC 125", h: 125, b: 65, tw: 4.4, tf: 6.6, mass: 10.7 },
+                    { name: "ISLC 150", h: 150, b: 75, tw: 4.8, tf: 7.8, mass: 14.4 },
+                    { name: "ISLC 200", h: 200, b: 90, tw: 5.3, tf: 8.6, mass: 20.6 }
+                ]
+            },
+            {
+                category: "IS Medium Channels",
+                items: [
+                    { name: "ISMC 75", h: 75, b: 40, tw: 4.4, tf: 7.3, mass: 7.1 },
+                    { name: "ISMC 100", h: 100, b: 50, tw: 4.7, tf: 7.5, mass: 9.6 },
+                    { name: "ISMC 125", h: 125, b: 65, tw: 5.3, tf: 8.1, mass: 13.1 },
+                    { name: "ISMC 150", h: 150, b: 75, tw: 5.7, tf: 7.8, mass: 16.8 },
+                    { name: "ISMC 200", h: 200, b: 75, tw: 6.2, tf: 11.4, mass: 22.3 },
+                    { name: "ISMC 250", h: 250, b: 80, tw: 7.2, tf: 14.1, mass: 30.7 },
+                    { name: "ISMC 300", h: 300, b: 90, tw: 7.8, tf: 13.6, mass: 36.3 }
+                ]
+            }
         ],
-        ANSI: [
-            { name: "C 3x4.1", h: 76.2, b: 35.8, tw: 4.3, tf: 6.9, mass: 6.1 },
-            { name: "MC 6x12", h: 152.4, b: 63.4, tw: 8.0, tf: 9.8, mass: 17.9 },
-            { name: "C 8x11.5", h: 203.2, b: 57.4, tw: 5.6, tf: 9.9, mass: 17.1 }
-        ],
-        BS: [
-            { name: "PFC 100x50", h: 100, b: 50, tw: 5.0, tf: 8.5, mass: 10.2 },
-            { name: "PFC 150x75", h: 150, b: 75, tw: 5.5, tf: 10.0, mass: 17.9 }
+        'ANSI/AISC': [
+            {
+                category: "ANSI MC/C Channels",
+                items: [
+                    { name: "C 3x4.1", h: 76.2, b: 35.8, tw: 4.3, tf: 6.9, mass: 6.1 },
+                    { name: "C 4x5.4", h: 101.6, b: 40.2, tw: 4.7, tf: 7.5, mass: 8.0 },
+                    { name: "MC 6x12", h: 152.4, b: 63.4, tw: 8.0, tf: 9.8, mass: 17.9 },
+                    { name: "C 8x11.5", h: 203.2, b: 57.4, tw: 5.6, tf: 9.9, mass: 17.1 },
+                    { name: "C 12x25", h: 304.8, b: 77.4, tw: 9.8, tf: 12.7, mass: 37.2 }
+                ]
+            }
         ]
     },
-    equal_angle: {
-        IS: [
-            { name: "ISA 25x25x3", a: 25, b: 25, t: 3, mass: 1.1 },
-            { name: "ISA 30x30x3", a: 30, b: 30, t: 3, mass: 1.4 },
-            { name: "ISA 40x40x5", a: 40, b: 40, t: 5, mass: 3.0 },
-            { name: "ISA 50x50x6", a: 50, b: 50, t: 6, mass: 4.5 },
-            { name: "ISA 65x65x6", a: 65, b: 65, t: 6, mass: 5.8 },
-            { name: "ISA 75x75x8", a: 75, b: 75, t: 8, mass: 8.9 },
-            { name: "ISA 100x100x10", a: 100, b: 100, t: 10, mass: 14.9 }
+    beam: {
+        'IS 808': [
+            {
+                category: "IS Medium Beams",
+                items: [
+                    { name: "ISMB 100", h: 100, b: 50, tw: 4.7, tf: 7.0, mass: 8.9 },
+                    { name: "ISMB 150", h: 150, b: 75, tw: 5.0, tf: 8.0, mass: 15.0 },
+                    { name: "ISMB 200", h: 200, b: 100, tw: 5.7, tf: 10.8, mass: 25.4 },
+                    { name: "ISMB 250", h: 250, b: 125, tw: 6.9, tf: 12.5, mass: 37.3 },
+                    { name: "ISMB 300", h: 300, b: 140, tw: 7.5, tf: 13.1, mass: 44.2 },
+                    { name: "ISMB 400", h: 400, b: 140, tw: 8.9, tf: 16.0, mass: 61.6 }
+                ]
+            },
+            {
+                category: "IS Wide Flange Beams",
+                items: [
+                    { name: "ISWB 150", h: 150, b: 100, tw: 5.4, tf: 7.0, mass: 17.0 },
+                    { name: "ISWB 200", h: 200, b: 140, tw: 6.1, tf: 9.0, mass: 28.8 },
+                    { name: "ISWB 250", h: 250, b: 200, tw: 6.7, tf: 9.0, mass: 40.9 },
+                    { name: "ISWB 300", h: 300, b: 200, tw: 7.4, tf: 10.0, mass: 48.1 }
+                ]
+            },
+            {
+                category: "IS Column Sections H Beams",
+                items: [
+                    { name: "ISHB 150", h: 150, b: 150, tw: 5.4, tf: 8.4, mass: 27.1 },
+                    { name: "ISHB 200", h: 200, b: 200, tw: 6.1, tf: 9.0, mass: 37.3 },
+                    { name: "ISHB 250", h: 250, b: 250, tw: 6.7, tf: 9.0, mass: 51.0 },
+                    { name: "ISHB 300", h: 300, b: 300, tw: 7.6, tf: 10.6, mass: 63.0 }
+                ]
+            }
+        ]
+    },
+    angle: {
+        'IS 808': [
+            {
+                category: "IS Equal Angles",
+                items: [
+                    { name: "25x25x3", a: 25, b: 25, t: 3, mass: 1.1 },
+                    { name: "25x25x4", a: 25, b: 25, t: 4, mass: 1.4 },
+                    { name: "30x30x3", a: 30, b: 30, t: 3, mass: 1.4 },
+                    { name: "40x40x5", a: 40, b: 40, t: 5, mass: 3.0 },
+                    { name: "50x50x6", a: 50, b: 50, t: 6, mass: 4.5 },
+                    { name: "65x65x6", a: 65, b: 65, t: 6, mass: 5.8 },
+                    { name: "75x75x8", a: 75, b: 75, t: 8, mass: 8.9 },
+                    { name: "100x100x10", a: 100, b: 100, t: 10, mass: 14.9 }
+                ]
+            }
         ]
     },
     tee: {
-        IS: [
-            { name: "ISNT 20", h: 20, b: 20, tw: 3.0, tf: 3.0, mass: 0.9 },
-            { name: "ISNT 40", h: 40, b: 40, tw: 5.0, tf: 5.0, mass: 2.9 },
-            { name: "ISNT 50", h: 50, b: 50, tw: 6.0, tf: 6.0, mass: 4.5 },
-            { name: "ISNT 75", h: 75, b: 75, tw: 8.0, tf: 8.0, mass: 8.9 },
-            { name: "ISNT 100", h: 100, b: 100, tw: 10.0, tf: 10.0, mass: 15.0 },
-            { name: "ISMT 75", h: 75, b: 150, tw: 7.0, tf: 10.0, mass: 14.2 }
+        'IS 808': [
+            {
+                category: "IS Normal Tee Bars",
+                items: [
+                    { name: "ISNT 20", h: 20, b: 20, tw: 3.0, tf: 3.0, mass: 0.9 },
+                    { name: "ISNT 30", h: 30, b: 30, tw: 4.0, tf: 4.0, mass: 1.8 },
+                    { name: "ISNT 40", h: 40, b: 40, tw: 5.0, tf: 5.0, mass: 2.9 },
+                    { name: "ISNT 50", h: 50, b: 50, tw: 6.0, tf: 6.0, mass: 4.5 },
+                    { name: "ISNT 60", h: 60, b: 60, tw: 6.0, tf: 6.0, mass: 5.4 },
+                    { name: "ISNT 75", h: 75, b: 75, tw: 8.0, tf: 8.0, mass: 8.9 },
+                    { name: "ISNT 100", h: 100, b: 100, tw: 10.0, tf: 10.0, mass: 15.0 },
+                    { name: "ISNT 150", h: 150, b: 150, tw: 12.0, tf: 12.0, mass: 27.2 }
+                ]
+            },
+            {
+                category: "IS Deep Legged Tee Bars",
+                items: [
+                    { name: "ISDT 100", h: 100, b: 50, tw: 5.0, tf: 7.0, mass: 7.5 },
+                    { name: "ISDT 150", h: 150, b: 75, tw: 6.0, tf: 8.0, mass: 12.8 }
+                ]
+            },
+            {
+                category: "IS Slit Medium Weight Tee Bars",
+                items: [
+                    { name: "ISMT 50", h: 50, b: 100, tw: 4.7, tf: 7.0, mass: 4.5 },
+                    { name: "ISMT 62.5", h: 62.5, b: 125, tw: 5.3, tf: 8.1, mass: 6.6 },
+                    { name: "ISMT 75", h: 75, b: 150, tw: 5.7, tf: 7.8, mass: 8.4 },
+                    { name: "ISMT 87.5", h: 87.5, b: 175, tw: 6.0, tf: 8.6, mass: 11.2 },
+                    { name: "ISMT 100", h: 100, b: 200, tw: 6.2, tf: 11.4, mass: 14.2 }
+                ]
+            }
         ]
     }
 };
 
 let weightCalcState = {
-    activeShape: 'plate',
-    activeFamily: 'IS',
+    activeScreen: 'grid', // 'grid', 'standards', 'form'
+    activeShape: 'square',
+    activeStandardType: 'channel',
+    activeFamily: 'IS 808',
     sg: 7.85,
-    materialName: 'Steel (General / Mild)',
+    materialName: 'Steel C15',
     unitPrice: 1.00,
     takeoffList: JSON.parse(localStorage.getItem('weight_calc_takeoff') || '[]'),
     lastResult: null
@@ -195,225 +262,238 @@ function switchProjectTab(projectKey) {
         tabA.classList.add('active');
         tabB.classList.remove('active');
     } else {
-        appShell.style.transform = 'translateX(-50%)';
+        appShell.style.transform = 'translateX(-100vw)';
         tabB.classList.add('active');
         tabA.classList.remove('active');
     }
 }
 
+function openStandardSelector(typeKey) {
+    weightCalcState.activeStandardType = typeKey;
+    weightCalcState.activeScreen = 'standards';
+    
+    document.getElementById('wb-grid-screen').style.display = 'none';
+    document.getElementById('wb-form-screen').style.display = 'none';
+    document.getElementById('wb-standards-screen').style.display = 'block';
+    document.getElementById('wb-nav-back-btn').style.display = 'flex';
+
+    const titleMap = {
+        channel: 'Channel Sections Standard',
+        beam: 'Beam Sections Standard',
+        angle: 'Angle Sections Standard',
+        tee: 'Tee Sections Standard'
+    };
+
+    document.getElementById('wb-standards-title').innerText = titleMap[typeKey] || 'Select Standard';
+    selectStandardFamily(weightCalcState.activeFamily);
+}
+
+function selectStandardFamily(family) {
+    weightCalcState.activeFamily = family;
+    document.querySelectorAll('.wb-std-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.innerText.trim() === family);
+    });
+
+    const typeKey = weightCalcState.activeStandardType;
+    const container = document.getElementById('wb-categorized-sections-list');
+    if (!container) return;
+
+    const categories = (CATEGORIZED_PROFILES[typeKey] && CATEGORIZED_PROFILES[typeKey][family]) || [];
+    if (categories.length === 0) {
+        container.innerHTML = '<div style="padding: 20px; color: #888; text-align: center;">Select a valid standard (e.g. IS 808 or ANSI)</div>';
+        return;
+    }
+
+    container.innerHTML = categories.map(cat => `
+        <div class="wb-category-block">
+            <h4>${cat.category}</h4>
+            <div class="wb-section-chips-grid">
+                ${cat.items.map((item, idx) => `
+                    <button class="wb-section-btn" onclick="applyCategorizedSection('${typeKey}', '${family}', '${cat.category}', ${idx})">
+                        ${item.name}
+                    </button>
+                `).join('')}
+            </div>
+        </div>
+    `).join('');
+}
+
+function applyCategorizedSection(typeKey, family, categoryName, index) {
+    const categories = CATEGORIZED_PROFILES[typeKey][family];
+    const catBlock = categories.find(c => c.category === categoryName);
+    if (!catBlock) return;
+
+    const item = catBlock.items[index];
+    if (!item) return;
+
+    openShapeCalculator(typeKey);
+
+    setTimeout(() => {
+        if (item.h && document.getElementById('inp_h')) document.getElementById('inp_h').value = item.h;
+        if (item.b && document.getElementById('inp_w')) document.getElementById('inp_w').value = item.b;
+        if (item.a && document.getElementById('inp_a')) document.getElementById('inp_a').value = item.a;
+        if (item.b && document.getElementById('inp_b')) document.getElementById('inp_b').value = item.b;
+        if (item.tw && document.getElementById('inp_tw')) document.getElementById('inp_tw').value = item.tw;
+        if (item.tf && document.getElementById('inp_tf')) document.getElementById('inp_tf').value = item.tf;
+        if (item.t && document.getElementById('inp_t')) document.getElementById('inp_t').value = item.t;
+        
+        document.getElementById('wb-app-title').innerText = `${item.name} Calculations`;
+        calculateCurrentMass();
+        drawShapeCanvas(typeKey);
+    }, 50);
+}
+
 function openShapeCalculator(shapeKey) {
     weightCalcState.activeShape = shapeKey;
+    weightCalcState.activeScreen = 'form';
+
     document.getElementById('wb-grid-screen').style.display = 'none';
+    document.getElementById('wb-standards-screen').style.display = 'none';
     document.getElementById('wb-form-screen').style.display = 'block';
+    document.getElementById('wb-nav-back-btn').style.display = 'flex';
 
-    const formTitle = document.getElementById('wb-form-title');
+    const dropdown = document.getElementById('wb-shape-selector-dropdown');
+    if (dropdown) dropdown.value = shapeKey;
+
     const formInputsContainer = document.getElementById('wb-form-inputs');
-    const stdSelectorContainer = document.getElementById('wb-standard-selector-container');
-
     formInputsContainer.innerHTML = '';
-    
-    // Check if standard selector applies
-    if (STANDARD_PROFILES[shapeKey]) {
-        stdSelectorContainer.style.display = 'block';
-        renderProfileChips(shapeKey, weightCalcState.activeFamily);
-    } else {
-        stdSelectorContainer.style.display = 'none';
-    }
 
     let html = '';
     switch(shapeKey) {
-        case 'plate':
-        case 'flat':
-            formTitle.innerText = shapeKey === 'plate' ? 'Plate / Sheet' : 'Flat Bar';
+        case 'square':
             html = `
                 <div class="wb-input-group">
-                    <label>Length (L) (mm)</label>
+                    <label>Side (mm)</label>
+                    <input type="number" id="inp_s" value="100" oninput="calculateCurrentMass()">
+                </div>
+                <div class="wb-input-group">
+                    <label>Length (mm)</label>
                     <input type="number" id="inp_l" value="1000" oninput="calculateCurrentMass()">
                 </div>
                 <div class="wb-input-group">
-                    <label>Width (W) (mm)</label>
-                    <input type="number" id="inp_w" value="100" oninput="calculateCurrentMass()">
-                </div>
-                <div class="wb-input-group">
-                    <label>Thickness (T) (mm)</label>
-                    <input type="number" id="inp_t" value="10" oninput="calculateCurrentMass()">
+                    <label>Specific Gravity</label>
+                    <input type="number" id="inp_sg" value="${weightCalcState.sg}" step="0.01" oninput="calculateCurrentMass()">
                 </div>
                 <div class="wb-input-group">
                     <label>Quantity</label>
                     <input type="number" id="inp_qty" value="1" oninput="calculateCurrentMass()">
                 </div>
+                <div class="wb-input-group">
+                    <label>Price Rs./kg</label>
+                    <input type="number" id="inp_price" value="${weightCalcState.unitPrice}" step="0.01" oninput="calculateCurrentMass()">
+                </div>
+            `;
+            break;
+
+        case 'plate':
+        case 'flat':
+            html = `
+                <div class="wb-input-group">
+                    <label>Length (mm)</label>
+                    <input type="number" id="inp_l" value="1000" oninput="calculateCurrentMass()">
+                </div>
+                <div class="wb-input-group">
+                    <label>Width (mm)</label>
+                    <input type="number" id="inp_w" value="100" oninput="calculateCurrentMass()">
+                </div>
+                <div class="wb-input-group">
+                    <label>Thickness T (mm)</label>
+                    <input type="number" id="inp_t" value="10" oninput="calculateCurrentMass()">
+                </div>
+                <div class="wb-input-group">
+                    <label>Specific Gravity</label>
+                    <input type="number" id="inp_sg" value="${weightCalcState.sg}" step="0.01" oninput="calculateCurrentMass()">
+                </div>
+                <div class="wb-input-group">
+                    <label>Quantity</label>
+                    <input type="number" id="inp_qty" value="1" oninput="calculateCurrentMass()">
+                </div>
+                <div class="wb-input-group">
+                    <label>Price Rs./kg</label>
+                    <input type="number" id="inp_price" value="${weightCalcState.unitPrice}" step="0.01" oninput="calculateCurrentMass()">
+                </div>
             `;
             break;
 
         case 'pipe':
-            formTitle.innerText = 'Round Pipe / Tube';
             html = `
                 <div class="wb-input-group">
                     <label>Outer Diameter (OD) (mm)</label>
                     <input type="number" id="inp_od" value="114.3" oninput="calculateCurrentMass()">
                 </div>
                 <div class="wb-input-group">
-                    <label>Wall Thickness (t) (mm)</label>
+                    <label>Wall Thickness t (mm)</label>
                     <input type="number" id="inp_t" value="4.5" oninput="calculateCurrentMass()">
                 </div>
                 <div class="wb-input-group">
-                    <label>Length (L) (mm)</label>
+                    <label>Length (mm)</label>
                     <input type="number" id="inp_l" value="6000" oninput="calculateCurrentMass()">
+                </div>
+                <div class="wb-input-group">
+                    <label>Specific Gravity</label>
+                    <input type="number" id="inp_sg" value="${weightCalcState.sg}" step="0.01" oninput="calculateCurrentMass()">
                 </div>
                 <div class="wb-input-group">
                     <label>Quantity</label>
                     <input type="number" id="inp_qty" value="1" oninput="calculateCurrentMass()">
+                </div>
+                <div class="wb-input-group">
+                    <label>Price Rs./kg</label>
+                    <input type="number" id="inp_price" value="${weightCalcState.unitPrice}" step="0.01" oninput="calculateCurrentMass()">
                 </div>
             `;
             break;
 
         case 'rod':
-            formTitle.innerText = 'Round Bar / Rod';
             html = `
                 <div class="wb-input-group">
-                    <label>Diameter (D) (mm)</label>
+                    <label>Diameter D (mm)</label>
                     <input type="number" id="inp_d" value="25" oninput="calculateCurrentMass()">
                 </div>
                 <div class="wb-input-group">
-                    <label>Length (L) (mm)</label>
+                    <label>Length (mm)</label>
                     <input type="number" id="inp_l" value="1000" oninput="calculateCurrentMass()">
+                </div>
+                <div class="wb-input-group">
+                    <label>Specific Gravity</label>
+                    <input type="number" id="inp_sg" value="${weightCalcState.sg}" step="0.01" oninput="calculateCurrentMass()">
                 </div>
                 <div class="wb-input-group">
                     <label>Quantity</label>
                     <input type="number" id="inp_qty" value="1" oninput="calculateCurrentMass()">
                 </div>
-            `;
-            break;
-
-        case 'square':
-            formTitle.innerText = 'Square Bar';
-            html = `
                 <div class="wb-input-group">
-                    <label>Side (S) (mm)</label>
-                    <input type="number" id="inp_s" value="50" oninput="calculateCurrentMass()">
-                </div>
-                <div class="wb-input-group">
-                    <label>Length (L) (mm)</label>
-                    <input type="number" id="inp_l" value="1000" oninput="calculateCurrentMass()">
-                </div>
-                <div class="wb-input-group">
-                    <label>Quantity</label>
-                    <input type="number" id="inp_qty" value="1" oninput="calculateCurrentMass()">
-                </div>
-            `;
-            break;
-
-        case 'hex':
-            formTitle.innerText = 'Hexagonal Bar';
-            html = `
-                <div class="wb-input-group">
-                    <label>Across Flats (A/F) (mm)</label>
-                    <input type="number" id="inp_af" value="32" oninput="calculateCurrentMass()">
-                </div>
-                <div class="wb-input-group">
-                    <label>Length (L) (mm)</label>
-                    <input type="number" id="inp_l" value="1000" oninput="calculateCurrentMass()">
-                </div>
-                <div class="wb-input-group">
-                    <label>Quantity</label>
-                    <input type="number" id="inp_qty" value="1" oninput="calculateCurrentMass()">
-                </div>
-            `;
-            break;
-
-        case 'oct':
-            formTitle.innerText = 'Octagonal Bar';
-            html = `
-                <div class="wb-input-group">
-                    <label>Across Flats (A/F) (mm)</label>
-                    <input type="number" id="inp_af" value="40" oninput="calculateCurrentMass()">
-                </div>
-                <div class="wb-input-group">
-                    <label>Length (L) (mm)</label>
-                    <input type="number" id="inp_l" value="1000" oninput="calculateCurrentMass()">
-                </div>
-                <div class="wb-input-group">
-                    <label>Quantity</label>
-                    <input type="number" id="inp_qty" value="1" oninput="calculateCurrentMass()">
-                </div>
-            `;
-            break;
-
-        case 'box':
-            formTitle.innerText = 'Rectangular / Square Tube';
-            html = `
-                <div class="wb-input-group">
-                    <label>Height (H) (mm)</label>
-                    <input type="number" id="inp_h" value="100" oninput="calculateCurrentMass()">
-                </div>
-                <div class="wb-input-group">
-                    <label>Width (W) (mm)</label>
-                    <input type="number" id="inp_w" value="80" oninput="calculateCurrentMass()">
-                </div>
-                <div class="wb-input-group">
-                    <label>Thickness (t) (mm)</label>
-                    <input type="number" id="inp_t" value="5" oninput="calculateCurrentMass()">
-                </div>
-                <div class="wb-input-group">
-                    <label>Length (L) (mm)</label>
-                    <input type="number" id="inp_l" value="1000" oninput="calculateCurrentMass()">
-                </div>
-                <div class="wb-input-group">
-                    <label>Quantity</label>
-                    <input type="number" id="inp_qty" value="1" oninput="calculateCurrentMass()">
-                </div>
-            `;
-            break;
-
-        case 'equal_angle':
-        case 'unequal_angle':
-            formTitle.innerText = shapeKey === 'equal_angle' ? 'Equal Angle' : 'Unequal Angle';
-            html = `
-                <div class="wb-input-group">
-                    <label>Leg A (mm)</label>
-                    <input type="number" id="inp_a" value="50" oninput="calculateCurrentMass()">
-                </div>
-                <div class="wb-input-group">
-                    <label>Leg B (mm)</label>
-                    <input type="number" id="inp_b" value="50" oninput="calculateCurrentMass()">
-                </div>
-                <div class="wb-input-group">
-                    <label>Thickness (t) (mm)</label>
-                    <input type="number" id="inp_t" value="6" oninput="calculateCurrentMass()">
-                </div>
-                <div class="wb-input-group">
-                    <label>Length (L) (mm)</label>
-                    <input type="number" id="inp_l" value="1000" oninput="calculateCurrentMass()">
-                </div>
-                <div class="wb-input-group">
-                    <label>Quantity</label>
-                    <input type="number" id="inp_qty" value="1" oninput="calculateCurrentMass()">
+                    <label>Price Rs./kg</label>
+                    <input type="number" id="inp_price" value="${weightCalcState.unitPrice}" step="0.01" oninput="calculateCurrentMass()">
                 </div>
             `;
             break;
 
         case 'beam':
-            formTitle.innerText = 'I-Beam Section';
             html = `
                 <div class="wb-input-group">
-                    <label>Height (H) (mm)</label>
+                    <label>Section Height H (mm)</label>
                     <input type="number" id="inp_h" value="200" oninput="calculateCurrentMass()">
                 </div>
                 <div class="wb-input-group">
-                    <label>Flange Width (B) (mm)</label>
+                    <label>Flange Width B (mm)</label>
                     <input type="number" id="inp_w" value="100" oninput="calculateCurrentMass()">
                 </div>
                 <div class="wb-input-group">
-                    <label>Web Thickness (tw) (mm)</label>
+                    <label>Web Thickness tw (mm)</label>
                     <input type="number" id="inp_tw" value="5.7" oninput="calculateCurrentMass()">
                 </div>
                 <div class="wb-input-group">
-                    <label>Flange Thickness (tf) (mm)</label>
+                    <label>Flange Thickness tf (mm)</label>
                     <input type="number" id="inp_tf" value="10.8" oninput="calculateCurrentMass()">
                 </div>
                 <div class="wb-input-group">
-                    <label>Length (L) (mm)</label>
+                    <label>Length (mm)</label>
                     <input type="number" id="inp_l" value="1000" oninput="calculateCurrentMass()">
+                </div>
+                <div class="wb-input-group">
+                    <label>Specific Gravity</label>
+                    <input type="number" id="inp_sg" value="${weightCalcState.sg}" step="0.01" oninput="calculateCurrentMass()">
                 </div>
                 <div class="wb-input-group">
                     <label>Quantity</label>
@@ -423,53 +503,30 @@ function openShapeCalculator(shapeKey) {
             break;
 
         case 'channel':
-            formTitle.innerText = 'Channel Section';
             html = `
                 <div class="wb-input-group">
-                    <label>Height (H) (mm)</label>
+                    <label>Section Height H (mm)</label>
                     <input type="number" id="inp_h" value="150" oninput="calculateCurrentMass()">
                 </div>
                 <div class="wb-input-group">
-                    <label>Flange Width (B) (mm)</label>
+                    <label>Flange Width B (mm)</label>
                     <input type="number" id="inp_w" value="75" oninput="calculateCurrentMass()">
                 </div>
                 <div class="wb-input-group">
-                    <label>Web Thickness (tw) (mm)</label>
+                    <label>Web Thickness tw (mm)</label>
                     <input type="number" id="inp_tw" value="5.7" oninput="calculateCurrentMass()">
                 </div>
                 <div class="wb-input-group">
-                    <label>Flange Thickness (tf) (mm)</label>
+                    <label>Flange Thickness tf (mm)</label>
                     <input type="number" id="inp_tf" value="7.8" oninput="calculateCurrentMass()">
                 </div>
                 <div class="wb-input-group">
-                    <label>Length (L) (mm)</label>
+                    <label>Length (mm)</label>
                     <input type="number" id="inp_l" value="1000" oninput="calculateCurrentMass()">
                 </div>
                 <div class="wb-input-group">
-                    <label>Quantity</label>
-                    <input type="number" id="inp_qty" value="1" oninput="calculateCurrentMass()">
-                </div>
-            `;
-            break;
-
-        case 'tee':
-            formTitle.innerText = 'Tee Bar Section';
-            html = `
-                <div class="wb-input-group">
-                    <label>Height (H) (mm)</label>
-                    <input type="number" id="inp_h" value="75" oninput="calculateCurrentMass()">
-                </div>
-                <div class="wb-input-group">
-                    <label>Flange Width (B) (mm)</label>
-                    <input type="number" id="inp_w" value="75" oninput="calculateCurrentMass()">
-                </div>
-                <div class="wb-input-group">
-                    <label>Thickness (t) (mm)</label>
-                    <input type="number" id="inp_t" value="8" oninput="calculateCurrentMass()">
-                </div>
-                <div class="wb-input-group">
-                    <label>Length (L) (mm)</label>
-                    <input type="number" id="inp_l" value="1000" oninput="calculateCurrentMass()">
+                    <label>Specific Gravity</label>
+                    <input type="number" id="inp_sg" value="${weightCalcState.sg}" step="0.01" oninput="calculateCurrentMass()">
                 </div>
                 <div class="wb-input-group">
                     <label>Quantity</label>
@@ -479,15 +536,26 @@ function openShapeCalculator(shapeKey) {
             break;
 
         default:
-            formTitle.innerText = 'Section Calculator';
             html = `
                 <div class="wb-input-group">
-                    <label>Length (L) (mm)</label>
+                    <label>Side A (mm)</label>
+                    <input type="number" id="inp_a" value="50" oninput="calculateCurrentMass()">
+                </div>
+                <div class="wb-input-group">
+                    <label>Side B (mm)</label>
+                    <input type="number" id="inp_b" value="50" oninput="calculateCurrentMass()">
+                </div>
+                <div class="wb-input-group">
+                    <label>Thickness t (mm)</label>
+                    <input type="number" id="inp_t" value="6" oninput="calculateCurrentMass()">
+                </div>
+                <div class="wb-input-group">
+                    <label>Length (mm)</label>
                     <input type="number" id="inp_l" value="1000" oninput="calculateCurrentMass()">
                 </div>
                 <div class="wb-input-group">
-                    <label>Side / Dimension (mm)</label>
-                    <input type="number" id="inp_s" value="50" oninput="calculateCurrentMass()">
+                    <label>Specific Gravity</label>
+                    <input type="number" id="inp_sg" value="${weightCalcState.sg}" step="0.01" oninput="calculateCurrentMass()">
                 </div>
                 <div class="wb-input-group">
                     <label>Quantity</label>
@@ -501,56 +569,32 @@ function openShapeCalculator(shapeKey) {
     drawShapeCanvas(shapeKey);
 }
 
-function selectStandardFamily(family) {
-    weightCalcState.activeFamily = family;
-    document.querySelectorAll('.wb-std-btn').forEach(btn => {
-        btn.classList.toggle('active', btn.innerText.includes(family));
-    });
-    renderProfileChips(weightCalcState.activeShape, family);
+function onShapeDropdownChange(shapeKey) {
+    openShapeCalculator(shapeKey);
 }
 
-function renderProfileChips(shapeKey, family) {
-    const container = document.getElementById('wb-profile-picker-container');
-    if (!container) return;
-
-    const list = (STANDARD_PROFILES[shapeKey] && STANDARD_PROFILES[shapeKey][family]) || [];
-    if (list.length === 0) {
-        container.innerHTML = '<span style="grid-column: span 2; font-size: 0.75rem; color: #888;">Custom dimensions standard</span>';
-        return;
+function wbGoBack() {
+    if (weightCalcState.activeScreen === 'form') {
+        if (['channel', 'beam', 'angle', 'tee'].includes(weightCalcState.activeShape)) {
+            openStandardSelector(weightCalcState.activeShape);
+        } else {
+            returnToGridScreen();
+        }
+    } else if (weightCalcState.activeScreen === 'standards') {
+        returnToGridScreen();
     }
-
-    container.innerHTML = list.map((item, idx) => `
-        <div class="wb-profile-chip" onclick="applyStandardProfile('${shapeKey}', '${family}', ${idx})">
-            ${item.name}
-        </div>
-    `).join('');
-}
-
-function applyStandardProfile(shapeKey, family, index) {
-    const item = STANDARD_PROFILES[shapeKey][family][index];
-    if (!item) return;
-
-    if (item.h && document.getElementById('inp_h')) document.getElementById('inp_h').value = item.h;
-    if (item.b && document.getElementById('inp_w')) document.getElementById('inp_w').value = item.b;
-    if (item.a && document.getElementById('inp_a')) document.getElementById('inp_a').value = item.a;
-    if (item.b && document.getElementById('inp_b')) document.getElementById('inp_b').value = item.b;
-    if (item.tw && document.getElementById('inp_tw')) document.getElementById('inp_tw').value = item.tw;
-    if (item.tf && document.getElementById('inp_tf')) document.getElementById('inp_tf').value = item.tf;
-    if (item.t && document.getElementById('inp_t')) document.getElementById('inp_t').value = item.t;
-
-    document.querySelectorAll('.wb-profile-chip').forEach((chip, i) => {
-        chip.classList.toggle('active', i === index);
-    });
-
-    drawShapeCanvas(shapeKey);
 }
 
 function returnToGridScreen() {
+    weightCalcState.activeScreen = 'grid';
     document.getElementById('wb-form-screen').style.display = 'none';
+    document.getElementById('wb-standards-screen').style.display = 'none';
     document.getElementById('wb-grid-screen').style.display = 'grid';
+    document.getElementById('wb-nav-back-btn').style.display = 'none';
+    document.getElementById('wb-app-title').innerText = 'Engineering Weight Calculator';
 }
 
-// 2D TECHNICAL CANVAS RENDERER WITH DIMENSION LINES (IMG_9450, IMG_9460)
+// TECHNICAL CANVAS RENDERER WITH DIMENSION ARROWS (IMG_9450, IMG_9460)
 function drawShapeCanvas(shapeKey) {
     const canvas = document.getElementById('shapeCanvas');
     if (!canvas) return;
@@ -559,88 +603,64 @@ function drawShapeCanvas(shapeKey) {
     const h = canvas.height;
 
     ctx.clearRect(0, 0, w, h);
-
     ctx.fillStyle = '#00E5FF';
     ctx.strokeStyle = '#ffffff';
-    ctx.lineWidth = 2;
+    ctx.lineWidth = 1.5;
 
     const cx = w / 2;
     const cy = h / 2;
 
     ctx.beginPath();
     switch(shapeKey) {
+        case 'square':
         case 'plate':
         case 'flat':
-        case 'square':
-            ctx.rect(cx - 50, cy - 40, 100, 80);
+            ctx.rect(cx - 35, cy - 30, 70, 60);
             ctx.fill(); ctx.stroke();
-            drawDimensionArrow(ctx, cx - 50, cy + 50, cx + 50, cy + 50, "W / Side");
-            drawDimensionArrow(ctx, cx - 60, cy - 40, cx - 60, cy + 40, "T / H");
+            drawDimensionArrow(ctx, cx - 35, cy + 40, cx + 35, cy + 40, "W");
+            drawDimensionArrow(ctx, cx - 45, cy - 30, cx - 45, cy + 30, "H");
             break;
 
         case 'pipe':
-            ctx.arc(cx, cy, 45, 0, Math.PI * 2);
+            ctx.arc(cx, cy, 35, 0, Math.PI * 2);
             ctx.fill(); ctx.stroke();
             ctx.beginPath();
             ctx.fillStyle = '#181a20';
-            ctx.arc(cx, cy, 30, 0, Math.PI * 2);
+            ctx.arc(cx, cy, 22, 0, Math.PI * 2);
             ctx.fill(); ctx.stroke();
-            drawDimensionArrow(ctx, cx - 45, cy - 55, cx + 45, cy - 55, "OD");
+            drawDimensionArrow(ctx, cx - 35, cy - 42, cx + 35, cy - 42, "OD");
             break;
 
         case 'rod':
-            ctx.arc(cx, cy, 45, 0, Math.PI * 2);
+            ctx.arc(cx, cy, 35, 0, Math.PI * 2);
             ctx.fill(); ctx.stroke();
-            drawDimensionArrow(ctx, cx - 45, cy - 55, cx + 45, cy - 55, "D");
+            drawDimensionArrow(ctx, cx - 35, cy - 42, cx + 35, cy - 42, "D");
             break;
 
         case 'beam':
-            // I-Beam Profile
-            ctx.fillRect(cx - 40, cy - 50, 80, 14); // Top flange
-            ctx.fillRect(cx - 6, cy - 50, 12, 100); // Web
-            ctx.fillRect(cx - 40, cy + 36, 80, 14); // Bottom flange
-            ctx.strokeRect(cx - 40, cy - 50, 80, 14);
-            ctx.strokeRect(cx - 6, cy - 50, 12, 100);
-            ctx.strokeRect(cx - 40, cy + 36, 80, 14);
-            drawDimensionArrow(ctx, cx - 55, cy - 50, cx - 55, cy + 50, "H");
-            drawDimensionArrow(ctx, cx - 40, cy + 60, cx + 40, cy + 60, "B");
+            ctx.fillRect(cx - 30, cy - 40, 60, 10);
+            ctx.fillRect(cx - 5, cy - 40, 10, 80);
+            ctx.fillRect(cx - 30, cy + 30, 60, 10);
+            ctx.strokeRect(cx - 30, cy - 40, 60, 10);
+            ctx.strokeRect(cx - 5, cy - 40, 10, 80);
+            ctx.strokeRect(cx - 30, cy + 30, 60, 10);
+            drawDimensionArrow(ctx, cx - 42, cy - 40, cx - 42, cy + 40, "H");
+            drawDimensionArrow(ctx, cx - 30, cy + 48, cx + 30, cy + 48, "B");
             break;
 
         case 'channel':
-            // Channel Profile
-            ctx.fillRect(cx - 30, cy - 50, 12, 100); // Web
-            ctx.fillRect(cx - 30, cy - 50, 60, 14); // Top flange
-            ctx.fillRect(cx - 30, cy + 36, 60, 14); // Bottom flange
-            ctx.strokeRect(cx - 30, cy - 50, 12, 100);
-            ctx.strokeRect(cx - 30, cy - 50, 60, 14);
-            ctx.strokeRect(cx - 30, cy + 36, 60, 14);
-            drawDimensionArrow(ctx, cx - 42, cy - 50, cx - 42, cy + 50, "H");
-            drawDimensionArrow(ctx, cx - 30, cy + 60, cx + 30, cy + 60, "B");
-            break;
-
-        case 'equal_angle':
-        case 'unequal_angle':
-            // Angle Profile
-            ctx.fillRect(cx - 40, cy - 40, 14, 80);
-            ctx.fillRect(cx - 40, cy + 26, 80, 14);
-            ctx.strokeRect(cx - 40, cy - 40, 14, 80);
-            ctx.strokeRect(cx - 40, cy + 26, 80, 14);
-            drawDimensionArrow(ctx, cx - 52, cy - 40, cx - 52, cy + 40, "Leg A");
-            drawDimensionArrow(ctx, cx - 40, cy + 50, cx + 40, cy + 50, "Leg B");
-            break;
-
-        case 'tee':
-            // Tee Profile
-            ctx.fillRect(cx - 40, cy - 40, 80, 14); // Top flange
-            ctx.fillRect(cx - 6, cy - 40, 12, 80); // Leg
-            ctx.strokeRect(cx - 40, cy - 40, 80, 14);
-            ctx.strokeRect(cx - 6, cy - 40, 12, 80);
-            drawDimensionArrow(ctx, cx - 20, cy - 40, cx - 20, cy + 40, "H");
-            drawDimensionArrow(ctx, cx - 40, cy - 52, cx + 40, cy - 52, "B");
+            ctx.fillRect(cx - 25, cy - 40, 10, 80);
+            ctx.fillRect(cx - 25, cy - 40, 50, 10);
+            ctx.fillRect(cx - 25, cy + 30, 50, 10);
+            ctx.strokeRect(cx - 25, cy - 40, 10, 80);
+            ctx.strokeRect(cx - 25, cy - 40, 50, 10);
+            ctx.strokeRect(cx - 25, cy + 30, 50, 10);
+            drawDimensionArrow(ctx, cx - 36, cy - 40, cx - 36, cy + 40, "H");
+            drawDimensionArrow(ctx, cx - 25, cy + 48, cx + 25, cy + 48, "B");
             break;
 
         default:
-            ctx.rect(cx - 40, cy - 40, 80, 80);
+            ctx.rect(cx - 30, cy - 30, 60, 60);
             ctx.fill(); ctx.stroke();
             break;
     }
@@ -650,28 +670,38 @@ function drawDimensionArrow(ctx, x1, y1, x2, y2, label) {
     ctx.save();
     ctx.strokeStyle = '#FFD700';
     ctx.fillStyle = '#FFD700';
-    ctx.lineWidth = 1.5;
+    ctx.lineWidth = 1;
     ctx.beginPath();
     ctx.moveTo(x1, y1);
     ctx.lineTo(x2, y2);
     ctx.stroke();
 
-    ctx.font = '10px sans-serif';
+    ctx.font = '9px sans-serif';
     ctx.textAlign = 'center';
-    ctx.fillText(label, (x1 + x2) / 2, (y1 + y2) / 2 - 4);
+    ctx.fillText(label, (x1 + x2) / 2, (y1 + y2) / 2 - 2);
     ctx.restore();
 }
 
 // MATHEMATICAL CALCULATION ENGINE
+function calculateCurrentMass() {
+    return calculateMassEngine();
+}
+
 function calculateMassEngine() {
     const shape = weightCalcState.activeShape;
-    const sg = weightCalcState.sg;
+    const sg = parseFloat(document.getElementById('inp_sg')?.value || weightCalcState.sg);
     const qty = parseFloat(document.getElementById('inp_qty')?.value || 1);
+    const price = parseFloat(document.getElementById('inp_price')?.value || weightCalcState.unitPrice);
 
     let area_mm2 = 0;
     let length_mm = parseFloat(document.getElementById('inp_l')?.value || 1000);
 
     switch(shape) {
+        case 'square':
+            const s = parseFloat(document.getElementById('inp_s')?.value || 100);
+            area_mm2 = s * s;
+            break;
+
         case 'plate':
         case 'flat':
             const w = parseFloat(document.getElementById('inp_w')?.value || 100);
@@ -691,36 +721,6 @@ function calculateMassEngine() {
             area_mm2 = (Math.PI / 4) * (d * d);
             break;
 
-        case 'square':
-            const s = parseFloat(document.getElementById('inp_s')?.value || 50);
-            area_mm2 = s * s;
-            break;
-
-        case 'hex':
-            const af_hex = parseFloat(document.getElementById('inp_af')?.value || 32);
-            area_mm2 = 0.866025 * af_hex * af_hex;
-            break;
-
-        case 'oct':
-            const af_oct = parseFloat(document.getElementById('inp_af')?.value || 40);
-            area_mm2 = 0.828427 * af_oct * af_oct;
-            break;
-
-        case 'box':
-            const box_h = parseFloat(document.getElementById('inp_h')?.value || 100);
-            const box_w = parseFloat(document.getElementById('inp_w')?.value || 80);
-            const box_t = parseFloat(document.getElementById('inp_t')?.value || 5);
-            area_mm2 = 2 * box_t * (box_h + box_w - 2 * box_t);
-            break;
-
-        case 'equal_angle':
-        case 'unequal_angle':
-            const leg_a = parseFloat(document.getElementById('inp_a')?.value || 50);
-            const leg_b = parseFloat(document.getElementById('inp_b')?.value || 50);
-            const angle_t = parseFloat(document.getElementById('inp_t')?.value || 6);
-            area_mm2 = angle_t * (leg_a + leg_b - angle_t);
-            break;
-
         case 'beam':
             const bm_h = parseFloat(document.getElementById('inp_h')?.value || 200);
             const bm_w = parseFloat(document.getElementById('inp_w')?.value || 100);
@@ -737,13 +737,6 @@ function calculateMassEngine() {
             area_mm2 = 2 * (ch_w * ch_tf) + (ch_h - 2 * ch_tf) * ch_tw;
             break;
 
-        case 'tee':
-            const tee_h = parseFloat(document.getElementById('inp_h')?.value || 75);
-            const tee_w = parseFloat(document.getElementById('inp_w')?.value || 75);
-            const tee_t = parseFloat(document.getElementById('inp_t')?.value || 8);
-            area_mm2 = (tee_w * tee_t) + (tee_h - tee_t) * tee_t;
-            break;
-
         default:
             area_mm2 = 1000;
             break;
@@ -752,10 +745,10 @@ function calculateMassEngine() {
     const volume_cm3 = (area_mm2 / 100) * (length_mm / 10);
     const unit_mass_kg = (volume_cm3 * sg) / 1000;
     const total_mass_kg = unit_mass_kg * qty;
-    const total_cost = total_mass_kg * weightCalcState.unitPrice;
+    const total_cost = total_mass_kg * price;
 
     return {
-        component: document.getElementById('wb-form-title')?.innerText || 'Section',
+        component: document.getElementById('wb-app-title')?.innerText || 'Section',
         size: `${length_mm} mm (SG: ${sg})`,
         qty: qty,
         unitMass: unit_mass_kg,
@@ -795,7 +788,7 @@ function renderSpecificGravityModal() {
     list.innerHTML = DENSITY_DATABASE.map(item => `
         <div class="wb-modal-item ${item.sg === weightCalcState.sg ? 'selected' : ''}" onclick="selectSpecificGravity(${item.sg}, '${item.name}')">
             <span>${item.name}</span>
-            <strong class="wb-badge">${item.sg.toFixed(2)} g/cm³</strong>
+            <strong class="wb-badge">${item.sg.toFixed(2)}</strong>
         </div>
     `).join('');
 }
@@ -803,6 +796,8 @@ function renderSpecificGravityModal() {
 function selectSpecificGravity(sg, name) {
     weightCalcState.sg = sg;
     weightCalcState.materialName = name;
+    const inpSg = document.getElementById('inp_sg');
+    if (inpSg) inpSg.value = sg;
     renderSpecificGravityModal();
     closeModal('modal-sg');
 }
@@ -843,7 +838,7 @@ function updateLinearConversion() {
     const select = document.getElementById('conv-linear-select')?.value || 'mm-cm';
     const val = parseFloat(document.getElementById('conv-input-val')?.value || 1);
     
-    let factor = 1;
+    let factor = 0.1;
     let fromUnit = 'mm';
     let toUnit = 'cm';
 

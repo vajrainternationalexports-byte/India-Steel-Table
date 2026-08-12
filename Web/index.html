@@ -8,7 +8,9 @@
 </head>
 <body>
 
-  <div class="phone-wrapper">
+  <!-- Full-Screen Dual-App Suite Container -->
+  <div class="suite-app-container">
+    
     <!-- Top Dual-App Navigation Switcher Bar -->
     <div class="dual-app-header">
       <div id="tab-project-a" class="app-tab active" onclick="switchProjectTab('A')">
@@ -21,254 +23,239 @@
       </div>
     </div>
 
-    <!-- Phone Device Shell -->
-    <div class="phone-frame">
-      <!-- Horizontal Swipe Viewport Container -->
-      <div class="swipe-viewport">
-        <div id="app-swipe-shell" class="swipe-shell">
-          
-          <!-- ==================== PROJECT A: IS STEEL TABLE ==================== -->
-          <div id="project-a-view" class="project-view">
-            <div class="app-container">
-              <!-- Android Status Bar -->
-              <div class="status-bar">
-                <span>7:25</span>
-                <div class="status-icons">
-                  <span>5G</span>
-                  <span>55%</span>
-                </div>
+    <!-- Edge-to-Edge Viewport Container -->
+    <div class="swipe-viewport">
+      <div id="app-swipe-shell" class="swipe-shell">
+        
+        <!-- ==================== PROJECT A: IS STEEL TABLE ==================== -->
+        <div id="project-a-view" class="project-view">
+          <div class="app-container">
+            <!-- Top App Bar -->
+            <div class="app-bar">
+              <div class="app-title-box">
+                <span id="appTitle" class="app-title">IS Steel Table</span>
+                <span id="appVersion" class="app-version">v.1.4.3</span>
               </div>
 
-              <!-- Top App Bar -->
-              <div class="app-bar">
-                <div class="app-title-box">
-                  <span id="appTitle" class="app-title">IS Steel Table</span>
-                  <span id="appVersion" class="app-version">v.1.4.3</span>
-                </div>
+              <div class="app-actions">
+                <button id="shareBtn" class="icon-btn" style="display: none;" title="Share">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="18" cy="5" r="3"></circle>
+                    <circle cx="6" cy="12" r="3"></circle>
+                    <circle cx="18" cy="19" r="3"></circle>
+                    <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+                    <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+                  </svg>
+                </button>
 
-                <div class="app-actions">
-                  <button id="shareBtn" class="icon-btn" style="display: none;" title="Share">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                      <circle cx="18" cy="5" r="3"></circle>
-                      <circle cx="6" cy="12" r="3"></circle>
-                      <circle cx="18" cy="19" r="3"></circle>
-                      <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
-                      <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
-                    </svg>
-                  </button>
+                <button id="bookmarkBtn" class="icon-btn" title="Bookmark">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
+                    <polygon points="12 7 13.5 10 17 10.5 14.5 13 15 16.5 12 14.8 9 16.5 9.5 13 7 10.5 10.5 10 12 7" fill="currentColor"></polygon>
+                  </svg>
+                </button>
 
-                  <button id="bookmarkBtn" class="icon-btn" title="Bookmark">
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                      <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
-                      <polygon points="12 7 13.5 10 17 10.5 14.5 13 15 16.5 12 14.8 9 16.5 9.5 13 7 10.5 10.5 10 12 7" fill="currentColor"></polygon>
-                    </svg>
-                  </button>
+                <button id="calcBtn" class="icon-btn" style="display: none;" title="Calculator">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="4" y="2" width="16" height="20" rx="2"></rect>
+                    <line x1="8" y1="6" x2="16" y2="6"></line>
+                    <line x1="16" y1="14" x2="16" y2="18"></line>
+                    <path d="M8 10h.01M12 10h.01M16 10h.01M8 14h.01M12 14h.01M8 18h.01M12 18h.01"></path>
+                  </svg>
+                </button>
 
-                  <button id="calcBtn" class="icon-btn" style="display: none;" title="Calculator">
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                      <rect x="4" y="2" width="16" height="20" rx="2"></rect>
-                      <line x1="8" y1="6" x2="16" y2="6"></line>
-                      <line x1="16" y1="14" x2="16" y2="18"></line>
-                      <path d="M8 10h.01M12 10h.01M16 10h.01M8 14h.01M12 14h.01M8 18h.01M12 18h.01"></path>
-                    </svg>
-                  </button>
-
-                  <button id="menuBtn" class="icon-btn" title="Menu">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                      <circle cx="12" cy="5" r="2"></circle>
-                      <circle cx="12" cy="12" r="2"></circle>
-                      <circle cx="12" cy="19" r="2"></circle>
-                    </svg>
-                  </button>
-                </div>
-              </div>
-
-              <!-- Screen Content Body -->
-              <div id="screenContent" class="screen-content"></div>
-
-              <!-- Bottom Navigation Bar -->
-              <div class="android-nav-bar">
-                <span id="navRecentsBtn" class="nav-bar-icon">|||</span>
-                <span id="navHomeBtn" class="nav-bar-icon">○</span>
-                <span id="navBackBtn" class="nav-bar-icon">&lt;</span>
+                <button id="menuBtn" class="icon-btn" title="Menu">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <circle cx="12" cy="5" r="2"></circle>
+                    <circle cx="12" cy="12" r="2"></circle>
+                    <circle cx="12" cy="19" r="2"></circle>
+                  </svg>
+                </button>
               </div>
             </div>
+
+            <!-- Screen Content Body -->
+            <div id="screenContent" class="screen-content"></div>
           </div>
-
-          <!-- ==================== PROJECT B: ENGINEERING WEIGHT CALCULATOR ==================== -->
-          <div id="project-b-view" class="project-view">
-            <div class="app-container wb-theme">
-              
-              <!-- Android Status Bar -->
-              <div class="status-bar">
-                <span>1:27</span>
-                <div class="status-icons">
-                  <span>5G</span>
-                  <span>39%</span>
-                </div>
-              </div>
-
-              <!-- Top App Bar for Project B -->
-              <div class="app-bar wb-app-bar">
-                <span class="app-title">Engineering Weight Calculator</span>
-                <div class="app-actions">
-                  <button class="icon-btn" onclick="openModal('modal-calc')" title="Expression Calculator">🧮</button>
-                  <button class="icon-btn" onclick="openModal('modal-takeoff')" title="Display List">📋</button>
-                  <button class="icon-btn" onclick="openModal('modal-sg')" title="Settings / Density">⚙️</button>
-                </div>
-              </div>
-
-              <div class="screen-content wb-screen-content">
-
-                <!-- MAIN GRID LAUNCHER SCREEN -->
-                <div id="wb-grid-screen" class="wb-grid-container">
-                  <div class="wb-grid-tile" onclick="openShapeCalculator('plate')">
-                    <div class="wb-tile-icon cyan-3d">🟦</div>
-                    <span>Plate / Sheet</span>
-                  </div>
-
-                  <div class="wb-grid-tile" onclick="openShapeCalculator('pipe')">
-                    <div class="wb-tile-icon cyan-3d">⭕</div>
-                    <span>Round Pipe</span>
-                  </div>
-
-                  <div class="wb-grid-tile" onclick="openShapeCalculator('rod')">
-                    <div class="wb-tile-icon cyan-3d">⏺</div>
-                    <span>Round Bar</span>
-                  </div>
-
-                  <div class="wb-grid-tile" onclick="openShapeCalculator('square')">
-                    <div class="wb-tile-icon cyan-3d">⬛</div>
-                    <span>Square Bar</span>
-                  </div>
-
-                  <div class="wb-grid-tile" onclick="openShapeCalculator('hex')">
-                    <div class="wb-tile-icon cyan-3d">⬢</div>
-                    <span>Hexagonal Bar</span>
-                  </div>
-
-                  <div class="wb-grid-tile" onclick="openShapeCalculator('oct')">
-                    <div class="wb-tile-icon cyan-3d">🛑</div>
-                    <span>Octagonal Bar</span>
-                  </div>
-
-                  <div class="wb-grid-tile" onclick="openShapeCalculator('box')">
-                    <div class="wb-tile-icon cyan-3d">📦</div>
-                    <span>Rectangular Tube</span>
-                  </div>
-
-                  <div class="wb-grid-tile" onclick="openShapeCalculator('flat')">
-                    <div class="wb-tile-icon cyan-3d">▬</div>
-                    <span>Flat Bar</span>
-                  </div>
-
-                  <div class="wb-grid-tile" onclick="openShapeCalculator('equal_angle')">
-                    <div class="wb-tile-icon cyan-3d">L</div>
-                    <span>Equal Angle</span>
-                  </div>
-
-                  <div class="wb-grid-tile" onclick="openShapeCalculator('unequal_angle')">
-                    <div class="wb-tile-icon cyan-3d">⅃</div>
-                    <span>Unequal Angle</span>
-                  </div>
-
-                  <div class="wb-grid-tile" onclick="openShapeCalculator('beam')">
-                    <div class="wb-tile-icon cyan-3d">I</div>
-                    <span>I-Beam</span>
-                  </div>
-
-                  <div class="wb-grid-tile" onclick="openShapeCalculator('channel')">
-                    <div class="wb-tile-icon cyan-3d">匚</div>
-                    <span>Channel</span>
-                  </div>
-
-                  <div class="wb-grid-tile" onclick="openShapeCalculator('tee')">
-                    <div class="wb-tile-icon cyan-3d">┬</div>
-                    <span>Tee Bar</span>
-                  </div>
-
-                  <div class="wb-grid-tile" onclick="openShapeCalculator('zsection')">
-                    <div class="wb-tile-icon cyan-3d">Z</div>
-                    <span>Z-Section</span>
-                  </div>
-
-                  <!-- UTILITY TILES -->
-                  <div class="wb-grid-tile wb-utility-tile" onclick="openModal('modal-swg')">
-                    <div class="wb-tile-icon orange-3d">⚙️</div>
-                    <span>SWG Gauges</span>
-                  </div>
-
-                  <div class="wb-grid-tile wb-utility-tile" onclick="openModal('modal-fractions')">
-                    <div class="wb-tile-icon orange-3d">📏</div>
-                    <span>Unit Converter</span>
-                  </div>
-
-                  <div class="wb-grid-tile wb-utility-tile" onclick="openModal('modal-takeoff')">
-                    <div class="wb-tile-icon orange-3d">📋</div>
-                    <span>Display List</span>
-                  </div>
-
-                  <div class="wb-grid-tile wb-utility-tile" onclick="openModal('modal-calc')">
-                    <div class="wb-tile-icon orange-3d">🧮</div>
-                    <span>Calculator</span>
-                  </div>
-                </div>
-
-                <!-- INPUT FORM CALCULATOR SCREEN -->
-                <div id="wb-form-screen" class="wb-form-container" style="display: none;">
-                  <div class="wb-form-header">
-                    <button class="wb-back-btn" onclick="returnToGridScreen()">&lt; Back</button>
-                    <h3 id="wb-form-title">Calculations</h3>
-                  </div>
-
-                  <!-- Standard Selection Dropdown (For Beams, Channels, Angles, Tees, Pipes) -->
-                  <div id="wb-standard-selector-container" class="wb-standard-box" style="display: none;">
-                    <label>Select Standard / Profile:</label>
-                    <div class="wb-standard-btn-group">
-                      <button class="wb-std-btn active" onclick="selectStandardFamily('IS')">IS 808</button>
-                      <button class="wb-std-btn" onclick="selectStandardFamily('ANSI')">ANSI/AISC</button>
-                      <button class="wb-std-btn" onclick="selectStandardFamily('BS')">BS 4</button>
-                      <button class="wb-std-btn" onclick="selectStandardFamily('AS')">AS 3679</button>
-                      <button class="wb-std-btn" onclick="selectStandardFamily('ISO')">ISO 657</button>
-                    </div>
-                    <div id="wb-profile-picker-container" class="wb-profile-picker"></div>
-                  </div>
-
-                  <!-- Top Technical 2D Canvas Drawing -->
-                  <div id="wb-shape-canvas-container" class="wb-canvas-card">
-                    <canvas id="shapeCanvas" width="300" height="150"></canvas>
-                  </div>
-
-                  <!-- Dynamic Form Inputs Container -->
-                  <div id="wb-form-inputs" class="wb-form-inputs"></div>
-
-                  <!-- Action Buttons Grid -->
-                  <div class="wb-form-actions">
-                    <button class="wb-action-btn primary" onclick="calculateAndShowResultModal()">Calculate mass</button>
-                    <button class="wb-action-btn secondary" onclick="openModal('modal-takeoff')">Display List</button>
-                    <button class="wb-action-btn secondary" onclick="openModal('modal-sg')">Select Specific Gravity</button>
-                    <button class="wb-action-btn secondary" onclick="openModal('modal-fractions')">mm Conversion</button>
-                    <button class="wb-action-btn secondary" onclick="openModal('modal-fractions')">Inch fractions</button>
-                  </div>
-
-                  <div class="wb-footnote">
-                    <span>Engineering Weight Calculator • High Precision Standard Engine</span>
-                  </div>
-                </div>
-
-              </div>
-
-              <!-- Bottom Navigation Bar for Project B -->
-              <div class="android-nav-bar">
-                <span class="nav-bar-icon" onclick="returnToGridScreen()">|||</span>
-                <span class="nav-bar-icon" onclick="returnToGridScreen()">○</span>
-                <span class="nav-bar-icon" onclick="returnToGridScreen()">&lt;</span>
-              </div>
-
-            </div>
-          </div>
-
         </div>
+
+        <!-- ==================== PROJECT B: ENGINEERING WEIGHT CALCULATOR ==================== -->
+        <div id="project-b-view" class="project-view">
+          <div class="app-container wb-theme">
+            
+            <!-- Top App Bar for Project B -->
+            <div class="app-bar wb-app-bar">
+              <button id="wb-nav-back-btn" class="icon-btn" onclick="wbGoBack()" style="display: none;" title="Back">←</button>
+              <span id="wb-app-title" class="app-title">Engineering Weight Calculator</span>
+              <div class="app-actions">
+                <button class="icon-btn" onclick="openModal('modal-calc')" title="Expression Calculator">🧮</button>
+                <button class="icon-btn" onclick="openModal('modal-takeoff')" title="Display List">📋</button>
+                <button class="icon-btn" onclick="openModal('modal-sg')" title="Settings / Density">⚙️</button>
+              </div>
+            </div>
+
+            <div class="screen-content wb-screen-content">
+
+              <!-- SCREEN 1: MAIN GRID LAUNCHER -->
+              <div id="wb-grid-screen" class="wb-grid-container">
+                <div class="wb-grid-tile" onclick="openShapeCalculator('plate')">
+                  <div class="wb-tile-icon cyan-3d">🟦</div>
+                  <span>Plate / Sheet</span>
+                </div>
+
+                <div class="wb-grid-tile" onclick="openShapeCalculator('pipe')">
+                  <div class="wb-tile-icon cyan-3d">⭕</div>
+                  <span>Round Pipe</span>
+                </div>
+
+                <div class="wb-grid-tile" onclick="openShapeCalculator('rod')">
+                  <div class="wb-tile-icon cyan-3d">⏺</div>
+                  <span>Round Bar</span>
+                </div>
+
+                <div class="wb-grid-tile" onclick="openShapeCalculator('square')">
+                  <div class="wb-tile-icon cyan-3d">⬛</div>
+                  <span>Square Bar</span>
+                </div>
+
+                <div class="wb-grid-tile" onclick="openShapeCalculator('hex')">
+                  <div class="wb-tile-icon cyan-3d">⬢</div>
+                  <span>Hexagonal Bar</span>
+                </div>
+
+                <div class="wb-grid-tile" onclick="openShapeCalculator('oct')">
+                  <div class="wb-tile-icon cyan-3d">🛑</div>
+                  <span>Octagonal Bar</span>
+                </div>
+
+                <div class="wb-grid-tile" onclick="openShapeCalculator('box')">
+                  <div class="wb-tile-icon cyan-3d">📦</div>
+                  <span>Rectangular Tube</span>
+                </div>
+
+                <div class="wb-grid-tile" onclick="openShapeCalculator('flat')">
+                  <div class="wb-tile-icon cyan-3d">▬</div>
+                  <span>Flat Bar</span>
+                </div>
+
+                <div class="wb-grid-tile" onclick="openStandardSelector('angle')">
+                  <div class="wb-tile-icon cyan-3d">L</div>
+                  <span>Equal / Unequal Angle</span>
+                </div>
+
+                <div class="wb-grid-tile" onclick="openStandardSelector('beam')">
+                  <div class="wb-tile-icon cyan-3d">I</div>
+                  <span>I-Beam</span>
+                </div>
+
+                <div class="wb-grid-tile" onclick="openStandardSelector('channel')">
+                  <div class="wb-tile-icon cyan-3d">匚</div>
+                  <span>Channel</span>
+                </div>
+
+                <div class="wb-grid-tile" onclick="openStandardSelector('tee')">
+                  <div class="wb-tile-icon cyan-3d">┬</div>
+                  <span>Tee Bar</span>
+                </div>
+
+                <div class="wb-grid-tile" onclick="openShapeCalculator('zsection')">
+                  <div class="wb-tile-icon cyan-3d">Z</div>
+                  <span>Z-Section</span>
+                </div>
+
+                <!-- UTILITY TILES -->
+                <div class="wb-grid-tile wb-utility-tile" onclick="openModal('modal-swg')">
+                  <div class="wb-tile-icon orange-3d">⚙️</div>
+                  <span>SWG Gauges</span>
+                </div>
+
+                <div class="wb-grid-tile wb-utility-tile" onclick="openModal('modal-fractions')">
+                  <div class="wb-tile-icon orange-3d">📏</div>
+                  <span>Unit Converter</span>
+                </div>
+
+                <div class="wb-grid-tile wb-utility-tile" onclick="openModal('modal-takeoff')">
+                  <div class="wb-tile-icon orange-3d">📋</div>
+                  <span>Display List</span>
+                </div>
+
+                <div class="wb-grid-tile wb-utility-tile" onclick="openModal('modal-calc')">
+                  <div class="wb-tile-icon orange-3d">🧮</div>
+                  <span>Calculator</span>
+                </div>
+              </div>
+
+              <!-- SCREEN 2: STANDARDS & SECTIONS PICKER LIST SCREEN (IMG_9440, IMG_9445, IMG_9448, IMG_9453) -->
+              <div id="wb-standards-screen" class="wb-standards-container" style="display: none;">
+                <div class="wb-standards-header">
+                  <h3 id="wb-standards-title">Select Standard</h3>
+                </div>
+                <div class="wb-standard-btn-group">
+                  <button class="wb-std-btn active" onclick="selectStandardFamily('IS 808')">IS 808</button>
+                  <button class="wb-std-btn" onclick="selectStandardFamily('ANSI/AISC')">ANSI/AISC</button>
+                  <button class="wb-std-btn" onclick="selectStandardFamily('BS 4 : Part 1')">BS 4 : Part 1</button>
+                  <button class="wb-std-btn" onclick="selectStandardFamily('AS 3679')">AS 3679</button>
+                  <button class="wb-std-btn" onclick="selectStandardFamily('ISO 657')">ISO 657</button>
+                </div>
+                <div id="wb-categorized-sections-list" class="wb-categorized-list"></div>
+              </div>
+
+              <!-- SCREEN 3: EXACT 2-COLUMN CALCULATION FORM SCREEN (IMG_9436, IMG_9450, IMG_9460, IMG_9466) -->
+              <div id="wb-form-screen" class="wb-form-container" style="display: none;">
+                
+                <!-- Top Shape / Section Dropdown Selector -->
+                <div class="wb-shape-dropdown-bar">
+                  <select id="wb-shape-selector-dropdown" onchange="onShapeDropdownChange(this.value)">
+                    <option value="square">Square</option>
+                    <option value="plate">Plate / Sheet</option>
+                    <option value="rod">Round Bar</option>
+                    <option value="pipe">Round Pipe</option>
+                    <option value="hex">Hexagonal</option>
+                    <option value="oct">Octagonal</option>
+                    <option value="triangular">Triangular</option>
+                    <option value="pentagonal">Pentagonal</option>
+                    <option value="beam">Generic Beam</option>
+                    <option value="channel">Generic Channel</option>
+                    <option value="equal_angle">Generic Angle</option>
+                    <option value="tee">Generic Tee</option>
+                  </select>
+                </div>
+
+                <!-- 2-Column Calculation Layout Container -->
+                <div class="wb-2col-layout">
+                  
+                  <!-- LEFT COLUMN: 3D/2D Diagram + Numerical Inputs -->
+                  <div class="wb-col-left">
+                    <div id="wb-shape-canvas-container" class="wb-canvas-card">
+                      <canvas id="shapeCanvas" width="140" height="110"></canvas>
+                    </div>
+
+                    <div class="wb-input-header-label">Enter dimensions in mm</div>
+
+                    <div id="wb-form-inputs" class="wb-form-inputs"></div>
+                  </div>
+
+                  <!-- RIGHT COLUMN: 5 Stacked Rectangular Action Buttons -->
+                  <div class="wb-col-right">
+                    <button class="wb-stacked-btn primary-cyan" onclick="calculateAndShowResultModal()">Calculate mass</button>
+                    <button class="wb-stacked-btn" onclick="openModal('modal-takeoff')">Display List</button>
+                    <button class="wb-stacked-btn" onclick="openModal('modal-sg')">Select Specific Gravity</button>
+                    <button class="wb-stacked-btn" onclick="openModal('modal-fractions')">mm Conversion</button>
+                    <button class="wb-stacked-btn" onclick="openModal('modal-fractions')">Inch fractions</button>
+                  </div>
+
+                </div>
+
+                <div class="wb-footnote">
+                  <span>Engineering Weight Calculator • High Precision Structural Engine</span>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+
       </div>
     </div>
   </div>
@@ -287,7 +274,7 @@
       <div class="wb-res-row"><span>Quantity:</span><strong id="res-qty">1</strong></div>
       <div class="wb-res-row highlighted-cyan"><span>Unit mass:</span><strong id="res-unit-mass">0.00 kg</strong></div>
       <div class="wb-res-row highlighted-cyan"><span>Total mass:</span><strong id="res-total-mass">0.00 kg</strong></div>
-      <div class="wb-res-row"><span>Cost Rs./kg:</span><strong id="res-cost-kg">1.00</strong></div>
+      <div class="wb-res-row"><span>Price Rs./kg:</span><strong id="res-cost-kg">1.00</strong></div>
       <div class="wb-res-row highlighted-yellow"><span>Total cost:</span><strong id="res-total-cost">Rs. 0.00</strong></div>
 
       <div class="wb-modal-actions">

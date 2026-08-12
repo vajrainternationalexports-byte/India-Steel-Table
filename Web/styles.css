@@ -1,7 +1,7 @@
-/* IS Steel Table & Engineering Weight Calculator — Dual App Suite */
+/* IS Steel Table & Engineering Weight Calculator — Native Full-Screen Suite */
 :root {
-  --bg-dark: #212429;
-  --appbar-bg: #1c1d21;
+  --bg-dark: #121418;
+  --appbar-bg: #1a1c22;
   --btn-grey: #4a4d53;
   --btn-grey-active: #5c6068;
   --btn-border: #383a40;
@@ -19,43 +19,39 @@
   -webkit-font-smoothing: antialiased;
 }
 
-body {
-  font-family: var(--font-family);
-  background-color: #0b0c0e;
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: var(--bg-dark);
   color: var(--text-white);
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 12px;
+  font-family: var(--font-family);
 }
 
-/* PHONE CONTAINER WRAPPER */
-.phone-wrapper {
+/* FULL-SCREEN APP SUITE CONTAINER */
+.suite-app-container {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  width: 100%;
-  max-width: 420px;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
 }
 
-/* TOP DUAL-APP NAVIGATION TAB BAR */
+/* TOP DUAL-APP NAVIGATION SWITCHER BAR */
 .dual-app-header {
   width: 100%;
   display: flex;
   background: #14171d;
-  border-radius: 14px;
-  padding: 4px;
-  border: 1px solid #282d38;
-  margin-bottom: 12px;
-  box-shadow: 0 4px 14px rgba(0,0,0,0.5);
+  padding: 4px 8px;
+  border-bottom: 1px solid #282d38;
+  z-index: 20;
 }
 
 .app-tab {
   flex: 1;
-  padding: 10px 8px;
+  padding: 10px;
   text-align: center;
-  font-size: 0.82rem;
+  font-size: 0.85rem;
   font-weight: 700;
   color: #8a8f9d;
   cursor: pointer;
@@ -63,7 +59,7 @@ body {
   align-items: center;
   justify-content: center;
   gap: 6px;
-  border-radius: 10px;
+  border-radius: 8px;
   transition: all 0.2s ease;
   user-select: none;
 }
@@ -74,33 +70,24 @@ body {
   border: 1px solid rgba(0, 229, 255, 0.3);
 }
 
-/* PHONE DEVICE FRAME */
-.phone-frame {
-  width: 100%;
-  height: 860px;
-  background-color: var(--bg-dark);
-  border-radius: 36px;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 0 8px #2b2e35;
-  overflow: hidden;
-  position: relative;
-}
-
+/* EDGE-TO-EDGE SWIPE VIEWPORT */
 .swipe-viewport {
-  width: 100%;
-  height: 100%;
+  flex: 1;
+  width: 100vw;
+  height: calc(100vh - 46px);
   overflow: hidden;
   position: relative;
 }
 
 .swipe-shell {
   display: flex;
-  width: 200%;
+  width: 200vw;
   height: 100%;
   transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 .project-view {
-  width: 50%;
+  width: 100vw;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -117,37 +104,15 @@ body {
   position: relative;
 }
 
-/* Status Bar */
-.status-bar {
-  height: 38px;
-  background: var(--appbar-bg);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 20px;
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: #fff;
-  user-select: none;
-  z-index: 10;
-}
-
-.status-icons {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 0.75rem;
-}
-
 /* Top App Bar */
 .app-bar {
-  height: 56px;
+  height: 54px;
   background: var(--appbar-bg);
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 16px;
-  border-bottom: 1px solid rgba(0,0,0,0.4);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
   box-shadow: 0 2px 4px rgba(0,0,0,0.3);
   z-index: 10;
 }
@@ -180,12 +145,12 @@ body {
   background: none;
   border: none;
   color: #fff;
-  font-size: 1.2rem;
+  font-size: 1.25rem;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 4px;
+  padding: 6px;
 }
 
 .icon-btn:hover {
@@ -200,36 +165,35 @@ body {
   flex-direction: column;
 }
 
-/* SCREEN 1: CATEGORY LIST */
+/* PROJECT A CATEGORY LIST */
 .category-list {
-  padding: 8px 12px;
+  padding: 12px 16px;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 8px;
 }
 
 .category-btn {
-  background: linear-gradient(180deg, #4f535a 0%, #3e4249 100%);
-  border: 1px solid #36393f;
-  border-top-color: #5f636b;
+  background: linear-gradient(180deg, #3a3e47 0%, #2b2e35 100%);
+  border: 1px solid #454954;
   color: #ffffff;
-  padding: 13px 18px;
+  padding: 14px 18px;
   font-size: 0.95rem;
-  font-weight: 500;
+  font-weight: 600;
   text-align: left;
-  border-radius: 4px;
+  border-radius: 6px;
   cursor: pointer;
-  box-shadow: 0 2px 3px rgba(0,0,0,0.4);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.4);
 }
 
 .category-btn:active {
-  background: #34373d;
+  background: #25282e;
 }
 
-/* SCREEN 2: DESIGNATION TABLE */
+/* DESIGNATION TABLE */
 .designation-header {
   background: #2b2e35;
-  padding: 10px 16px;
+  padding: 12px 16px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -251,7 +215,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 12px 16px;
+  padding: 14px 18px;
   background: #25282e;
   border-bottom: 1px solid #1a1c21;
   cursor: pointer;
@@ -275,7 +239,7 @@ body {
   color: var(--text-muted);
 }
 
-/* SCREEN 3: TABBED PROPERTIES DETAIL VIEW */
+/* TABBED PROPERTIES DETAIL VIEW */
 .tabs-header {
   display: flex;
   background: #1a1c21;
@@ -303,27 +267,22 @@ body {
 
 .tab-content {
   flex: 1;
-  padding: 12px;
+  padding: 16px;
   overflow-y: auto;
 }
 
-/* 2D Technical Diagram Canvas Container */
 .diagram-container {
   background: #191b20;
   border: 1px solid #333742;
   border-radius: 8px;
-  padding: 8px;
+  padding: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 12px;
-
-  /* Explicit boundaries preventing layout shifts */
+  margin-bottom: 16px;
   width: 100%;
-  max-width: 380px;
-  height: 220px;
-  min-height: 220px;
-  box-sizing: border-border;
+  max-width: 480px;
+  height: 240px;
   overflow: hidden;
   margin-left: auto;
   margin-right: auto;
@@ -336,7 +295,6 @@ body {
   object-fit: contain;
 }
 
-/* Property Grid Table */
 .property-table {
   width: 100%;
   border-collapse: collapse;
@@ -352,7 +310,7 @@ body {
 
 .property-table td {
   padding: 10px 8px;
-  font-size: 0.88rem;
+  font-size: 0.9rem;
 }
 
 .prop-symbol {
@@ -374,47 +332,24 @@ body {
 
 /* Search Bar */
 .search-box {
-  padding: 8px 12px;
+  padding: 10px 16px;
   background: #1c1d21;
   border-bottom: 1px solid #333742;
 }
 
 .search-input {
   width: 100%;
-  padding: 8px 12px;
+  padding: 10px 14px;
   background: #2b2e35;
   border: 1px solid #454954;
-  border-radius: 4px;
+  border-radius: 6px;
   color: #fff;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
 }
 
 .search-input:focus {
   outline: none;
   border-color: var(--accent-cyan);
-}
-
-/* Android Navigation Bar */
-.android-nav-bar {
-  height: 44px;
-  background: #141518;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  border-top: 1px solid #22242a;
-}
-
-.nav-bar-icon {
-  color: #808590;
-  font-size: 1.1rem;
-  font-weight: bold;
-  cursor: pointer;
-  user-select: none;
-  padding: 8px 24px;
-}
-
-.nav-bar-icon:active {
-  color: #fff;
 }
 
 /* PROJECT B WEIGHT CALCULATOR THEME */
@@ -428,10 +363,10 @@ body {
 }
 
 .wb-grid-container {
-  padding: 12px;
+  padding: 16px;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 14px;
   overflow-y: auto;
 }
 
@@ -439,14 +374,14 @@ body {
   background: linear-gradient(145deg, #1f232b, #181a20);
   border: 1px solid #2d333f;
   border-radius: 12px;
-  padding: 14px 8px;
+  padding: 18px 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 6px;
+  gap: 8px;
   cursor: pointer;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.4);
   transition: transform 0.15s, border-color 0.15s;
   text-align: center;
 }
@@ -457,10 +392,10 @@ body {
 }
 
 .wb-tile-icon {
-  font-size: 1.8rem;
-  width: 48px;
-  height: 48px;
-  border-radius: 12px;
+  font-size: 2.2rem;
+  width: 54px;
+  height: 54px;
+  border-radius: 14px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -470,17 +405,17 @@ body {
 .wb-tile-icon.cyan-3d {
   background: linear-gradient(135deg, #00E5FF, #0088A3);
   color: #000;
-  box-shadow: 0 4px 10px rgba(0, 229, 255, 0.3);
+  box-shadow: 0 4px 12px rgba(0, 229, 255, 0.3);
 }
 
 .wb-tile-icon.orange-3d {
   background: linear-gradient(135deg, #FF9800, #F57C00);
   color: #fff;
-  box-shadow: 0 4px 10px rgba(255, 152, 0, 0.3);
+  box-shadow: 0 4px 12px rgba(255, 152, 0, 0.3);
 }
 
 .wb-grid-tile span {
-  font-size: 0.82rem;
+  font-size: 0.88rem;
   font-weight: 700;
   color: #e0e4ec;
 }
@@ -490,59 +425,36 @@ body {
   border-color: #423624;
 }
 
-/* FORM SCREEN */
-.wb-form-container {
-  padding: 12px;
+/* STANDARDS & SECTIONS PICKER SCREEN (IMG_9440, IMG_9445) */
+.wb-standards-container {
+  padding: 16px;
   overflow-y: auto;
 }
 
-.wb-form-header {
-  display: flex;
-  align-items: center;
-  gap: 12px;
+.wb-standards-header {
   margin-bottom: 12px;
 }
 
-.wb-back-btn {
-  background: #2a2e38;
-  border: 1px solid #3d4352;
+.wb-standards-header h3 {
+  font-size: 1.1rem;
   color: #00E5FF;
-  padding: 6px 12px;
-  border-radius: 6px;
-  font-weight: 700;
-  cursor: pointer;
-}
-
-.wb-standard-box {
-  background: #1a1e27;
-  border: 1px solid #2c3342;
-  border-radius: 10px;
-  padding: 10px;
-  margin-bottom: 12px;
-}
-
-.wb-standard-box label {
-  font-size: 0.78rem;
-  color: #00E5FF;
-  font-weight: 700;
-  display: block;
-  margin-bottom: 6px;
 }
 
 .wb-standard-btn-group {
   display: flex;
-  gap: 4px;
+  gap: 6px;
   overflow-x: auto;
-  padding-bottom: 4px;
+  padding-bottom: 8px;
+  margin-bottom: 14px;
 }
 
 .wb-std-btn {
-  background: #252a36;
+  background: #202430;
   border: 1px solid #363d4e;
   color: #aaa;
-  padding: 6px 10px;
+  padding: 8px 14px;
   border-radius: 6px;
-  font-size: 0.75rem;
+  font-size: 0.82rem;
   font-weight: 700;
   cursor: pointer;
   white-space: nowrap;
@@ -554,42 +466,104 @@ body {
   border-color: #00E5FF;
 }
 
-.wb-profile-picker {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 6px;
-  margin-top: 8px;
-  max-height: 140px;
-  overflow-y: auto;
+.wb-categorized-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
-.wb-profile-chip {
-  background: #202430;
-  border: 1px solid #323a4b;
+.wb-category-block {
+  background: #181b22;
+  border: 1px solid #282d38;
+  border-radius: 10px;
+  padding: 12px;
+}
+
+.wb-category-block h4 {
+  font-size: 0.88rem;
+  color: #FFD700;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #282d38;
+  padding-bottom: 6px;
+}
+
+.wb-section-chips-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 8px;
+}
+
+.wb-section-btn {
+  background: #252a36;
+  border: 1px solid #363d4e;
   color: #fff;
-  padding: 6px;
+  padding: 10px 8px;
   border-radius: 6px;
-  font-size: 0.75rem;
+  font-size: 0.8rem;
   font-weight: 600;
   cursor: pointer;
   text-align: center;
 }
 
-.wb-profile-chip:hover, .wb-profile-chip.active {
-  border-color: #00E5FF;
-  color: #00E5FF;
-  background: rgba(0, 229, 255, 0.1);
+.wb-section-btn:active {
+  background: #00E5FF;
+  color: #000;
+}
+
+/* EXACT 2-COLUMN CALCULATION SCREEN (IMG_9436, IMG_9450, IMG_9466) */
+.wb-form-container {
+  padding: 14px 16px;
+  overflow-y: auto;
+}
+
+.wb-shape-dropdown-bar {
+  margin-bottom: 12px;
+}
+
+.wb-shape-dropdown-bar select {
+  width: 100%;
+  background: #1f232c;
+  border: 1px solid #00E5FF;
+  border-radius: 6px;
+  color: #fff;
+  padding: 10px 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  outline: none;
+}
+
+.wb-2col-layout {
+  display: grid;
+  grid-template-columns: 1fr 150px;
+  gap: 16px;
+
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.wb-col-left {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .wb-canvas-card {
   background: #181a20;
   border: 1px solid #2d333f;
-  border-radius: 12px;
+  border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 8px;
-  margin-bottom: 12px;
+  width: 140px;
+  height: 110px;
+}
+
+.wb-input-header-label {
+  font-size: 0.85rem;
+  color: #00E5FF;
+  font-weight: 700;
 }
 
 .wb-form-inputs {
@@ -616,32 +590,138 @@ body {
   border-radius: 6px;
   color: #fff;
   padding: 8px 10px;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   outline: none;
 }
 
-.wb-input-group input:focus, .wb-input-group select:focus {
+.wb-input-group input:focus {
   border-color: #00E5FF;
 }
 
-.wb-form-actions {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+/* RIGHT COLUMN 5 STACKED ACTION BUTTONS (IMG_9436) */
+.wb-col-right {
+  display: flex;
+  flex-direction: column;
   gap: 8px;
-  margin-top: 12px;
+}
+
+.wb-stacked-btn {
+  background: #252a36;
+  border: 1px solid #363e50;
+  color: #ffffff;
+  padding: 12px 10px;
+  border-radius: 6px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.wb-stacked-btn.primary-cyan {
+  background: linear-gradient(135deg, #00E5FF, #0088A3);
+  color: #000000;
+  border-color: #00E5FF;
+}
+
+.wb-stacked-btn:active {
+  transform: scale(0.97);
+}
+
+.wb-footnote {
+  margin-top: 16px;
+  text-align: center;
+  font-size: 0.75rem;
+  color: #8892a4;
+  font-style: italic;
+}
+
+/* MODALS & POPUPS */
+.wb-modal-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.82);
+  backdrop-filter: blur(4px);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+.wb-modal-card {
+  background: #1c1f26;
+  border: 1px solid #333a48;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 380px;
+  padding: 16px;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.8);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.wb-modal-card.scrollable {
+  max-height: 85vh;
+  overflow-y: auto;
+}
+
+.wb-modal-card.large {
+  max-width: 440px;
+}
+
+.wb-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #2d3340;
+  padding-bottom: 8px;
+}
+
+.wb-close-btn {
+  background: none;
+  border: none;
+  color: #aaa;
+  font-size: 1.3rem;
+  cursor: pointer;
+}
+
+.wb-res-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.88rem;
+  padding: 6px 0;
+  border-bottom: 1px dashed #2a2e38;
+}
+
+.wb-res-row.highlighted-cyan {
+  color: #00E5FF;
+  font-size: 1rem;
+}
+
+.wb-res-row.highlighted-yellow {
+  color: #FFD700;
+  font-size: 1.05rem;
+}
+
+.wb-modal-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
 }
 
 .wb-action-btn {
-  padding: 9px 12px;
+  padding: 10px 14px;
   border-radius: 8px;
   font-weight: 700;
   border: none;
   cursor: pointer;
-  font-size: 0.82rem;
+  font-size: 0.85rem;
+  flex: 1;
 }
 
 .wb-action-btn.primary {
-  grid-column: span 2;
   background: linear-gradient(135deg, #00E5FF, #0099B8);
   color: #000;
 }
@@ -657,118 +737,35 @@ body {
   color: #fff;
 }
 
-.wb-footnote {
-  margin-top: 12px;
-  text-align: center;
-  font-size: 0.72rem;
-  color: #8892a4;
-  font-style: italic;
-}
-
-/* MODALS & POPUPS */
-.wb-modal-overlay {
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(0, 0, 0, 0.78);
-  backdrop-filter: blur(4px);
-  z-index: 100;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 12px;
-}
-
-.wb-modal-card {
-  background: #1c1f26;
-  border: 1px solid #333a48;
-  border-radius: 16px;
-  width: 100%;
-  max-width: 360px;
-  padding: 14px;
-  box-shadow: 0 12px 30px rgba(0,0,0,0.8);
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.wb-modal-card.scrollable {
-  max-height: 82vh;
-  overflow-y: auto;
-}
-
-.wb-modal-card.large {
-  max-width: 390px;
-}
-
-.wb-modal-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px solid #2d3340;
-  padding-bottom: 6px;
-}
-
-.wb-close-btn {
-  background: none;
-  border: none;
-  color: #aaa;
-  font-size: 1.2rem;
-  cursor: pointer;
-}
-
-.wb-res-row {
-  display: flex;
-  justify-content: space-between;
-  font-size: 0.85rem;
-  padding: 4px 0;
-  border-bottom: 1px dashed #2a2e38;
-}
-
-.wb-res-row.highlighted-cyan {
-  color: #00E5FF;
-  font-size: 0.95rem;
-}
-
-.wb-res-row.highlighted-yellow {
-  color: #FFD700;
-  font-size: 1rem;
-}
-
-.wb-modal-actions {
-  display: flex;
-  gap: 8px;
-  margin-top: 8px;
-}
-
 .wb-modal-list {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 8px;
 }
 
 .wb-modal-item {
   background: #252933;
   border: 1px solid #383f4f;
-  padding: 8px 10px;
+  padding: 10px 12px;
   border-radius: 8px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   cursor: pointer;
-  font-size: 0.85rem;
+  font-size: 0.88rem;
 }
 
 .wb-modal-item:hover, .wb-modal-item.selected {
   border-color: #00E5FF;
-  background: rgba(0, 229, 255, 0.1);
+  background: rgba(0, 229, 255, 0.12);
 }
 
 .wb-badge {
   background: #00E5FF;
   color: #000;
-  padding: 2px 6px;
+  padding: 2px 8px;
   border-radius: 10px;
-  font-size: 0.72rem;
+  font-size: 0.75rem;
   font-weight: 700;
 }
 
@@ -779,11 +776,11 @@ body {
 .wb-data-table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 0.78rem;
+  font-size: 0.8rem;
 }
 
 .wb-data-table th, .wb-data-table td {
-  padding: 6px 4px;
+  padding: 8px 6px;
   border-bottom: 1px solid #2a2e38;
   text-align: left;
 }
@@ -795,9 +792,9 @@ body {
 .wb-takeoff-summary {
   display: flex;
   justify-content: space-between;
-  padding: 8px 0;
+  padding: 10px 0;
   border-top: 2px solid #00E5FF;
-  font-size: 0.85rem;
+  font-size: 0.9rem;
 }
 
 /* EXPRESSION CALCULATOR KEYPAD (IMG_9468) */
@@ -805,7 +802,7 @@ body {
   background: #14171e;
   border: 1px solid #2c3342;
   border-radius: 8px;
-  padding: 8px;
+  padding: 10px;
 }
 
 .wb-calc-display-box input {
@@ -813,7 +810,7 @@ body {
   background: none;
   border: none;
   color: #fff;
-  font-size: 1.1rem;
+  font-size: 1.15rem;
   outline: none;
   text-align: right;
   font-family: monospace;
@@ -823,24 +820,24 @@ body {
   text-align: right;
   color: #00E5FF;
   font-weight: 700;
-  font-size: 0.95rem;
-  margin-top: 4px;
+  font-size: 1rem;
+  margin-top: 6px;
 }
 
 .wb-calc-keypad {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
-  gap: 4px;
-  margin-top: 6px;
+  gap: 6px;
+  margin-top: 8px;
 }
 
 .wb-calc-keypad button {
   background: #252933;
   border: 1px solid #363d4e;
   color: #fff;
-  padding: 8px 4px;
+  padding: 10px 4px;
   border-radius: 6px;
-  font-size: 0.75rem;
+  font-size: 0.8rem;
   font-weight: 600;
   cursor: pointer;
 }
@@ -855,19 +852,19 @@ body {
   background: #181b22;
   border: 1px solid #2d3340;
   border-radius: 10px;
-  padding: 10px;
+  padding: 12px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
 }
 
 .wb-conv-result {
   background: #12141a;
   border-left: 3px solid #00E5FF;
-  padding: 8px;
+  padding: 10px;
   border-radius: 4px;
   display: flex;
   flex-direction: column;
-  gap: 2px;
-  font-size: 0.85rem;
+  gap: 4px;
+  font-size: 0.88rem;
 }
