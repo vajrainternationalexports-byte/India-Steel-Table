@@ -352,77 +352,76 @@ html, body {
   border-color: var(--accent-cyan);
 }
 
-/* PROJECT B WEIGHT CALCULATOR THEME */
+/* PROJECT B WEIGHT CALCULATOR THEME - EXACT IMG_9410 REPLICA */
 .wb-theme {
-  background-color: #121418;
+  background-color: #000000;
 }
 
 .wb-app-bar {
-  background: #1a1c23;
-  border-bottom: 1px solid #2d313b;
+  background: #111318;
+  border-bottom: 1px solid #222630;
 }
 
-.wb-grid-container {
+.wb-home-launcher {
   padding: 16px;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  gap: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
   overflow-y: auto;
 }
 
-.wb-grid-tile {
-  background: linear-gradient(145deg, #1f232b, #181a20);
-  border: 1px solid #2d333f;
-  border-radius: 12px;
-  padding: 18px 10px;
+.wb-top-shapes-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+.wb-shape-card-white {
+  background: #ffffff;
+  border-radius: 6px;
+  padding: 8px;
+  aspect-ratio: 1 / 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.wb-shape-card-white:active {
+  transform: scale(0.95);
+  box-shadow: 0 0 10px #00bcd4;
+}
+
+.wb-3d-svg {
+  width: 100%;
+  height: 100%;
+}
+
+.wb-home-stacked-actions {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
+  gap: 10px;
+}
+
+.wb-main-action-row {
+  background: #ffffff;
+  color: #000000;
+  border: none;
+  border-radius: 4px;
+  padding: 14px 16px;
+  font-size: 0.95rem;
+  font-weight: 600;
   cursor: pointer;
-  box-shadow: 0 4px 14px rgba(0,0,0,0.4);
-  transition: transform 0.15s, border-color 0.15s;
   text-align: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+  transition: background-color 0.15s, transform 0.15s;
 }
 
-.wb-grid-tile:active {
-  transform: scale(0.96);
-  border-color: #00E5FF;
-}
-
-.wb-tile-icon {
-  font-size: 2.2rem;
-  width: 54px;
-  height: 54px;
-  border-radius: 14px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 2px;
-}
-
-.wb-tile-icon.cyan-3d {
-  background: linear-gradient(135deg, #00E5FF, #0088A3);
-  color: #000;
-  box-shadow: 0 4px 12px rgba(0, 229, 255, 0.3);
-}
-
-.wb-tile-icon.orange-3d {
-  background: linear-gradient(135deg, #FF9800, #F57C00);
-  color: #fff;
-  box-shadow: 0 4px 12px rgba(255, 152, 0, 0.3);
-}
-
-.wb-grid-tile span {
-  font-size: 0.88rem;
-  font-weight: 700;
-  color: #e0e4ec;
-}
-
-.wb-utility-tile {
-  background: linear-gradient(145deg, #28241e, #1f1b16);
-  border-color: #423624;
+.wb-main-action-row:active {
+  background: #e0f7fa;
+  transform: scale(0.98);
 }
 
 /* STANDARDS & SECTIONS PICKER SCREEN (IMG_9440, IMG_9445) */
