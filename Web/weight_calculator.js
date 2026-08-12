@@ -266,6 +266,20 @@ function switchProjectTab(projectKey) {
         tabB.classList.add('active');
         tabA.classList.remove('active');
     }
+function openStandardsOrMoreCrossSections() {
+    openStandardSelector('beam');
+}
+
+function openSurfaceAreaCalculator() {
+    openShapeCalculator('plate');
+    const title = document.getElementById('wb-app-title');
+    if (title) title.innerText = 'Surface Area Calculation';
+}
+
+function openVolumeCalculator() {
+    openShapeCalculator('box');
+    const title = document.getElementById('wb-app-title');
+    if (title) title.innerText = 'Volume Calculation';
 }
 
 function openStandardSelector(typeKey) {
