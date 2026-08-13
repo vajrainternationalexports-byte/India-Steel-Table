@@ -6,21 +6,43 @@
  */
 
 const DENSITY_DATABASE = [
-    { name: "Aluminium", sg: 2.70 },
-    { name: "Brass", sg: 8.45 },
-    { name: "Bronze", sg: 8.73 },
-    { name: "Cast Iron", sg: 7.20 },
-    { name: "Copper", sg: 8.96 },
+    { name: "Aluminium (Pure / 6061)", sg: 2.70 },
+    { name: "Aluminium Alloy 5052", sg: 2.68 },
+    { name: "Aluminium Alloy 7075", sg: 2.81 },
+    { name: "Brass (Yellow / C26000)", sg: 8.47 },
+    { name: "Brass (Naval)", sg: 8.44 },
+    { name: "Bronze (Phosphor)", sg: 8.86 },
+    { name: "Bronze (Aluminium)", sg: 7.70 },
+    { name: "Cast Iron (Grey)", sg: 7.20 },
+    { name: "Cast Iron (Ductile)", sg: 7.10 },
+    { name: "Wrought Iron", sg: 7.75 },
+    { name: "Copper (Pure / ETP)", sg: 8.96 },
+    { name: "Steel (Structural / Mild)", sg: 7.85 },
     { name: "Steel C15", sg: 7.85 },
     { name: "Steel C35", sg: 7.84 },
     { name: "Steel C60", sg: 7.83 },
-    { name: "Stainless Steel (304/316)", sg: 7.93 },
+    { name: "Stainless Steel (304)", sg: 7.93 },
+    { name: "Stainless Steel (316)", sg: 8.00 },
+    { name: "Stainless Steel (430)", sg: 7.75 },
     { name: "Lead", sg: 11.35 },
-    { name: "Titanium", sg: 4.51 },
+    { name: "Titanium (Grade 2 / Grade 5)", sg: 4.51 },
     { name: "Zinc", sg: 7.14 },
+    { name: "Nickel", sg: 8.90 },
+    { name: "Inconel 625", sg: 8.44 },
+    { name: "Monel 400", sg: 8.80 },
+    { name: "Hastelloy C276", sg: 8.89 },
     { name: "Gold", sg: 19.32 },
     { name: "Silver", sg: 10.49 },
-    { name: "Nickel", sg: 8.90 }
+    { name: "Platinum", sg: 21.45 },
+    { name: "PVC (Polyvinyl Chloride)", sg: 1.38 },
+    { name: "Polycarbonate (PC)", sg: 1.20 },
+    { name: "Nylon 6 / 66", sg: 1.14 },
+    { name: "PTFE (Teflon)", sg: 2.20 },
+    { name: "HDPE (High Density PE)", sg: 0.95 },
+    { name: "Polypropylene (PP)", sg: 0.90 },
+    { name: "Acrylic (PMMA)", sg: 1.18 },
+    { name: "Rubber (Natural)", sg: 0.92 },
+    { name: "Glass (Float / Plate)", sg: 2.50 }
 ];
 
 const SWG_GAUGE_TABLE = [
@@ -980,7 +1002,10 @@ function openShapeCalculator(shapeKey) {
     let html = renderPresetDropdownHtml(shapeKey);
     const commonTail = `
         <div class="wb-input-group">
-            <label>Specific Gravity</label>
+            <label style="display: flex; justify-content: space-between; align-items: center;">
+                <span>Specific Gravity</span>
+                <button type="button" onclick="openModal('modal-sg')" style="background: none; border: none; color: #00E5FF; font-size: 0.8rem; font-weight: 700; text-decoration: underline; cursor: pointer; padding: 0;">(Select Material)</button>
+            </label>
             <input type="number" id="inp_sg" value="${weightCalcState.sg}" step="0.01" oninput="calculateCurrentMass()">
         </div>
         <div class="wb-input-group highlighted-calc-field">
