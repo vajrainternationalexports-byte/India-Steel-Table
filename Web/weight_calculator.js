@@ -1665,12 +1665,12 @@ function calcEvaluate() {
     const inp = document.getElementById('calc-expression-input')?.value || '';
     try {
         let expr = inp
-            .replace(/sin/g, 'Math.sin')
-            .replace(/cos/g, 'Math.cos')
-            .replace(/tan/g, 'Math.tan')
             .replace(/asin/g, 'Math.asin')
             .replace(/acos/g, 'Math.acos')
             .replace(/atan/g, 'Math.atan')
+            .replace(/sin/g, 'Math.sin')
+            .replace(/cos/g, 'Math.cos')
+            .replace(/tan/g, 'Math.tan')
             .replace(/sqrt/g, 'Math.sqrt')
             .replace(/PI/g, 'Math.PI');
 
