@@ -1141,6 +1141,91 @@ function openShapeCalculator(shapeKey) {
             `;
             break;
 
+        case 'angle':
+            html += `
+                <div class="wb-input-group">
+                    <label>Leg Side A (mm)</label>
+                    <input type="number" id="inp_a" value="50" oninput="calculateCurrentMass()">
+                </div>
+                <div class="wb-input-group">
+                    <label>Leg Side B (mm)</label>
+                    <input type="number" id="inp_b" value="50" oninput="calculateCurrentMass()">
+                </div>
+                <div class="wb-input-group">
+                    <label>Thickness t (mm)</label>
+                    <input type="number" id="inp_t" value="6" oninput="calculateCurrentMass()">
+                </div>
+                <div class="wb-input-group">
+                    <label>Length (mm)</label>
+                    <input type="number" id="inp_l" value="1000" oninput="calculateCurrentMass()">
+                </div>
+                ${commonTail}
+            `;
+            break;
+
+        case 'tee':
+            html += `
+                <div class="wb-input-group">
+                    <label>Tee Height H (mm)</label>
+                    <input type="number" id="inp_h" value="100" oninput="calculateCurrentMass()">
+                </div>
+                <div class="wb-input-group">
+                    <label>Flange Width B (mm)</label>
+                    <input type="number" id="inp_w" value="100" oninput="calculateCurrentMass()">
+                </div>
+                <div class="wb-input-group">
+                    <label>Web Thickness tw (mm)</label>
+                    <input type="number" id="inp_tw" value="10" oninput="calculateCurrentMass()">
+                </div>
+                <div class="wb-input-group">
+                    <label>Flange Thickness tf (mm)</label>
+                    <input type="number" id="inp_tf" value="10" oninput="calculateCurrentMass()">
+                </div>
+                <div class="wb-input-group">
+                    <label>Length (mm)</label>
+                    <input type="number" id="inp_l" value="1000" oninput="calculateCurrentMass()">
+                </div>
+                ${commonTail}
+            `;
+            break;
+
+        case 'hex':
+        case 'oct':
+            html += `
+                <div class="wb-input-group">
+                    <label>Across Flats A/F (mm)</label>
+                    <input type="number" id="inp_s" value="24" oninput="calculateCurrentMass()">
+                </div>
+                <div class="wb-input-group">
+                    <label>Length (mm)</label>
+                    <input type="number" id="inp_l" value="1000" oninput="calculateCurrentMass()">
+                </div>
+                ${commonTail}
+            `;
+            break;
+
+        case 'zsection':
+            html += `
+                <div class="wb-input-group">
+                    <label>Height H (mm)</label>
+                    <input type="number" id="inp_h" value="100" oninput="calculateCurrentMass()">
+                </div>
+                <div class="wb-input-group">
+                    <label>Flange Width B (mm)</label>
+                    <input type="number" id="inp_w" value="50" oninput="calculateCurrentMass()">
+                </div>
+                <div class="wb-input-group">
+                    <label>Thickness t (mm)</label>
+                    <input type="number" id="inp_t" value="6" oninput="calculateCurrentMass()">
+                </div>
+                <div class="wb-input-group">
+                    <label>Length (mm)</label>
+                    <input type="number" id="inp_l" value="1000" oninput="calculateCurrentMass()">
+                </div>
+                ${commonTail}
+            `;
+            break;
+
         default:
             html += `
                 <div class="wb-input-group">
@@ -1174,6 +1259,9 @@ function onShapeDropdownChange(shapeKey) {
 }
 
 function wbGoBack() {
+    if (document.activeElement && typeof document.activeElement.blur === 'function') {
+        document.activeElement.blur();
+    }
     if (weightCalcState.activeScreen === 'form') {
         if (['channel', 'beam', 'angle', 'tee'].includes(weightCalcState.activeShape)) {
             openStandardSelector(weightCalcState.activeShape);
@@ -1344,6 +1432,38 @@ function calculateMassEngine() {
             area_mm2 = 2 * (ch_w * ch_tf) + (ch_h - 2 * ch_tf) * ch_tw;
             break;
 
+        case 'angle':
+            const ang_a = parseFloat(document.getElementById('inp_a')?.value || 50);
+            const ang_b = parseFloat(document.getElementById('inp_b')?.value || 50);
+            const ang_t = parseFloat(document.getElementById('inp_t')?.value || 6);
+            area_mm2 = (ang_a * ang_t) + (ang_b - ang_t) * ang_t;
+            break;
+
+        case 'tee':
+            const tee_h = parseFloat(document.getElementById('inp_h')?.value || 100);
+            const tee_b = parseFloat(document.getElementById('inp_w')?.value || 100);
+            const tee_tw = parseFloat(document.getElementById('inp_tw')?.value || 10);
+            const tee_tf = parseFloat(document.getElementById('inp_tf')?.value || 10);
+            area_mm2 = (tee_b * tee_tf) + (tee_h - tee_tf) * tee_tw;
+            break;
+
+        case 'hex':
+            const hex_af = parseFloat(document.getElementById('inp_s')?.value || 24);
+            area_mm2 = (Math.sqrt(3) / 2) * (hex_af * hex_af);
+            break;
+
+        case 'oct':
+            const oct_af = parseFloat(document.getElementById('inp_s')?.value || 24);
+            area_mm2 = 2 * (Math.SQRT2 - 1) * (oct_af * oct_af);
+            break;
+
+        case 'zsection':
+            const z_h = parseFloat(document.getElementById('inp_h')?.value || 100);
+            const z_w = parseFloat(document.getElementById('inp_w')?.value || 50);
+            const z_t = parseFloat(document.getElementById('inp_t')?.value || 6);
+            area_mm2 = (2 * z_w * z_t) + (z_h - 2 * z_t) * z_t;
+            break;
+
         default:
             area_mm2 = 1000;
             break;
@@ -1415,6 +1535,7 @@ function selectSpecificGravity(sg, name) {
     const inpSg = document.getElementById('inp_sg');
     if (inpSg) inpSg.value = sg;
     renderSpecificGravityModal();
+    calculateCurrentMass();
     closeModal('modal-sg');
 }
 
@@ -1431,10 +1552,21 @@ function renderSwgModal() {
 }
 
 function applySwgThickness(mm) {
-    const inputT = document.getElementById('inp_t');
-    if (inputT) inputT.value = mm;
+    const inpT = document.getElementById('inp_t');
+    if (inpT) inpT.value = mm;
+    calculateCurrentMass();
     closeModal('modal-swg');
 }
+
+// GLOBAL KEYBOARD DISMISSAL ON NON-INPUT TAP
+document.addEventListener('click', (e) => {
+    const active = document.activeElement;
+    if (active && (active.tagName === 'INPUT' || active.tagName === 'TEXTAREA' || active.tagName === 'SELECT')) {
+        if (!e.target.closest('input, select, textarea, button, .wb-shape-card-dark, .wb-main-action-row, .wb-std-btn, .wb-section-item-row')) {
+            active.blur();
+        }
+    }
+});
 
 function renderInchFractionsTable() {
     const body = document.getElementById('inch-fractions-body');
