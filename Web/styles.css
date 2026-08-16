@@ -282,7 +282,7 @@ html, body {
   margin-bottom: 16px;
   width: 100%;
   max-width: 480px;
-  height: 240px;
+  height: 220px;
   overflow: hidden;
   margin-left: auto;
   margin-right: auto;
@@ -293,6 +293,91 @@ html, body {
   width: 100% !important;
   height: 100% !important;
   object-fit: contain;
+}
+
+/* PROJECT A SPLIT VIEW & TECHNICAL CANVASES */
+.detail-split-view {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 12px 16px;
+  width: 100%;
+}
+
+.detail-diagram-pane {
+  background: #181b22;
+  border: 1px solid #2d3342;
+  border-radius: 8px;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 220px;
+  max-height: 220px;
+  width: 100%;
+  overflow: hidden;
+}
+
+.detail-diagram-pane canvas, #detailCanvas {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.detail-props-pane {
+  background: #181b22;
+  border: 1px solid #2d3342;
+  border-radius: 8px;
+  padding: 12px;
+}
+
+.detail-legend-box {
+  background: #12141a;
+  border: 1px solid #222632;
+  border-radius: 6px;
+  padding: 10px 14px;
+  margin: 0 16px 16px 16px;
+  font-size: 0.82rem;
+  color: #94a3b8;
+}
+
+.size-selector-bar {
+  background: #232733;
+  border-bottom: 1px solid #363d4e;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  color: #00E5FF;
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.size-grid-container {
+  padding: 12px 16px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.size-grid-btn {
+  background: #1a1e28;
+  border: 1px solid #323a4d;
+  color: #e2e8f0;
+  padding: 10px 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.size-grid-btn:active {
+  background: #00E5FF;
+  color: #000;
 }
 
 .property-table {

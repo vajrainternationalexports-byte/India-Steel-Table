@@ -38,6 +38,8 @@ function showCategoryListScreen() {
   document.getElementById("shareBtn").style.display = "none";
   document.getElementById("calcBtn").style.display = "none";
   document.getElementById("bookmarkBtn").style.display = "flex";
+  const backBtn = document.getElementById("backBtn");
+  if (backBtn) backBtn.style.display = "none";
 
   const content = document.getElementById("screenContent");
   content.innerHTML = "";
@@ -98,6 +100,8 @@ function showDetailScreen() {
   document.getElementById("shareBtn").style.display = "flex";
   document.getElementById("calcBtn").style.display = "flex";
   document.getElementById("bookmarkBtn").style.display = "flex";
+  const backBtn = document.getElementById("backBtn");
+  if (backBtn) backBtn.style.display = "flex";
 
   const content = document.getElementById("screenContent");
   content.innerHTML = "";
@@ -165,6 +169,8 @@ function showSizePickerScreen() {
   document.getElementById("appVersion").style.display = "none";
   document.getElementById("shareBtn").style.display = "none";
   document.getElementById("calcBtn").style.display = "none";
+  const backBtn = document.getElementById("backBtn");
+  if (backBtn) backBtn.style.display = "flex";
 
   const content = document.getElementById("screenContent");
   content.innerHTML = "";
@@ -213,6 +219,8 @@ function showCalculatorScreen() {
   document.getElementById("shareBtn").style.display = "none";
   document.getElementById("calcBtn").style.display = "none";
   document.getElementById("bookmarkBtn").style.display = "none";
+  const backBtn = document.getElementById("backBtn");
+  if (backBtn) backBtn.style.display = "flex";
 
   calcLengthVal = "1";
   calcRateVal = "";
@@ -465,7 +473,7 @@ function drawDiagram(section, canvas) {
   const ctx = canvas.getContext("2d");
   const dpr = window.devicePixelRatio || 1;
   const w = canvas.parentElement.clientWidth || 180;
-  const h = 420;
+  const h = 220;
 
   canvas.width = w * dpr;
   canvas.height = h * dpr;
@@ -503,15 +511,14 @@ function drawDiagram(section, canvas) {
 function drawDualAngleBlueprint(ctx, section, w, h) {
   const legA = section.dimensions.legA_mm || 30;
   const legB = section.dimensions.legB_mm || 20;
-  const isUnequal = legA !== legB;
 
-  // --- TOP SCHEMATIC: CROSS SECTION WITH R1, R2, A, B, t ---
-  const ox1 = 30;
-  const oy1 = 160;
-  const scale = 2.8;
-  const da = Math.min(Math.max(legA * scale, 85), 130);
-  const db = Math.min(Math.max(legB * scale, 65), 110);
-  const dt = 14;
+  // --- SCHEMATIC: CROSS SECTION WITH R1, R2, A, B, t ---
+  const ox1 = 45;
+  const oy1 = 175;
+  const scale = 1.6;
+  const da = Math.min(Math.max(legA * scale, 65), 110);
+  const db = Math.min(Math.max(legB * scale, 50), 95);
+  const dt = 12;
 
   ctx.strokeStyle = "#ffffff";
   ctx.fillStyle = "#ffffff";
@@ -522,8 +529,8 @@ function drawDualAngleBlueprint(ctx, section, w, h) {
   ctx.moveTo(ox1, oy1);
   ctx.lineTo(ox1 + db, oy1);
   ctx.lineTo(ox1 + db, oy1 - dt);
-  ctx.lineTo(ox1 + dt + 8, oy1 - dt);
-  ctx.quadraticCurveTo(ox1 + dt, oy1 - dt, ox1 + dt, oy1 - dt - 8);
+  ctx.lineTo(ox1 + dt + 6, oy1 - dt);
+  ctx.quadraticCurveTo(ox1 + dt, oy1 - dt, ox1 + dt, oy1 - dt - 6);
   ctx.lineTo(ox1 + dt, oy1 - da);
   ctx.lineTo(ox1, oy1 - da);
   ctx.closePath();
@@ -534,10 +541,10 @@ function drawDualAngleBlueprint(ctx, section, w, h) {
   ctx.clip();
   ctx.strokeStyle = "rgba(255, 255, 255, 0.4)";
   ctx.lineWidth = 1;
-  for (let x = ox1 - 150; x < ox1 + db + 150; x += 6) {
+  for (let x = ox1 - 100; x < ox1 + db + 100; x += 6) {
     ctx.beginPath();
     ctx.moveTo(x, oy1);
-    ctx.lineTo(x + 150, oy1 - 150);
+    ctx.lineTo(x + 100, oy1 - 100);
     ctx.stroke();
   }
   ctx.restore();
@@ -557,79 +564,16 @@ function drawDualAngleBlueprint(ctx, section, w, h) {
   ctx.fillText("B", ox1 + db / 2 - 3, oy1 + 24);
 
   // t Dimension
-  drawDimArrow(ctx, ox1 + dt + 8, oy1 - da + 18, ox1 + dt + 8, oy1 - da + 18 + dt, true);
-  ctx.fillText("t", ox1 + dt + 14, oy1 - da + 18 + dt / 2 + 3);
+  drawDimArrow(ctx, ox1 + dt + 6, oy1 - da + 14, ox1 + dt + 6, oy1 - da + 14 + dt, true);
+  ctx.fillText("t", ox1 + dt + 12, oy1 - da + 14 + dt / 2 + 3);
 
   // R1 Root Radius Leader Callout
-  ctx.fillText("R₁ ROOT RADIUS", ox1 + dt + 20, oy1 - dt - 4);
-  drawLeader(ctx, ox1 + dt + 18, oy1 - dt - 6, ox1 + dt + 2, oy1 - dt - 2);
+  ctx.fillText("R₁ ROOT RADIUS", ox1 + dt + 16, oy1 - dt - 4);
+  drawLeader(ctx, ox1 + dt + 14, oy1 - dt - 6, ox1 + dt + 2, oy1 - dt - 2);
 
   // R2 Toe Radius Leader Callout
-  ctx.fillText("R₂ TOE RADIUS", ox1 + dt + 14, oy1 - da + 8);
-  drawLeader(ctx, ox1 + dt + 12, oy1 - da + 6, ox1 + dt, oy1 - da + 1);
-
-  // --- BOTTOM SCHEMATIC: COORDINATE AXES (X-X, Y-Y, U-U, V-V, Cx, Cy, Tan α) ---
-  const ox2 = 30;
-  const oy2 = 370;
-
-  ctx.strokeStyle = "#ffffff";
-  ctx.lineWidth = 1.8;
-  ctx.beginPath();
-  ctx.moveTo(ox2, oy2);
-  ctx.lineTo(ox2 + db, oy2);
-  ctx.lineTo(ox2 + db, oy2 - dt);
-  ctx.lineTo(ox2 + dt, oy2 - dt);
-  ctx.lineTo(ox2 + dt, oy2 - da);
-  ctx.lineTo(ox2, oy2 - da);
-  ctx.closePath();
-  ctx.stroke();
-
-  // Centroid point G
-  const cx = ox2 + (isUnequal ? 22 : 28);
-  const cy = oy2 - (isUnequal ? 44 : 28);
-
-  // X-X Axis (Horizontal dashed)
-  ctx.setLineDash([8, 3, 2, 3]);
-  ctx.beginPath();
-  ctx.moveTo(ox2 - 16, cy);
-  ctx.lineTo(ox2 + db + 18, cy);
-  ctx.stroke();
-
-  // Y-Y Axis (Vertical dashed)
-  ctx.beginPath();
-  ctx.moveTo(cx, oy2 - da - 14);
-  ctx.lineTo(cx, oy2 + 14);
-  ctx.stroke();
-
-  // U-U & V-V Axes (Diagonal Principal Axes)
-  const angle = isUnequal ? 0.38 : 0.785; // 45 deg for equal, alpha for unequal
-  const len = 52;
-  ctx.beginPath();
-  ctx.moveTo(cx - len * Math.cos(angle), cy + len * Math.sin(angle));
-  ctx.lineTo(cx + len * Math.cos(angle), cy - len * Math.sin(angle));
-  ctx.stroke();
-
-  ctx.beginPath();
-  ctx.moveTo(cx - len * Math.sin(angle), cy - len * Math.cos(angle));
-  ctx.lineTo(cx + len * Math.sin(angle), cy + len * Math.cos(angle));
-  ctx.stroke();
-  ctx.setLineDash([]);
-
-  // Axis Labels
-  ctx.font = "bold 9px Arial";
-  ctx.fillText("X", ox2 - 24, cy + 3);
-  ctx.fillText("X", ox2 + db + 20, cy + 3);
-  ctx.fillText("Y", cx - 3, oy2 - da - 18);
-  ctx.fillText("Y", cx - 3, oy2 + 24);
-  ctx.fillText("U", cx + len * Math.cos(angle) + 4, cy - len * Math.sin(angle));
-  ctx.fillText("V", cx - len * Math.sin(angle) - 10, cy - len * Math.cos(angle));
-
-  // Cx, Cy dimension markers
-  ctx.fillText("Cx", ox2 + 6, cy + 12);
-  ctx.fillText("Cy", cx - 14, oy2 + 8);
-  if (isUnequal) {
-    ctx.fillText("α", cx + 10, cy - 4);
-  }
+  ctx.fillText("R₂ TOE RADIUS", ox1 + dt + 12, oy1 - da + 8);
+  drawLeader(ctx, ox1 + dt + 10, oy1 - da + 6, ox1 + dt, oy1 - da + 1);
 }
 
 // 2. Flats Drawing (Matching Screenshots 9358, 9374)

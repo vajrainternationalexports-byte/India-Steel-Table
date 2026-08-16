@@ -1334,6 +1334,16 @@ function drawShapeCanvas(shapeKey) {
             drawDimensionArrow(ctx, cx - 45, cy - 30, cx - 45, cy + 30, "H");
             break;
 
+        case 'box':
+            ctx.fillRect(cx - 35, cy - 30, 70, 60);
+            ctx.strokeRect(cx - 35, cy - 30, 70, 60);
+            ctx.fillStyle = '#181a20';
+            ctx.fillRect(cx - 23, cy - 18, 46, 36);
+            ctx.strokeRect(cx - 23, cy - 18, 46, 36);
+            drawDimensionArrow(ctx, cx - 35, cy + 40, cx + 35, cy + 40, "B");
+            drawDimensionArrow(ctx, cx - 45, cy - 30, cx - 45, cy + 30, "H");
+            break;
+
         case 'pipe':
             ctx.arc(cx, cy, 35, 0, Math.PI * 2);
             ctx.fill(); ctx.stroke();
@@ -1370,6 +1380,68 @@ function drawShapeCanvas(shapeKey) {
             ctx.strokeRect(cx - 25, cy + 30, 50, 10);
             drawDimensionArrow(ctx, cx - 36, cy - 40, cx - 36, cy + 40, "H");
             drawDimensionArrow(ctx, cx - 25, cy + 48, cx + 25, cy + 48, "B");
+            break;
+
+        case 'angle':
+            // L-Shape Angle Section Drawing
+            ctx.beginPath();
+            ctx.moveTo(cx - 30, cy - 40);
+            ctx.lineTo(cx - 30, cy + 30);
+            ctx.lineTo(cx + 30, cy + 30);
+            ctx.lineTo(cx + 30, cy + 18);
+            ctx.lineTo(cx - 18, cy + 18);
+            ctx.lineTo(cx - 18, cy - 40);
+            ctx.closePath();
+            ctx.fill(); ctx.stroke();
+            drawDimensionArrow(ctx, cx - 42, cy - 40, cx - 42, cy + 30, "A");
+            drawDimensionArrow(ctx, cx - 30, cy + 42, cx + 30, cy + 42, "B");
+            break;
+
+        case 'tee':
+            // T-Shape Tee Section Drawing
+            ctx.beginPath();
+            ctx.moveTo(cx - 35, cy - 35);
+            ctx.lineTo(cx + 35, cy - 35);
+            ctx.lineTo(cx + 35, cy - 23);
+            ctx.lineTo(cx + 6, cy - 23);
+            ctx.lineTo(cx + 6, cy + 35);
+            ctx.lineTo(cx - 6, cy + 35);
+            ctx.lineTo(cx - 6, cy - 23);
+            ctx.lineTo(cx - 35, cy - 23);
+            ctx.closePath();
+            ctx.fill(); ctx.stroke();
+            drawDimensionArrow(ctx, cx - 35, cy - 43, cx + 35, cy - 43, "B");
+            drawDimensionArrow(ctx, cx - 45, cy - 35, cx - 45, cy + 35, "H");
+            break;
+
+        case 'hex':
+            // Hexagon Drawing
+            ctx.beginPath();
+            for (let i = 0; i < 6; i++) {
+                const angle = (i * Math.PI) / 3;
+                const x = cx + 32 * Math.cos(angle);
+                const y = cy + 32 * Math.sin(angle);
+                if (i === 0) ctx.moveTo(x, y);
+                else ctx.lineTo(x, y);
+            }
+            ctx.closePath();
+            ctx.fill(); ctx.stroke();
+            drawDimensionArrow(ctx, cx - 32, cy + 40, cx + 32, cy + 40, "A/F");
+            break;
+
+        case 'oct':
+            // Octagon Drawing
+            ctx.beginPath();
+            for (let i = 0; i < 8; i++) {
+                const angle = (i * Math.PI) / 4;
+                const x = cx + 32 * Math.cos(angle);
+                const y = cy + 32 * Math.sin(angle);
+                if (i === 0) ctx.moveTo(x, y);
+                else ctx.lineTo(x, y);
+            }
+            ctx.closePath();
+            ctx.fill(); ctx.stroke();
+            drawDimensionArrow(ctx, cx - 32, cy + 40, cx + 32, cy + 40, "A/F");
             break;
 
         default:
