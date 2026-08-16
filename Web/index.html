@@ -181,6 +181,42 @@
                     </div>
                     <span class="wb-shape-title">Tee Section</span>
                   </div>
+
+                  <div class="wb-shape-card-dark" onclick="openShapeCalculator('square')">
+                    <div class="wb-svg-wrap">
+                      <svg class="wb-3d-svg" viewBox="0 0 100 100">
+                        <rect x="25" y="25" width="50" height="50" fill="#00bcd4" stroke="#008ba3" stroke-width="1.5"/>
+                      </svg>
+                    </div>
+                    <span class="wb-shape-title">Square Bar</span>
+                  </div>
+
+                  <div class="wb-shape-card-dark" onclick="openShapeCalculator('hex')">
+                    <div class="wb-svg-wrap">
+                      <svg class="wb-3d-svg" viewBox="0 0 100 100">
+                        <polygon points="50,15 80,32 80,68 50,85 20,68 20,32" fill="#00bcd4" stroke="#008ba3" stroke-width="1.5"/>
+                      </svg>
+                    </div>
+                    <span class="wb-shape-title">Hexagonal</span>
+                  </div>
+
+                  <div class="wb-shape-card-dark" onclick="openShapeCalculator('oct')">
+                    <div class="wb-svg-wrap">
+                      <svg class="wb-3d-svg" viewBox="0 0 100 100">
+                        <polygon points="35,15 65,15 85,35 85,65 65,85 35,85 15,65 15,35" fill="#00bcd4" stroke="#008ba3" stroke-width="1.5"/>
+                      </svg>
+                    </div>
+                    <span class="wb-shape-title">Octagonal</span>
+                  </div>
+
+                  <div class="wb-shape-card-dark" onclick="openShapeCalculator('zsection')">
+                    <div class="wb-svg-wrap">
+                      <svg class="wb-3d-svg" viewBox="0 0 100 100">
+                        <path d="M15,20 L65,20 L65,34 L43,34 L43,66 L85,66 L85,80 L35,80 L35,66 L57,66 L57,34 L15,34 Z" fill="#00bcd4" stroke="#008ba3" stroke-width="1.5"/>
+                      </svg>
+                    </div>
+                    <span class="wb-shape-title">Z-Section</span>
+                  </div>
                 </div>
 
                 <!-- Bottom 7 Stacked Action Rows -->
@@ -238,18 +274,19 @@
                 <!-- Top Shape / Section Dropdown Selector -->
                 <div class="wb-shape-dropdown-bar">
                   <select id="wb-shape-selector-dropdown" onchange="onShapeDropdownChange(this.value)">
-                    <option value="square">Square</option>
-                    <option value="plate">Plate / Sheet</option>
-                    <option value="rod">Round Bar</option>
+                    <option value="box">Rectangular / Square Tube</option>
                     <option value="pipe">Round Pipe</option>
-                    <option value="hex">Hexagonal</option>
-                    <option value="oct">Octagonal</option>
-                    <option value="triangular">Triangular</option>
-                    <option value="pentagonal">Pentagonal</option>
-                    <option value="beam">Generic Beam</option>
-                    <option value="channel">Generic Channel</option>
                     <option value="angle">Angle Section</option>
-                    <option value="tee">Generic Tee</option>
+                    <option value="channel">Channel Section</option>
+                    <option value="plate">Plate / Sheet</option>
+                    <option value="flat">Flat Bar</option>
+                    <option value="rod">Round Bar</option>
+                    <option value="square">Square Bar</option>
+                    <option value="beam">I-Beam Section</option>
+                    <option value="tee">Tee Section</option>
+                    <option value="hex">Hexagonal Bar</option>
+                    <option value="oct">Octagonal Bar</option>
+                    <option value="zsection">Z-Section</option>
                   </select>
                 </div>
 
